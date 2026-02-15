@@ -10,7 +10,6 @@ import { getFluentIcon } from 'utils'
 import { useTimesheetContext } from '../../../context'
 import {
   CLEAR_MANUAL_MATCH,
-  IGNORE_EVENT,
   TOGGLE_MANUAL_MATCH_PANEL
 } from '../../../reducer/actions'
 import { ClearManualMatchButton } from './ClearManualMatchButton'
@@ -26,7 +25,7 @@ export const ProjectColumn: StyledComponent<IProjectColumnProps> = ({
   includeCustomerLink
 }) => {
   const { t } = useTranslation('timesheet')
-  const { state, dispatch } = useTimesheetContext()
+  const { state, dispatch, onIgnoreEvent } = useTimesheetContext()
   const { errorMessage } = useProjectColumn(event)
   let element: ReactElement = null
 
@@ -60,7 +59,7 @@ export const ProjectColumn: StyledComponent<IProjectColumnProps> = ({
           iconName: 'CalendarCancel',
           iconColor: 'var(--colorPaletteRedForeground1)',
           onClick: () => {
-            dispatch(IGNORE_EVENT({ id: event.id }))
+            onIgnoreEvent?.(state.selectedPeriod?.id, event.id, true)
           }
         }}
       />

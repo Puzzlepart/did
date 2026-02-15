@@ -1,6 +1,8 @@
-mutation UnsubmitPeriod ($period: TimesheetPeriodInput!, $options: TimesheetOptions!) {
-  result: unsubmitPeriod(period: $period, options: $options) {
+mutation UnsubmitPeriod ($opId: String, $period: TimesheetPeriodInput!, $options: TimesheetOptions!) {
+  result: unsubmitPeriod(opId: $opId, period: $period, options: $options) {
     success
+    opId
+    duplicate
     error {
       message
     }

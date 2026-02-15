@@ -1,0 +1,10 @@
+mutation SetTimesheetEventIgnored ($opId: String, $input: TimesheetIgnoreEventInput!) {
+  result: setTimesheetEventIgnored(opId: $opId, input: $input) {
+    success
+    opId
+    duplicate
+    error {
+      message
+    }
+  }
+}

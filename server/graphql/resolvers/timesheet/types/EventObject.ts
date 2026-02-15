@@ -84,6 +84,9 @@ export class EventObject {
   @Field({ nullable: true })
   isSystemIgnored?: boolean
 
+  @Field({ nullable: true })
+  isUserIgnored?: boolean
+
   @Field(() => ProjectRole, { nullable: true })
   role?: ProjectRole
 

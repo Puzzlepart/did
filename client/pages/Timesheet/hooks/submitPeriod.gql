@@ -1,6 +1,8 @@
-mutation SubmitPeriod ($period: TimesheetPeriodInput!, $options: TimesheetOptions!) {
-  result: submitPeriod(period: $period, options: $options) {
+mutation SubmitPeriod ($opId: String, $period: TimesheetPeriodInput!, $options: TimesheetOptions!) {
+  result: submitPeriod(opId: $opId, period: $period, options: $options) {
     success
+    opId
+    duplicate
     error {
       message
     }

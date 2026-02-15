@@ -1,0 +1,10 @@
+mutation ClearTimesheetIgnoredEvents ($opId: String, $periodId: String!) {
+  result: clearTimesheetIgnoredEvents(opId: $opId, periodId: $periodId) {
+    success
+    opId
+    duplicate
+    error {
+      message
+    }
+  }
+}

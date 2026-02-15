@@ -5,14 +5,18 @@ import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { DateObject } from '../../../../shared/utils/date'
 import {
+  AppliedOpsService,
   ConfirmedPeriodsService,
   TimesheetService,
+  UserIgnoredEventsService,
   UserService
 } from '../../../services'
 import { IAuthOptions } from '../../authChecker'
 import { RequestContext } from '../../requestContext'
 import { BaseResult } from '../types'
 import {
+  TimesheetIgnoreEventInput,
+  TimesheetIgnoreEventsInput,
   TimesheetOptions,
   TimesheetPeriodInput,
   TimesheetPeriodObject,
@@ -40,11 +44,16 @@ export class TimesheetResolver {
    *
    * @param _timesheetSvc - Timesheet service
    * @param _userSvc - User service
+   * @param _cpSvc - Confirmed periods service
+   * @param _appliedOpsSvc - Applied ops service for idempotency
+   * @param _ignoredEventsSvc - User ignored events service
    */
   constructor(
     private readonly _timesheetSvc: TimesheetService,
     private readonly _userSvc: UserService,
-    private readonly _cpSvc: ConfirmedPeriodsService
+    private readonly _cpSvc: ConfirmedPeriodsService,
+    private readonly _appliedOpsSvc: AppliedOpsService,
+    private readonly _ignoredEventsSvc: UserIgnoredEventsService
   ) {}
 
   /**
@@ -101,6 +110,8 @@ export class TimesheetResolver {
   /**
    * Submit period
    *
+   * @param context - Request context
+   * @param opId - Optional operation ID for idempotency
    * @param period - Period
    * @param options - Timesheet options (forecast, tzoffset etc)
    */
@@ -110,18 +121,49 @@ export class TimesheetResolver {
       'Adds matched time entries for the specified period and an entry for the confirmed period'
   })
   async submitPeriod(
+    @Ctx() context: RequestContext,
+    @Arg('opId', { nullable: true }) opId: string,
     @Arg('period', () => TimesheetPeriodInput) period: TimesheetPeriodInput,
     @Arg('options') options: TimesheetOptions
   ): Promise<BaseResult> {
     try {
+      // Check for duplicate operation
+      if (opId) {
+        const existing = await this._appliedOpsSvc.findAppliedOp(
+          opId,
+          context.userId
+        )
+        if (existing) {
+          return {
+            success: true,
+            opId,
+            duplicate: true,
+            error: null
+          }
+        }
+      }
+
       await this._timesheetSvc.submitPeriod({ ...options, period })
+
+      // Mark operation as applied
+      if (opId) {
+        await this._appliedOpsSvc.markApplied(
+          opId,
+          context.userId,
+          'submitPeriod'
+        )
+      }
+
       return {
-        success: false,
+        success: true,
+        opId,
+        duplicate: false,
         error: null
       }
     } catch (error) {
       return {
         success: false,
+        opId,
         error
       }
     }
@@ -130,8 +172,10 @@ export class TimesheetResolver {
   /**
    * Unsubmit period
    *
+   * @param context - Request context
+   * @param opId - Optional operation ID for idempotency
    * @param period - Period
-   * @param forecast - Forecast
+   * @param options - Timesheet options (forecast, tzoffset etc)
    */
   @Authorized<IAuthOptions>({ requiresUserContext: true })
   @Mutation(() => BaseResult, {
@@ -139,18 +183,238 @@ export class TimesheetResolver {
       'Deletes time entries for the specified period and the entry for the confirmed period'
   })
   async unsubmitPeriod(
+    @Ctx() context: RequestContext,
+    @Arg('opId', { nullable: true }) opId: string,
     @Arg('period', () => TimesheetPeriodInput) period: TimesheetPeriodInput,
     @Arg('options') options: TimesheetOptions
   ): Promise<BaseResult> {
     try {
+      // Check for duplicate operation
+      if (opId) {
+        const existing = await this._appliedOpsSvc.findAppliedOp(
+          opId,
+          context.userId
+        )
+        if (existing) {
+          return {
+            success: true,
+            opId,
+            duplicate: true,
+            error: null
+          }
+        }
+      }
+
       await this._timesheetSvc.unsubmitPeriod({ ...options, period })
+
+      // Mark operation as applied
+      if (opId) {
+        await this._appliedOpsSvc.markApplied(
+          opId,
+          context.userId,
+          'unsubmitPeriod'
+        )
+      }
+
       return {
         success: true,
+        opId,
+        duplicate: false,
         error: null
       }
     } catch (error) {
       return {
         success: false,
+        opId,
+        error
+      }
+    }
+  }
+
+  /**
+   * Set event ignored state for a user's timesheet
+   *
+   * @param context - Request context
+   * @param opId - Optional operation ID for idempotency
+   * @param input - Input containing periodId, eventId, and ignored state
+   */
+  @Authorized<IAuthOptions>({ requiresUserContext: true })
+  @Mutation(() => BaseResult, {
+    description: 'Set an event as ignored or not ignored for the user'
+  })
+  async setTimesheetEventIgnored(
+    @Ctx() context: RequestContext,
+    @Arg('opId', { nullable: true }) opId: string,
+    @Arg('input', () => TimesheetIgnoreEventInput) input: TimesheetIgnoreEventInput
+  ): Promise<BaseResult> {
+    try {
+      // Check for duplicate operation
+      if (opId) {
+        const existing = await this._appliedOpsSvc.findAppliedOp(
+          opId,
+          context.userId
+        )
+        if (existing) {
+          return {
+            success: true,
+            opId,
+            duplicate: true,
+            error: null
+          }
+        }
+      }
+
+      await this._ignoredEventsSvc.setEventIgnored(
+        context.userId,
+        input.periodId,
+        input.eventId,
+        input.ignored
+      )
+
+      // Mark operation as applied
+      if (opId) {
+        await this._appliedOpsSvc.markApplied(
+          opId,
+          context.userId,
+          'setTimesheetEventIgnored'
+        )
+      }
+
+      return {
+        success: true,
+        opId,
+        duplicate: false,
+        error: null
+      }
+    } catch (error) {
+      return {
+        success: false,
+        opId,
+        error
+      }
+    }
+  }
+
+  /**
+   * Ignore multiple events at once (e.g., for "Ignore All" functionality)
+   *
+   * @param context - Request context
+   * @param opId - Optional operation ID for idempotency
+   * @param input - Input containing periodId and array of eventIds
+   */
+  @Authorized<IAuthOptions>({ requiresUserContext: true })
+  @Mutation(() => BaseResult, {
+    description: 'Ignore multiple events at once'
+  })
+  async ignoreAllTimesheetEvents(
+    @Ctx() context: RequestContext,
+    @Arg('opId', { nullable: true }) opId: string,
+    @Arg('input', () => TimesheetIgnoreEventsInput) input: TimesheetIgnoreEventsInput
+  ): Promise<BaseResult> {
+    try {
+      // Check for duplicate operation
+      if (opId) {
+        const existing = await this._appliedOpsSvc.findAppliedOp(
+          opId,
+          context.userId
+        )
+        if (existing) {
+          return {
+            success: true,
+            opId,
+            duplicate: true,
+            error: null
+          }
+        }
+      }
+
+      await this._ignoredEventsSvc.setMultipleEventsIgnored(
+        context.userId,
+        input.periodId,
+        input.eventIds
+      )
+
+      // Mark operation as applied
+      if (opId) {
+        await this._appliedOpsSvc.markApplied(
+          opId,
+          context.userId,
+          'ignoreAllTimesheetEvents'
+        )
+      }
+
+      return {
+        success: true,
+        opId,
+        duplicate: false,
+        error: null
+      }
+    } catch (error) {
+      return {
+        success: false,
+        opId,
+        error
+      }
+    }
+  }
+
+  /**
+   * Clear all ignored events for a period
+   *
+   * @param context - Request context
+   * @param opId - Optional operation ID for idempotency
+   * @param periodId - Period ID to clear ignored events from
+   */
+  @Authorized<IAuthOptions>({ requiresUserContext: true })
+  @Mutation(() => BaseResult, {
+    description: 'Clear all ignored events for a period'
+  })
+  async clearTimesheetIgnoredEvents(
+    @Ctx() context: RequestContext,
+    @Arg('opId', { nullable: true }) opId: string,
+    @Arg('periodId') periodId: string
+  ): Promise<BaseResult> {
+    try {
+      // Check for duplicate operation
+      if (opId) {
+        const existing = await this._appliedOpsSvc.findAppliedOp(
+          opId,
+          context.userId
+        )
+        if (existing) {
+          return {
+            success: true,
+            opId,
+            duplicate: true,
+            error: null
+          }
+        }
+      }
+
+      await this._ignoredEventsSvc.clearIgnoredEvents(
+        context.userId,
+        periodId
+      )
+
+      // Mark operation as applied
+      if (opId) {
+        await this._appliedOpsSvc.markApplied(
+          opId,
+          context.userId,
+          'clearTimesheetIgnoredEvents'
+        )
+      }
+
+      return {
+        success: true,
+        opId,
+        duplicate: false,
+        error: null
+      }
+    } catch (error) {
+      return {
+        success: false,
+        opId,
         error
       }
     }

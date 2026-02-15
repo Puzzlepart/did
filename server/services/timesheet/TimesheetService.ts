@@ -20,6 +20,7 @@ import {
   HolidaysService,
   ProjectService,
   TimeEntryService,
+  UserIgnoredEventsService,
   UserService
 } from '../mongo'
 import MatchingEngine from './TimesheetMatchingEngine'
@@ -54,6 +55,7 @@ export class TimesheetService {
    * @param _forecastPeriodSvc - Injected `ForecastedPeriodsService` through `typedi`
    * @param _userSvc - Injected `UserService` through `typedi`
    * @param _holidaysService - Injected `HolidaysService` through `typedi`
+   * @param _ignoredEventsSvc - Injected `UserIgnoredEventsService` through `typedi`
    */
   constructor(
     @Inject('CONTEXT') private readonly context: RequestContext,
@@ -65,7 +67,8 @@ export class TimesheetService {
     private readonly _confirmedPeriodSvc: ConfirmedPeriodsService,
     private readonly _forecastPeriodSvc: ForecastedPeriodsService,
     private readonly _userSvc: UserService,
-    private readonly _holidaysService: HolidaysService // eslint-disable-next-line unicorn/empty-brace-spaces
+    private readonly _holidaysService: HolidaysService,
+    private readonly _ignoredEventsSvc: UserIgnoredEventsService // eslint-disable-next-line unicorn/empty-brace-spaces
   ) {}
 
   /**
@@ -138,7 +141,7 @@ export class TimesheetService {
           }
         } else {
           const engine = new MatchingEngine(data)
-          period.events = await this._getEventsFromProvider({
+          const events = await this._getEventsFromProvider({
             ...parameters,
             ...periods[index],
             provider: this.context.provider,
@@ -148,6 +151,16 @@ export class TimesheetService {
               userId: this.context.userId
             }
           })
+          // Get user-ignored event IDs for this period
+          const ignoredEventIds = await this._ignoredEventsSvc.getIgnoredEventIds(
+            this.context.userId,
+            period.id
+          )
+          // Mark events as user-ignored
+          period.events = events.map((event) => ({
+            ...event,
+            isUserIgnored: ignoredEventIds.includes(event.id)
+          }))
         }
         periods[index] = period
       }

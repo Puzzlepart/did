@@ -2,6 +2,7 @@
 
 import { useMutation } from '@apollo/client'
 import { useAppContext } from 'AppContext'
+import { generateOpId } from 'hooks'
 import { useCallback } from 'react'
 import { ITimesheetContext } from '../context'
 import { SUBMITTING_PERIOD, UNSUBMITTING_PERIOD } from '../reducer/actions'
@@ -36,13 +37,18 @@ export function useSubmitActions({
   const onSubmitPeriod = useCallback(
     async (options: SubmitPeriodOptions): Promise<void> => {
       dispatch(SUBMITTING_PERIOD({ forecast: options.forecast }))
+      const opId = generateOpId()
       const variables = {
+        opId,
         period: state.selectedPeriod.data,
         options: { ...options, tzOffset: new Date().getTimezoneOffset() }
       }
-      await submitPeriod({ variables })
-      refetch()
-      appContext.notifications.refetch(250)
+      const { data } = await submitPeriod({ variables })
+      // Handle both success and duplicate as completed
+      if (data?.result?.success) {
+        refetch()
+        appContext.notifications.refetch(250)
+      }
     },
     [state.selectedPeriod]
   )
@@ -55,13 +61,18 @@ export function useSubmitActions({
   const onUnsubmitPeriod = useCallback(
     async (options: SubmitPeriodOptions): Promise<void> => {
       dispatch(UNSUBMITTING_PERIOD({ forecast: options.forecast }))
+      const opId = generateOpId()
       const variables = {
+        opId,
         period: state.selectedPeriod.data,
         options
       }
-      await unsubmitPeriod({ variables })
-      refetch()
-      appContext.notifications.refetch(250)
+      const { data } = await unsubmitPeriod({ variables })
+      // Handle both success and duplicate as completed
+      if (data?.result?.success) {
+        refetch()
+        appContext.notifications.refetch(250)
+      }
     },
     [state.selectedPeriod]
   )

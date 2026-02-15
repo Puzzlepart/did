@@ -2,7 +2,6 @@ import { DateRangeType } from '@fluentui/react-calendar-compat'
 import $date from 'DateUtils'
 import { IUserMessageProps } from 'components/UserMessage/types'
 import { useArray } from 'hooks/common/useArray'
-import { CLEAR_IGNORES, IGNORE_ALL } from 'pages/Timesheet/reducer/actions'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
@@ -101,7 +100,7 @@ export function useStatusBar() {
     }),
     action: {
       text: t('timesheet.ignoreAllTooltip'),
-      onClick: () => context.dispatch(IGNORE_ALL()),
+      onClick: () => context.onIgnoreAll?.(),
       iconName: 'CalendarCancel',
       iconColor: 'var(--colorPaletteRedForeground1)'
     },
@@ -165,7 +164,7 @@ export function useStatusBar() {
     }),
     action: {
       text: t('timesheet.undoIgnoreTooltip'),
-      onClick: () => context.dispatch(CLEAR_IGNORES()),
+      onClick: () => context.onClearIgnored?.(),
       iconName: 'ArrowUndo'
     },
     intent: 'warning'

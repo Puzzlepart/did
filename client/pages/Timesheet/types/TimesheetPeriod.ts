@@ -170,7 +170,9 @@ export class TimesheetPeriod {
     return [...(this.events || [])]
       .filter((event) => {
         const isIgnored =
-          this._uiIgnoredEvents.includes(event.id) || !!event.isSystemIgnored
+          this._uiIgnoredEvents.includes(event.id) ||
+          !!event.isSystemIgnored ||
+          !!event.isUserIgnored
         switch (option) {
           case GetEventsOption.AllEventsIncludingIgnored: {
             return true
@@ -273,6 +275,12 @@ export class TimesheetPeriod {
   public clearIgnoredEvents() {
     this._uiIgnoredEvents = []
     this._uiIgnoredEventsStorage.set(this._uiIgnoredEvents)
+    // Also clear isUserIgnored from event objects (server state)
+    // so they appear immediately without requiring a refetch
+    this.events = this.events.map((event) => ({
+      ...event,
+      isUserIgnored: false
+    }))
   }
 
   /**

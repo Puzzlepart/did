@@ -1,0 +1,10 @@
+mutation IgnoreAllTimesheetEvents ($opId: String, $input: TimesheetIgnoreEventsInput!) {
+  result: ignoreAllTimesheetEvents(opId: $opId, input: $input) {
+    success
+    opId
+    duplicate
+    error {
+      message
+    }
+  }
+}

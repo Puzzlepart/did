@@ -2,6 +2,7 @@ import { ApolloQueryResult, OperationVariables } from '@apollo/client'
 import { AnyAction } from '@reduxjs/toolkit'
 import { createContext, Dispatch, useContext } from 'react'
 import { useSubmitActions } from './hooks/useSubmitActions'
+import { useTimesheetEventIgnored } from './hooks/useTimesheetEventIgnored'
 import { ITimesheetState } from './types/ITimesheetState'
 
 /**
@@ -38,6 +39,21 @@ export interface ITimesheetContext {
    * @param options - The options for unsubmitting the period.
    */
   onUnsubmitPeriod: ReturnType<typeof useSubmitActions>['onUnsubmitPeriod']
+
+  /**
+   * Ignore an event (persists to server).
+   */
+  onIgnoreEvent?: ReturnType<typeof useTimesheetEventIgnored>['setIgnored']
+
+  /**
+   * Ignore all unmatched events (persists to server).
+   */
+  onIgnoreAll?: ReturnType<typeof useTimesheetEventIgnored>['ignoreAll']
+
+  /**
+   * Clear all ignored events for a period (persists to server).
+   */
+  onClearIgnored?: ReturnType<typeof useTimesheetEventIgnored>['clearIgnored']
 }
 
 /**

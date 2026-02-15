@@ -1,7 +1,7 @@
 import { useMutation } from '@apollo/client'
 import { useAppContext } from 'AppContext'
 import { TabItems } from 'components/Tabs'
-import { ComponentLogicHook, useTimesheetPeriods } from 'hooks'
+import { ComponentLogicHook, generateOpId, useTimesheetPeriods } from 'hooks'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import * as s from 'underscore.string'
@@ -69,10 +69,12 @@ export const useWeekStatus: ComponentLogicHook<
   const onLockPeriod = async (periodId: string, reason?: string) => {
     const period = periods.find((p) => p.id === periodId)
     const isLocked = lockedPeriods.isLocked(periodId)
+    const opId = generateOpId()
 
     try {
       const { data } = await lockPeriod({
         variables: {
+          opId,
           periodId,
           unlock: lockedPeriods.isLocked(periodId),
           reason
@@ -91,6 +93,7 @@ export const useWeekStatus: ComponentLogicHook<
         return
       }
 
+      // Both success and duplicate are treated as completed
       if (isLocked) {
         lockedPeriods.remove(periodId)
       } else {

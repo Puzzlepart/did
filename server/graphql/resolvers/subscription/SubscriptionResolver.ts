@@ -4,7 +4,11 @@ import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { PermissionScope } from '../../../../shared/config/security'
-import { SubscriptionService, UserService } from '../../../services/mongo'
+import {
+  AppliedOpsService,
+  SubscriptionService,
+  UserService
+} from '../../../services/mongo'
 import { IAuthOptions } from '../../authChecker'
 import { RequestContext } from '../../requestContext'
 import { BaseResult } from '../types'
@@ -34,10 +38,13 @@ export class SubscriptionResolver {
    * Constructor for SubscriptionResolver
    *
    * @param _subSvc - Subscription service
+   * @param _userSvc - User service
+   * @param _appliedOpsSvc - Applied ops service for idempotency
    */
   constructor(
     private readonly _subSvc: SubscriptionService,
-    private readonly _userSvc: UserService
+    private readonly _userSvc: UserService,
+    private readonly _appliedOpsSvc: AppliedOpsService
   ) {
     // This constructor will be probably be empty at least until
     // the world is at peace and there is no more hunger. I could
@@ -90,21 +97,62 @@ export class SubscriptionResolver {
   /**
    * Lock or unlock a period for the subscription.
    *
+   * @param context - Request context
+   * @param opId - Optional operation ID for idempotency
    * @param periodId Period ID
    * @param unlock If true, unlock the period
+   * @param reason Reason for locking
    */
   @Authorized<IAuthOptions>({ scope: PermissionScope.LOCK_UNLOCK_WEEKS })
   @Mutation(() => BaseResult, { description: 'Lock or unlock a period' })
   async lockPeriod(
+    @Ctx() context: RequestContext,
+    @Arg('opId', { nullable: true }) opId: string,
     @Arg('periodId') periodId: string,
     @Arg('unlock', { nullable: false }) unlock: boolean,
     @Arg('reason', { nullable: true }) reason: string
   ): Promise<BaseResult> {
     try {
+      // Check for duplicate operation
+      if (opId) {
+        const existing = await this._appliedOpsSvc.findAppliedOp(
+          opId,
+          context.userId
+        )
+        if (existing) {
+          return {
+            success: true,
+            opId,
+            duplicate: true,
+            error: null
+          }
+        }
+      }
+
       await this._subSvc.lockPeriod(periodId, unlock, reason)
-      return { success: true } as BaseResult
+
+      // Mark operation as applied
+      if (opId) {
+        await this._appliedOpsSvc.markApplied(
+          opId,
+          context.userId,
+          'lockPeriod',
+          { periodId, unlock }
+        )
+      }
+
+      return {
+        success: true,
+        opId,
+        duplicate: false,
+        error: null
+      }
     } catch (error) {
-      return { success: false, error } as BaseResult
+      return {
+        success: false,
+        opId,
+        error
+      } as BaseResult
     }
   }
 

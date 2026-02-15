@@ -1,9 +1,12 @@
-mutation LockPeriod ($periodId: String!, $unlock: Boolean!, $reason: String) {
+mutation LockPeriod ($opId: String, $periodId: String!, $unlock: Boolean!, $reason: String) {
   result: lockPeriod(
+    opId: $opId,
     periodId: $periodId, 
     unlock: $unlock,
     reason: $reason
     ) {
     success
+    opId
+    duplicate
   }
 }
