@@ -46,14 +46,16 @@ export interface ITimesheetContext {
   onIgnoreEvent?: ReturnType<typeof useTimesheetEventIgnored>['setIgnored']
 
   /**
-   * Ignore all unmatched events (persists to server).
+   * Ignore all unmatched events for the current period (persists to server).
+   * Derives periodId and eventIds from current state.
    */
-  onIgnoreAll?: ReturnType<typeof useTimesheetEventIgnored>['ignoreAll']
+  onIgnoreAll?: () => Promise<{ success: boolean; opId?: string; duplicate?: boolean }>
 
   /**
-   * Clear all ignored events for a period (persists to server).
+   * Clear all ignored events for the current period (persists to server).
+   * Derives periodId from current state.
    */
-  onClearIgnored?: ReturnType<typeof useTimesheetEventIgnored>['clearIgnored']
+  onClearIgnored?: () => Promise<{ success: boolean; opId?: string; duplicate?: boolean }>
 }
 
 /**

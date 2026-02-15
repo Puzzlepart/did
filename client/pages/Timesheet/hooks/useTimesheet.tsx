@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react'
 import { ITimesheetContext } from '../context'
 import { CLEAR_IGNORES, IGNORE_ALL, IGNORE_EVENT } from '../reducer/actions'
-import { GetEventsOption } from '../types/TimesheetPeriod'
+import { GetEventsOption, TimesheetPeriod } from '../types/TimesheetPeriod'
 import { useTimesheetReducer } from '../reducer'
 import { useSubmitActions } from './useSubmitActions'
 import { useTimesheetEventIgnored } from './useTimesheetEventIgnored'
@@ -40,7 +40,7 @@ export function useTimesheet() {
    * Ignore an event - updates local state AND persists to server
    */
   const onIgnoreEvent = useCallback(
-    async (periodId: string, eventId: string, ignored: boolean) => {
+    (periodId: string, eventId: string, ignored: boolean) => {
       // Update local state immediately for responsive UI
       dispatch(IGNORE_EVENT({ id: eventId }))
       // Persist to server (fire and forget - server is source of truth on reload)
@@ -50,30 +50,35 @@ export function useTimesheet() {
   )
 
   /**
-   * Ignore all unmatched events - updates local state AND persists to server
+   * Ignore all unmatched events - updates local state AND persists to server.
+   * Derives periodId and eventIds from current state.
    */
-  const onIgnoreAll = useCallback(async () => {
-    const periodId = state.selectedPeriod?.id
-    if (!periodId) return { success: false }
-
-    // Get unmatched event IDs before dispatching (state will change)
-    const unmatchedEventIds = state.selectedPeriod
+  const onIgnoreAll = useCallback(() => {
+    const period = state.selectedPeriod as TimesheetPeriod
+    if (!period?.id) {
+      return Promise.resolve({ success: false })
+    }
+    // Get unmatched event IDs before updating state
+    const eventIds = period
       .getEvents(GetEventsOption.UnmatchedEvents)
-      .map((event) => event.id)
-
+      .map((e) => e.id)
+    if (eventIds.length === 0) {
+      return Promise.resolve({ success: false })
+    }
     // Update local state immediately for responsive UI
     dispatch(IGNORE_ALL())
-
     // Persist to server
-    return ignoreAll(periodId, unmatchedEventIds)
+    return ignoreAll(period.id, eventIds)
   }, [dispatch, ignoreAll, state.selectedPeriod])
 
   /**
    * Clear all ignored events - updates local state AND persists to server
    */
-  const onClearIgnored = useCallback(async () => {
+  const onClearIgnored = useCallback(() => {
     const periodId = state.selectedPeriod?.id
-    if (!periodId) return { success: false }
+    if (!periodId) {
+      return Promise.resolve({ success: false })
+    }
 
     // Update local state immediately for responsive UI
     dispatch(CLEAR_IGNORES())

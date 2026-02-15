@@ -877,6 +877,7 @@
     "google": "Google",
     "signInDisabledText": "Pålogging er for øyeblikket deaktivert. \nVennligst vent.",
     "error": "Feilmelding",
+    "accessDenied": "Ingen tilgang",
     "uiThemeLabel": "Fargetema",
     "dark-theme": "Mørkt tema",
     "light-theme": "Lyst tema",
