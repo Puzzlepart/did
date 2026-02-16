@@ -1,0 +1,17 @@
+query ReportFilterOptions(
+  $preset: String
+  $query: ReportsQuery
+  $forecast: Boolean
+) {
+  filterOptions: reportFilterOptions(
+    preset: $preset
+    query: $query
+    forecast: $forecast
+  ) {
+    projectNames
+    parentProjectNames
+    customerNames
+    partnerNames
+    employeeNames
+  }
+}

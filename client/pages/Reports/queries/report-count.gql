@@ -1,4 +1,3 @@
-query ReportCount($query: ReportsQuery) {
-  approxCount: reportCount(query: $query)
+query ReportCount($preset: String, $query: ReportsQuery) {
+  approxCount: reportCount(preset: $preset, query: $query)
 }
-

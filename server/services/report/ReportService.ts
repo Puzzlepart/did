@@ -1,9 +1,12 @@
 /* eslint-disable unicorn/no-array-callback-reference */
+import crypto from 'crypto'
 import { Inject, Service } from 'typedi'
 import _ from 'underscore'
 import { ProjectService } from '../mongo/project/ProjectService'
 import { CustomerService } from '../mongo/customer'
 import { UserService } from '../mongo/user'
+import { CacheScope, CacheService } from '../cache'
+import { TABLE_NAME } from '../sqlite/constants'
 import { DateObject } from '../../../shared/utils/DateObject'
 import { RequestContext } from '../../graphql/requestContext'
 import {
@@ -19,6 +22,33 @@ import { TimeEntryService } from '../mongo/time_entry'
 import { Report, IGenerateReportParameters } from './types'
 const debug = require('debug')('services/report/ReportService')
 
+type PreloadSnapshot = {
+  count: number
+  projectIds: string[]
+  userIds: string[]
+}
+
+type PreloadPresetCounts = Partial<Record<ReportsQueryPreset, number>>
+
+type PreloadKeyInput = {
+  preset?: ReportsQueryPreset
+  query: ReportsQuery
+  forecast: boolean
+  subscriptionId: string
+}
+
+type L1PreloadSnapshotCacheEntry = {
+  snapshot: PreloadSnapshot
+  subscriptionId: string
+  expiresAt: number
+}
+
+type L1PreloadPresetCountsCacheEntry = {
+  counts: PreloadPresetCounts
+  subscriptionId: string
+  expiresAt: number
+}
+
 /**
  * Report service
  *
@@ -26,6 +56,165 @@ const debug = require('debug')('services/report/ReportService')
  */
 @Service({ global: false })
 export class ReportService {
+  private static readonly PRELOAD_CACHE_PREFIX = 'report_preload'
+  private static readonly PRELOAD_CACHE_VERSION = 1
+  private static readonly PRESET_COUNT_CACHE_VERSION = 1
+  private static readonly PRELOAD_CACHE_HASH_ALGORITHM = 'sha256'
+  private static readonly PRELOAD_CACHE_WARM_PRESETS: ReportsQueryPreset[] = [
+    'LAST_MONTH',
+    'CURRENT_MONTH',
+    'LAST_YEAR',
+    'CURRENT_YEAR'
+  ]
+  private static readonly _preloadSnapshotL1Cache = new Map<
+    string,
+    L1PreloadSnapshotCacheEntry
+  >()
+  private static readonly _preloadPresetCountsL1Cache = new Map<
+    string,
+    L1PreloadPresetCountsCacheEntry
+  >()
+  private static readonly _preloadSnapshotWarmups = new Map<string, Promise<void>>()
+  private static readonly _preloadSnapshotInFlight = new Map<
+    string,
+    Promise<PreloadSnapshot>
+  >()
+  private static readonly _preloadPresetCountsInFlight = new Map<
+    string,
+    Promise<PreloadPresetCounts>
+  >()
+  private readonly _preloadSnapshotCache: CacheService
+
+  private static _parsePositiveIntegerEnv(
+    value: string | undefined,
+    defaultValue: number
+  ): number {
+    const parsed = Number.parseInt(value || '', 10)
+    return Number.isFinite(parsed) && parsed > 0 ? parsed : defaultValue
+  }
+
+  private static _getPreloadL1TtlSeconds(): number {
+    return this._parsePositiveIntegerEnv(
+      process.env.REPORT_PRELOAD_L1_TTL_SECONDS,
+      15
+    )
+  }
+
+  private static _getPreloadL1MaxEntries(): number {
+    return this._parsePositiveIntegerEnv(
+      process.env.REPORT_PRELOAD_L1_MAX_ENTRIES,
+      500
+    )
+  }
+
+  private static _getPreloadL2TtlSeconds(): number {
+    return this._parsePositiveIntegerEnv(
+      process.env.REPORT_PRELOAD_L2_TTL_SECONDS,
+      120
+    )
+  }
+
+  private static _getPreloadSnapshotFromL1(
+    cacheKey: string
+  ): PreloadSnapshot | null {
+    const entry = this._preloadSnapshotL1Cache.get(cacheKey)
+    if (!entry) return null
+
+    if (entry.expiresAt <= Date.now()) {
+      this._preloadSnapshotL1Cache.delete(cacheKey)
+      return null
+    }
+
+    // Refresh recency for LRU semantics.
+    this._preloadSnapshotL1Cache.delete(cacheKey)
+    this._preloadSnapshotL1Cache.set(cacheKey, entry)
+    return entry.snapshot
+  }
+
+  private static _setPreloadSnapshotInL1(
+    cacheKey: string,
+    subscriptionId: string,
+    snapshot: PreloadSnapshot
+  ): void {
+    const ttlMilliseconds = this._getPreloadL1TtlSeconds() * 1000
+    this._preloadSnapshotL1Cache.delete(cacheKey)
+    this._preloadSnapshotL1Cache.set(cacheKey, {
+      snapshot,
+      subscriptionId,
+      expiresAt: Date.now() + ttlMilliseconds
+    })
+
+    const maxEntries = this._getPreloadL1MaxEntries()
+    while (this._preloadSnapshotL1Cache.size > maxEntries) {
+      const oldestKey = this._preloadSnapshotL1Cache.keys().next().value
+      if (!oldestKey) break
+      this._preloadSnapshotL1Cache.delete(oldestKey)
+    }
+  }
+
+  private static _getPreloadPresetCountsFromL1(
+    subscriptionId: string
+  ): PreloadPresetCounts | null {
+    const entry = this._preloadPresetCountsL1Cache.get(subscriptionId)
+    if (!entry) return null
+
+    if (entry.expiresAt <= Date.now()) {
+      this._preloadPresetCountsL1Cache.delete(subscriptionId)
+      return null
+    }
+
+    return entry.counts
+  }
+
+  private static _setPreloadPresetCountsInL1(
+    subscriptionId: string,
+    counts: PreloadPresetCounts
+  ): void {
+    const ttlMilliseconds = this._getPreloadL1TtlSeconds() * 1000
+    this._preloadPresetCountsL1Cache.set(subscriptionId, {
+      counts,
+      subscriptionId,
+      expiresAt: Date.now() + ttlMilliseconds
+    })
+  }
+
+  public static invalidatePreloadSnapshotL1ForSubscription(
+    subscriptionId?: string
+  ): void {
+    if (!subscriptionId) return
+
+    for (const [key, entry] of this._preloadSnapshotL1Cache.entries()) {
+      if (entry.subscriptionId === subscriptionId) {
+        this._preloadSnapshotL1Cache.delete(key)
+      }
+    }
+    this._preloadPresetCountsL1Cache.delete(subscriptionId)
+  }
+
+  public static clearPreloadSnapshotL1(): void {
+    this._preloadSnapshotL1Cache.clear()
+    this._preloadPresetCountsL1Cache.clear()
+  }
+
+  public static async invalidatePreloadSnapshotCache(
+    context: RequestContext
+  ): Promise<void> {
+    const subscriptionId = context?.subscription?.id
+    if (!subscriptionId) return
+
+    this.invalidatePreloadSnapshotL1ForSubscription(subscriptionId)
+    this._preloadSnapshotWarmups.delete(subscriptionId)
+    this._preloadSnapshotInFlight.clear()
+    this._preloadPresetCountsInFlight.delete(subscriptionId)
+
+    const cache = new CacheService(
+      context,
+      ReportService.PRELOAD_CACHE_PREFIX,
+      CacheScope.SUBSCRIPTION
+    )
+    await cache.clear()
+  }
+
   /**
    * Constructor for ReportsService
    *
@@ -45,8 +234,14 @@ export class ReportService {
     private readonly _forecastTimeEntrySvc: ForecastedTimeEntryService,
     private readonly _confirmedPeriodSvc: ConfirmedPeriodsService
   ) {
-    // Empty constructor on purpose. It will be like
-    // this until we need to inject something.
+    const cacheScope = context?.subscription?.id
+      ? CacheScope.SUBSCRIPTION
+      : CacheScope.GLOBAL
+    this._preloadSnapshotCache = new CacheService(
+      context,
+      ReportService.PRELOAD_CACHE_PREFIX,
+      cacheScope
+    )
   }
 
   /**
@@ -58,6 +253,525 @@ export class ReportService {
     return customer
       ? _.pick(customer, 'key', 'name', 'description', 'icon')
       : null
+  }
+
+  private _normalizeCacheValue(value: any): any {
+    if (value instanceof Date) {
+      return value.toISOString()
+    }
+    if (Array.isArray(value)) {
+      const normalizedArray = value.map((entry) => this._normalizeCacheValue(entry))
+      const allPrimitive = normalizedArray.every((entry) => {
+        return (
+          entry === null ||
+          ['string', 'number', 'boolean'].includes(typeof entry)
+        )
+      })
+      if (!allPrimitive) return normalizedArray
+      return [...normalizedArray].sort((a, b) =>
+        `${typeof a}:${String(a)}`.localeCompare(`${typeof b}:${String(b)}`)
+      )
+    }
+    if (!value || typeof value !== 'object') {
+      return value
+    }
+
+    return Object.keys(value)
+      .sort()
+      .reduce<Record<string, any>>((normalized, key) => {
+        const entryValue = value[key]
+        if (entryValue === undefined) return normalized
+        normalized[key] = this._normalizeCacheValue(entryValue)
+        return normalized
+      }, {})
+  }
+
+  private _buildPreloadSnapshotCacheKey(input: PreloadKeyInput): string {
+    const normalizedInput = this._normalizeCacheValue({
+      version: ReportService.PRELOAD_CACHE_VERSION,
+      subscriptionId: input.subscriptionId,
+      forecast: input.forecast,
+      preset: input.preset || null,
+      query: input.query || {}
+    })
+    const serializedInput = JSON.stringify(normalizedInput)
+    return crypto
+      .createHash(ReportService.PRELOAD_CACHE_HASH_ALGORITHM)
+      .update(serializedInput)
+      .digest('hex')
+  }
+
+  private _isSqliteShimClient(): boolean {
+    return typeof (this.context?.mcl as any)?._all === 'function'
+  }
+
+  private _getSqliteJsonPath(field: string): string | null {
+    switch (field) {
+      case 'projectId':
+      case 'userId':
+      case 'week':
+      case 'month':
+      case 'year': {
+        return `$.${field}`
+      }
+      case 'startDateTime':
+      case 'endDateTime': {
+        return `$.${field}.value`
+      }
+      default: {
+        return null
+      }
+    }
+  }
+
+  private _normalizeSqliteQueryValue(value: any): any {
+    return value instanceof Date ? value.toISOString() : value
+  }
+
+  private _buildSqliteWhereFromBaseQuery(baseQuery: Record<string, any>) {
+    const clauses: string[] = []
+    const parameters: any[] = []
+
+    for (const [field, rawCondition] of Object.entries(baseQuery || {})) {
+      const jsonPath = this._getSqliteJsonPath(field)
+      if (!jsonPath) return null
+      const fieldSql = `json_extract(document_json, '${jsonPath}')`
+      const condition = rawCondition as any
+
+      if (
+        condition &&
+        typeof condition === 'object' &&
+        !Array.isArray(condition)
+      ) {
+        const operatorKeys = Object.keys(condition)
+        for (const operator of operatorKeys) {
+          const value = condition[operator]
+          switch (operator) {
+            case '$eq': {
+              clauses.push(`${fieldSql} = ?`)
+              parameters.push(this._normalizeSqliteQueryValue(value))
+              break
+            }
+            case '$in': {
+              if (!Array.isArray(value)) return null
+              if (value.length === 0) {
+                clauses.push('1 = 0')
+                break
+              }
+              const placeholders = value.map(() => '?').join(', ')
+              clauses.push(`${fieldSql} IN (${placeholders})`)
+              parameters.push(
+                ...value.map((entry) => this._normalizeSqliteQueryValue(entry))
+              )
+              break
+            }
+            case '$gte': {
+              clauses.push(`${fieldSql} >= ?`)
+              parameters.push(this._normalizeSqliteQueryValue(value))
+              break
+            }
+            case '$lte': {
+              clauses.push(`${fieldSql} <= ?`)
+              parameters.push(this._normalizeSqliteQueryValue(value))
+              break
+            }
+            default: {
+              return null
+            }
+          }
+        }
+        continue
+      }
+
+      clauses.push(`${fieldSql} = ?`)
+      parameters.push(this._normalizeSqliteQueryValue(condition))
+    }
+
+    return {
+      whereSql: clauses.length > 0 ? ` AND ${clauses.join(' AND ')}` : '',
+      parameters
+    }
+  }
+
+  private async _computeSqlitePreloadSnapshot(
+    baseQuery: Record<string, any>,
+    collectionName: string
+  ): Promise<PreloadSnapshot | null> {
+    if (!this._isSqliteShimClient()) return null
+
+    const scope = this._buildSqliteWhereFromBaseQuery(baseQuery)
+    if (!scope) return null
+
+    const databaseName = (this.context?.db as any)?.databaseName
+    if (!databaseName) return null
+
+    const client = this.context.mcl as any
+    const scopeParameters = [databaseName, collectionName, ...scope.parameters]
+    const whereSql = `WHERE database_name = ? AND collection_name = ?${scope.whereSql}`
+    const groupedRows = (await client._all(
+      `SELECT
+         json_extract(document_json, '$.projectId') AS projectId,
+         json_extract(document_json, '$.userId') AS userId,
+         COUNT(*) AS entryCount
+       FROM ${TABLE_NAME}
+       ${whereSql}
+       GROUP BY projectId, userId`,
+      scopeParameters
+    )) as Array<{
+      projectId: string | null
+      userId: string | null
+      entryCount: number
+    }>
+
+    const projectIdSet = new Set<string>()
+    const userIdSet = new Set<string>()
+    let count = 0
+
+    for (const row of groupedRows) {
+      count += Number(row.entryCount || 0)
+      if (row.projectId) projectIdSet.add(row.projectId)
+      if (row.userId) userIdSet.add(row.userId)
+    }
+
+    return {
+      count,
+      projectIds: Array.from(projectIdSet).sort(),
+      userIds: Array.from(userIdSet).sort()
+    }
+  }
+
+  private _shouldUsePresetCountFastPath(
+    preset?: ReportsQueryPreset,
+    query: ReportsQuery = {},
+    forecast?: boolean
+  ): boolean {
+    return Boolean(
+      preset &&
+        !forecast &&
+        _.isEmpty(query) &&
+        ReportService.PRELOAD_CACHE_WARM_PRESETS.includes(preset)
+    )
+  }
+
+  private async _computeSqlitePresetCounts(
+    collectionName: string
+  ): Promise<PreloadPresetCounts | null> {
+    if (!this._isSqliteShimClient()) return null
+
+    const databaseName = (this.context?.db as any)?.databaseName
+    if (!databaseName) return null
+
+    const client = this.context.mcl as any
+    const rows = (await client._all(
+      `SELECT
+         CAST(json_extract(document_json, '$.year') AS INTEGER) AS year,
+         CAST(json_extract(document_json, '$.month') AS INTEGER) AS month,
+         COUNT(*) AS entryCount
+       FROM ${TABLE_NAME}
+       WHERE database_name = ? AND collection_name = ?
+       GROUP BY year, month`,
+      [databaseName, collectionName]
+    )) as Array<{
+      year: number | null
+      month: number | null
+      entryCount: number
+    }>
+
+    const yearTotals = new Map<number, number>()
+    const monthTotals = new Map<string, number>()
+
+    for (const row of rows) {
+      const count = Number(row.entryCount || 0)
+      const year = Number(row.year)
+      const month = Number(row.month)
+      if (!Number.isFinite(year) || count <= 0) continue
+
+      yearTotals.set(year, (yearTotals.get(year) || 0) + count)
+      if (Number.isFinite(month)) {
+        const monthKey = `${year}:${month}`
+        monthTotals.set(monthKey, (monthTotals.get(monthKey) || 0) + count)
+      }
+    }
+
+    const currentDate = new DateObject().toObject()
+    const previousMonthDate = new DateObject().add('-1month').toObject()
+
+    return {
+      LAST_MONTH:
+        monthTotals.get(`${previousMonthDate.year}:${previousMonthDate.month}`) ||
+        0,
+      CURRENT_MONTH:
+        monthTotals.get(`${currentDate.year}:${currentDate.month}`) || 0,
+      LAST_YEAR: yearTotals.get(currentDate.year - 1) || 0,
+      CURRENT_YEAR: yearTotals.get(currentDate.year) || 0
+    }
+  }
+
+  private async _getOrComputeSqlitePresetCounts(
+    subscriptionId: string
+  ): Promise<PreloadPresetCounts | null> {
+    if (!this._isSqliteShimClient()) return null
+
+    const l1Counts = ReportService._getPreloadPresetCountsFromL1(subscriptionId)
+    if (l1Counts) {
+      debug('[preloadPresetCount]', 'L1 cache hit', { subscriptionId })
+      return l1Counts
+    }
+
+    const inFlightCounts =
+      ReportService._preloadPresetCountsInFlight.get(subscriptionId)
+    if (inFlightCounts) {
+      debug('[preloadPresetCount]', 'Using in-flight preset count promise', {
+        subscriptionId
+      })
+      return await inFlightCounts
+    }
+
+    const countPromise = (async () => {
+      const key = `preset_counts_v${ReportService.PRESET_COUNT_CACHE_VERSION}`
+      let cacheMiss = false
+      const l2Start = Date.now()
+
+      const counts = await this._preloadSnapshotCache.usingCache(
+        async () => {
+          cacheMiss = true
+          return await this._computeSqlitePresetCounts('time_entries')
+        },
+        {
+          key,
+          expiry: ReportService._getPreloadL2TtlSeconds()
+        }
+      )
+
+      if (!counts) return null
+
+      debug(
+        '[preloadPresetCount]',
+        cacheMiss ? 'L2 cache miss' : 'L2 cache hit',
+        {
+          subscriptionId,
+          l2LookupMs: Date.now() - l2Start
+        }
+      )
+
+      ReportService._setPreloadPresetCountsInL1(subscriptionId, counts)
+      return counts
+    })()
+
+    ReportService._preloadPresetCountsInFlight.set(subscriptionId, countPromise)
+    try {
+      return await countPromise
+    } finally {
+      ReportService._preloadPresetCountsInFlight.delete(subscriptionId)
+    }
+  }
+
+  private _shouldWarmPresetSnapshots(
+    preset?: ReportsQueryPreset,
+    query: ReportsQuery = {},
+    forecast?: boolean
+  ): boolean {
+    return Boolean(
+      preset &&
+        !forecast &&
+        _.isEmpty(query) &&
+        ReportService.PRELOAD_CACHE_WARM_PRESETS.includes(preset)
+    )
+  }
+
+  private _schedulePresetSnapshotWarmup(subscriptionId: string): void {
+    if (ReportService._preloadSnapshotWarmups.has(subscriptionId)) {
+      return
+    }
+
+    const warmupPromise = (async () => {
+      debug('[preloadSnapshot]', 'Starting preset warmup', { subscriptionId })
+      for (const preset of ReportService.PRELOAD_CACHE_WARM_PRESETS) {
+        try {
+          await this._getOrComputePreloadSnapshot({
+            preset,
+            query: {},
+            forecast: false,
+            warmup: true
+          })
+        } catch (error) {
+          debug('[preloadSnapshot]', 'Preset warmup failed', {
+            subscriptionId,
+            preset,
+            error: error?.message
+          })
+        }
+      }
+      debug('[preloadSnapshot]', 'Finished preset warmup', { subscriptionId })
+    })().finally(() => {
+      ReportService._preloadSnapshotWarmups.delete(subscriptionId)
+    })
+
+    ReportService._preloadSnapshotWarmups.set(subscriptionId, warmupPromise)
+  }
+
+  private async _buildPreloadBaseQuery(
+    query: ReportsQuery = {},
+    preset?: ReportsQueryPreset,
+    forecast?: boolean
+  ) {
+    const queryStart = Date.now()
+    const baseQuery = forecast
+      ? {
+          ...(await this._generateQueryWithFilters(query)),
+          startDateTime: {
+            $gte: new Date()
+          }
+        }
+      : await this._generateQueryWithFilters(query, preset)
+
+    debug('[preloadSnapshot]', 'Generated base query', {
+      preset,
+      forecast: Boolean(forecast),
+      queryGenerationMs: Date.now() - queryStart,
+      queryKeys: Object.keys(baseQuery || {})
+    })
+
+    return baseQuery
+  }
+
+  private async _computePreloadSnapshot(
+    baseQuery: Record<string, any>,
+    forecast: boolean
+  ): Promise<PreloadSnapshot> {
+    const computeStart = Date.now()
+    const service = forecast ? this._forecastTimeEntrySvc : this._timeEntrySvc
+    const timeEntries = await service.find(baseQuery)
+    const projectIdSet = new Set<string>()
+    const userIdSet = new Set<string>()
+
+    for (const entry of timeEntries) {
+      if (entry?.projectId) projectIdSet.add(entry.projectId)
+      if (entry?.userId) userIdSet.add(entry.userId)
+    }
+
+    const snapshot = {
+      count: timeEntries.length,
+      projectIds: Array.from(projectIdSet).sort(),
+      userIds: Array.from(userIdSet).sort()
+    }
+
+    debug('[preloadSnapshot]', 'Computed snapshot', {
+      forecast,
+      count: snapshot.count,
+      distinctProjectIds: snapshot.projectIds.length,
+      distinctUserIds: snapshot.userIds.length,
+      computeMs: Date.now() - computeStart
+    })
+
+    return snapshot
+  }
+
+  private async _getOrComputePreloadSnapshot({
+    preset,
+    query = {},
+    forecast = false,
+    warmup = false
+  }: {
+    preset?: ReportsQueryPreset
+    query?: ReportsQuery
+    forecast?: boolean
+    warmup?: boolean
+  }): Promise<PreloadSnapshot> {
+    const subscriptionId = this.context?.subscription?.id || 'global'
+    const cacheKey = this._buildPreloadSnapshotCacheKey({
+      preset,
+      query,
+      forecast: Boolean(forecast),
+      subscriptionId
+    })
+
+    const inFlightSnapshot = ReportService._preloadSnapshotInFlight.get(cacheKey)
+    if (inFlightSnapshot) {
+      debug('[preloadSnapshot]', 'Using in-flight snapshot promise', {
+        cacheKey,
+        forecast: Boolean(forecast)
+      })
+      return await inFlightSnapshot
+    }
+
+    const snapshotPromise = (async () => {
+      const snapshotFromL1 = ReportService._getPreloadSnapshotFromL1(cacheKey)
+      if (snapshotFromL1) {
+        debug('[preloadSnapshot]', 'L1 cache hit', {
+          cacheKey,
+          forecast: Boolean(forecast),
+          count: snapshotFromL1.count
+        })
+        return snapshotFromL1
+      }
+
+      const l2Start = Date.now()
+      let cacheMiss = false
+      const snapshotFromL2OrCompute = await this._preloadSnapshotCache.usingCache(
+        async () => {
+          cacheMiss = true
+          const baseQuery = await this._buildPreloadBaseQuery(
+            query,
+            preset,
+            forecast
+          )
+          const canUseSqlitePresetFastPath = Boolean(
+            preset && !forecast && _.isEmpty(query)
+          )
+          if (canUseSqlitePresetFastPath) {
+            const fastPathStart = Date.now()
+            const sqliteSnapshot = await this._computeSqlitePreloadSnapshot(
+              baseQuery as any,
+              'time_entries'
+            )
+            if (sqliteSnapshot) {
+              debug('[preloadSnapshot]', 'Using SQLite preset fast path', {
+                preset,
+                fastPathMs: Date.now() - fastPathStart,
+                count: sqliteSnapshot.count
+              })
+              return sqliteSnapshot
+            }
+          }
+
+          return await this._computePreloadSnapshot(baseQuery as any, forecast)
+        },
+        {
+          key: cacheKey,
+          expiry: ReportService._getPreloadL2TtlSeconds()
+        }
+      )
+
+      debug('[preloadSnapshot]', cacheMiss ? 'L2 cache miss' : 'L2 cache hit', {
+        cacheKey,
+        forecast: Boolean(forecast),
+        count: snapshotFromL2OrCompute.count,
+        l2LookupMs: Date.now() - l2Start
+      })
+
+      ReportService._setPreloadSnapshotInL1(
+        cacheKey,
+        subscriptionId,
+        snapshotFromL2OrCompute
+      )
+
+      return snapshotFromL2OrCompute
+    })()
+
+    ReportService._preloadSnapshotInFlight.set(cacheKey, snapshotPromise)
+    try {
+      const snapshot = await snapshotPromise
+      if (this._shouldWarmPresetSnapshots(preset, query, forecast) && !warmup) {
+        // Warm remaining preset snapshots asynchronously to improve tab switching.
+        void Promise.resolve().then(() => {
+          this._schedulePresetSnapshotWarmup(subscriptionId)
+        })
+      }
+      return snapshot
+    } finally {
+      ReportService._preloadSnapshotInFlight.delete(cacheKey)
+    }
   }
 
   /**
@@ -201,9 +915,47 @@ export class ReportService {
     preset?: ReportsQueryPreset,
     query: ReportsQuery = {}
   ): Promise<number> {
-    const query_ = await this._generateQueryWithFilters(query, preset)
-    debug('[getReportCount]', 'Counting raw time entries with query:', query_)
-    return await this._timeEntrySvc.count(query_)
+    const subscriptionId = this.context?.subscription?.id || 'global'
+    const usePresetCountFastPath = this._shouldUsePresetCountFastPath(
+      preset,
+      query,
+      false
+    )
+
+    if (usePresetCountFastPath && preset) {
+      const presetCounts = await this._getOrComputeSqlitePresetCounts(
+        subscriptionId
+      )
+      const presetCount = presetCounts?.[preset]
+
+      if (typeof presetCount === 'number') {
+        // Compute the full snapshot in the background so filter options
+        // can reuse it when loaded right after count.
+        void this._getOrComputePreloadSnapshot({
+          preset,
+          query,
+          forecast: false,
+          warmup: true
+        }).catch(() => null)
+
+        debug('[getReportCount]', 'Using preset count fast path', {
+          preset,
+          count: presetCount
+        })
+        return presetCount
+      }
+    }
+
+    const snapshot = await this._getOrComputePreloadSnapshot({
+      preset,
+      query,
+      forecast: false
+    })
+    debug('[getReportCount]', 'Using preload snapshot count', {
+      preset,
+      count: snapshot.count
+    })
+    return snapshot.count
   }
 
   /**
@@ -214,25 +966,14 @@ export class ReportService {
     query: ReportsQuery = {},
     forecast?: boolean
   ): Promise<ReportFilterOptions> {
-    const baseQuery = forecast
-      ? {
-          ...(await this._generateQueryWithFilters(query)),
-          startDateTime: {
-            $gte: new Date()
-          }
-        }
-      : await this._generateQueryWithFilters(query, preset)
-
-    const [projectIds, userIds] = await Promise.all([
-      (forecast ? this._forecastTimeEntrySvc : this._timeEntrySvc).distinct(
-        'projectId',
-        baseQuery
-      ),
-      (forecast ? this._forecastTimeEntrySvc : this._timeEntrySvc).distinct(
-        'userId',
-        baseQuery
-      )
-    ])
+    const enrichmentStart = Date.now()
+    const snapshot = await this._getOrComputePreloadSnapshot({
+      preset,
+      query,
+      forecast: Boolean(forecast)
+    })
+    const projectIds = snapshot.projectIds
+    const userIds = snapshot.userIds
 
     if (projectIds.length === 0 && userIds.length === 0) {
       return {
@@ -325,6 +1066,15 @@ export class ReportService {
       new Set(users.map((user) => user.displayName).filter(Boolean))
     ).sort()
 
+    debug('[getReportFilterOptions]', 'Enriched filter options from snapshot', {
+      preset,
+      forecast: Boolean(forecast),
+      matchedCount: snapshot.count,
+      projectIds: projectIds.length,
+      userIds: userIds.length,
+      enrichmentMs: Date.now() - enrichmentStart
+    })
+
     return {
       projectNames,
       parentProjectNames,
@@ -338,17 +1088,14 @@ export class ReportService {
    * Count forecasted time entries.
    */
   public async getForecastReportCount(): Promise<number> {
-    const query = {
-      startDateTime: {
-        $gte: new Date()
-      }
-    }
-    debug(
-      '[getForecastReportCount]',
-      'Counting forecasted time entries with query:',
-      query
-    )
-    return await this._forecastTimeEntrySvc.count(query as any)
+    const snapshot = await this._getOrComputePreloadSnapshot({
+      query: {},
+      forecast: true
+    })
+    debug('[getForecastReportCount]', 'Using preload snapshot count', {
+      count: snapshot.count
+    })
+    return snapshot.count
   }
 
   /**

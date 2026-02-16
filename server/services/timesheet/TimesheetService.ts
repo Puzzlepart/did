@@ -23,6 +23,7 @@ import {
   UserIgnoredEventsService,
   UserService
 } from '../mongo'
+import { ReportService } from '../report'
 import MatchingEngine from './TimesheetMatchingEngine'
 import {
   IConnectEventsParameters,
@@ -221,6 +222,9 @@ export class TimesheetService {
         teSvc.insertMultiple(getEvents(true)),
         periodSvc.insert(period)
       ])
+      await ReportService.invalidatePreloadSnapshotCache(this.context).catch(
+        () => null
+      )
     } catch (error) {
       throw error
     }
@@ -249,6 +253,9 @@ export class TimesheetService {
         teSvc.collection.deleteMany({ periodId: _id }),
         periodSvc.collection.deleteOne({ _id })
       ])
+      await ReportService.invalidatePreloadSnapshotCache(this.context).catch(
+        () => null
+      )
     } catch (error) {
       throw error
     }

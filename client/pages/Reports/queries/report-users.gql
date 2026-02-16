@@ -1,0 +1,7 @@
+#import "./report-user-fragment.gql"
+
+query ReportUsers {
+  users {
+    ...ReportUserFragment
+  }
+}

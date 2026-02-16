@@ -1,10 +1,16 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-import { useApolloClient, useLazyQuery, useQuery } from '@apollo/client'
+import { useApolloClient, useQuery } from '@apollo/client'
 import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { ReportLink } from 'types'
 import _ from 'underscore'
 import { IReportsContext } from '../context'
-import { forecast_preload, report_links, report_preload } from '../queries'
+import {
+  forecast_count,
+  report_count,
+  report_filter_options,
+  report_links,
+  report_users
+} from '../queries'
 import {
   DATA_UPDATED,
   PRELOAD_UPDATED,
@@ -80,6 +86,7 @@ export function useReportsQuery({
   state
 }: IReportsContext) {
   const client = useApolloClient()
+  const preloadRequestId = useRef(0)
   const appliedFilterQuery = useMemo(
     () => buildFilterQuery(state?.appliedFilterState),
     [state?.appliedFilterState]
@@ -91,23 +98,16 @@ export function useReportsQuery({
   }, [queryPreset?.id, queryPreset?.variables?.queries])
   const lastSummaryKey = useRef<string>('')
 
-  const [loadPreloadQuery, preloadResult] = useLazyQuery(report_preload, {
-    fetchPolicy: 'no-cache'
-  })
-
-  const [loadForecastPreloadQuery, forecastPreloadResult] = useLazyQuery(
-    forecast_preload,
-    {
-      fetchPolicy: 'no-cache'
-    }
-  )
-
   const reportLinksQuery = useQuery<{ reportLinks: ReportLink[] }>(
     report_links,
     {
       fetchPolicy: 'cache-and-network'
     }
   )
+
+  const reportUsersQuery = useQuery<{ users: any[] }>(report_users, {
+    fetchPolicy: 'cache-and-network'
+  })
 
   useEffect(() => {
     dispatch(
@@ -118,50 +118,13 @@ export function useReportsQuery({
   }, [reportLinksQuery.data, dispatch])
 
   useEffect(() => {
-    if (preloadResult.data?.users) {
-      dispatch(
-        DATA_UPDATED({
-          ...preloadResult.data
-        })
-      )
-    }
-    if (!preloadResult.called) return
+    if (!reportUsersQuery.data?.users) return
     dispatch(
-      PRELOAD_UPDATED({
-        loading: preloadResult.loading,
-        approxCount: preloadResult.data?.approxCount,
-        filterOptions: preloadResult.data?.filterOptions
-      })
+      DATA_UPDATED({
+        users: reportUsersQuery.data.users
+      } as any)
     )
-  }, [
-    preloadResult.called,
-    preloadResult.data,
-    preloadResult.loading,
-    dispatch
-  ])
-
-  useEffect(() => {
-    if (forecastPreloadResult.data?.users) {
-      dispatch(
-        DATA_UPDATED({
-          ...forecastPreloadResult.data
-        })
-      )
-    }
-    if (!forecastPreloadResult.called) return
-    dispatch(
-      PRELOAD_UPDATED({
-        loading: forecastPreloadResult.loading,
-        approxCount: forecastPreloadResult.data?.approxCount,
-        filterOptions: forecastPreloadResult.data?.filterOptions
-      })
-    )
-  }, [
-    forecastPreloadResult.called,
-    forecastPreloadResult.data,
-    forecastPreloadResult.loading,
-    dispatch
-  ])
+  }, [reportUsersQuery.data, dispatch])
 
   useEffect(() => {
     if (!queryPreset) return
@@ -177,41 +140,104 @@ export function useReportsQuery({
     }
     if (state?.isFiltersOpen) return
 
+    preloadRequestId.current += 1
+    const currentPreloadId = preloadRequestId.current
+    let approxCount: number | undefined
+
+    const updatePreload = (payload: {
+      loading: boolean
+      approxCount?: number
+      filterOptions?: {
+        projectNames: string[]
+        parentProjectNames: string[]
+        customerNames: string[]
+        partnerNames: string[]
+        employeeNames: string[]
+      }
+    }) => {
+      if (preloadRequestId.current !== currentPreloadId) return
+      dispatch(
+        PRELOAD_UPDATED({
+          ...payload
+        })
+      )
+    }
+
     dispatch(REPORT_CLEARED())
     dispatch(
       PRELOAD_UPDATED({
         loading: true,
-        approxCount: undefined
+        approxCount: undefined,
+        filterOptions: undefined
       })
     )
 
-    if (queryPreset.id === 'forecast') {
-      loadForecastPreloadQuery()
-      return
+    const preloadReport = async () => {
+      const isForecast = queryPreset.id === 'forecast'
+      const preset = isForecast
+        ? undefined
+        : mapQueryPresetToReportsPreset(queryPreset.id)
+      const query =
+        supportsQueryFilters && hasAppliedFilters
+          ? appliedFilterQuery
+          : queryPreset.variables?.query
+
+      try {
+        const countResult = await client.query({
+          query: isForecast ? forecast_count : report_count,
+          variables: isForecast
+            ? undefined
+            : {
+                preset,
+                query
+              },
+          fetchPolicy: 'no-cache'
+        })
+        approxCount = countResult.data?.approxCount
+      } catch {
+        approxCount = undefined
+      }
+
+      updatePreload({
+        loading: true,
+        approxCount,
+        filterOptions: undefined
+      })
+
+      try {
+        const filterOptionsResult = await client.query({
+          query: report_filter_options,
+          variables: {
+            preset,
+            query,
+            forecast: isForecast ? true : undefined
+          },
+          fetchPolicy: 'no-cache'
+        })
+        updatePreload({
+          loading: false,
+          approxCount,
+          filterOptions: filterOptionsResult.data?.filterOptions
+        })
+      } catch {
+        updatePreload({
+          loading: false,
+          approxCount,
+          filterOptions: undefined
+        })
+      }
     }
 
-    const preset = mapQueryPresetToReportsPreset(queryPreset.id)
-    const query =
-      supportsQueryFilters && hasAppliedFilters
-        ? appliedFilterQuery
-        : queryPreset.variables?.query
-
-    loadPreloadQuery({
-      variables: {
-        preset,
-        query
-      }
-    })
+    preloadReport()
   }, [
+    client,
     queryPreset?.id,
     queryPreset?.reportLinks,
     queryPreset?.variables?.query,
     appliedFilterQuery,
     hasAppliedFilters,
     state?.isFiltersOpen,
-    dispatch,
-    loadForecastPreloadQuery,
-    loadPreloadQuery
+    dispatch
   ])
 
   useEffect(() => {

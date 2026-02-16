@@ -1,0 +1,3 @@
+query ForecastCount {
+  approxCount: forecastedReportCount
+}
