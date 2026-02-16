@@ -49,6 +49,21 @@ export interface AppliedOp {
 @Service({ global: false })
 export class AppliedOpsService extends MongoDocumentService<AppliedOp> {
   /**
+   * Returns true when the error indicates a duplicate key/unique constraint.
+   */
+  private _isDuplicateError(error: unknown): boolean {
+    const code = (error as { code?: number | string })?.code
+    const message = String((error as { message?: string })?.message || '')
+
+    return (
+      code === 11_000 ||
+      code === 'SQLITE_CONSTRAINT' ||
+      message.includes('duplicate key') ||
+      message.includes('UNIQUE constraint failed')
+    )
+  }
+
+  /**
    * Constructor for `AppliedOpsService`
    *
    * @param context - Injected context through `typedi`
@@ -72,6 +87,45 @@ export class AppliedOpsService extends MongoDocumentService<AppliedOp> {
     if (!opId) return null
     const compositeId = this._buildCompositeId(opId, userId)
     return await this.collection.findOne({ _id: compositeId })
+  }
+
+  /**
+   * Atomically claims an operation ID for mutation execution.
+   *
+   * @param opId - The operation ID to claim
+   * @param userId - The user ID (scope dedupe per-user)
+   * @param mutationName - Name of the mutation
+   *
+   * @returns true if the claim succeeded, false if this opId was already claimed
+   */
+  public async claimOperation(
+    opId: string,
+    userId: string,
+    mutationName: string
+  ): Promise<boolean> {
+    if (!opId) return true
+
+    try {
+      await this.markApplied(opId, userId, mutationName)
+      return true
+    } catch (error) {
+      if (this._isDuplicateError(error)) {
+        return false
+      }
+      throw error
+    }
+  }
+
+  /**
+   * Releases an operation claim (used when the mutation execution fails).
+   *
+   * @param opId - The operation ID
+   * @param userId - The user ID
+   */
+  public async releaseOperation(opId: string, userId: string): Promise<void> {
+    if (!opId) return
+    const compositeId = this._buildCompositeId(opId, userId)
+    await this.collection.deleteOne({ _id: compositeId })
   }
 
   /**

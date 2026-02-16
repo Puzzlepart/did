@@ -191,7 +191,13 @@ export function useOutbox(
       }
     }
 
-    setEntries(remainingEntries)
+    const processedOpIds = new Set(entries.map((entry) => entry.opId))
+    setEntries((currentEntries) => {
+      const entriesAddedDuringFlush = currentEntries.filter(
+        (entry) => !processedOpIds.has(entry.opId)
+      )
+      return [...remainingEntries, ...entriesAddedDuringFlush]
+    })
     setIsFlushing(false)
     flushingRef.current = false
 

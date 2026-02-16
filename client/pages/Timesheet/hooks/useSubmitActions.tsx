@@ -43,11 +43,14 @@ export function useSubmitActions({
         period: state.selectedPeriod.data,
         options: { ...options, tzOffset: new Date().getTimezoneOffset() }
       }
-      const { data } = await submitPeriod({ variables })
-      // Handle both success and duplicate as completed
-      if (data?.result?.success) {
+      try {
+        const { data } = await submitPeriod({ variables })
+        // Handle both success and duplicate as completed
+        if (data?.result?.success) {
+          appContext.notifications.refetch(250)
+        }
+      } finally {
         refetch()
-        appContext.notifications.refetch(250)
       }
     },
     [state.selectedPeriod]
@@ -67,11 +70,14 @@ export function useSubmitActions({
         period: state.selectedPeriod.data,
         options
       }
-      const { data } = await unsubmitPeriod({ variables })
-      // Handle both success and duplicate as completed
-      if (data?.result?.success) {
+      try {
+        const { data } = await unsubmitPeriod({ variables })
+        // Handle both success and duplicate as completed
+        if (data?.result?.success) {
+          appContext.notifications.refetch(250)
+        }
+      } finally {
         refetch()
-        appContext.notifications.refetch(250)
       }
     },
     [state.selectedPeriod]

@@ -39,6 +39,33 @@ import { PermissionScope } from '../../../../shared/config/security'
 @Service()
 @Resolver(TimesheetPeriodObject)
 export class TimesheetResolver {
+  private _duplicateResult(opId: string): BaseResult {
+    return {
+      success: true,
+      opId,
+      duplicate: true,
+      error: null
+    }
+  }
+
+  private async _claimOperation(
+    opId: string,
+    userId: string,
+    mutationName: string
+  ): Promise<boolean> {
+    if (!opId) return true
+    return await this._appliedOpsSvc.claimOperation(opId, userId, mutationName)
+  }
+
+  private async _releaseOperation(opId: string, userId: string): Promise<void> {
+    if (!opId) return
+    try {
+      await this._appliedOpsSvc.releaseOperation(opId, userId)
+    } catch {
+      // Best effort cleanup only.
+    }
+  }
+
   /**
    * Constructor for TimesheetResolver
    *
@@ -127,32 +154,16 @@ export class TimesheetResolver {
     @Arg('options') options: TimesheetOptions
   ): Promise<BaseResult> {
     try {
-      // Check for duplicate operation
-      if (opId) {
-        const existing = await this._appliedOpsSvc.findAppliedOp(
-          opId,
-          context.userId
-        )
-        if (existing) {
-          return {
-            success: true,
-            opId,
-            duplicate: true,
-            error: null
-          }
-        }
+      const claimed = await this._claimOperation(
+        opId,
+        context.userId,
+        'submitPeriod'
+      )
+      if (!claimed) {
+        return this._duplicateResult(opId)
       }
 
       await this._timesheetSvc.submitPeriod({ ...options, period })
-
-      // Mark operation as applied
-      if (opId) {
-        await this._appliedOpsSvc.markApplied(
-          opId,
-          context.userId,
-          'submitPeriod'
-        )
-      }
 
       return {
         success: true,
@@ -161,6 +172,7 @@ export class TimesheetResolver {
         error: null
       }
     } catch (error) {
+      await this._releaseOperation(opId, context.userId)
       return {
         success: false,
         opId,
@@ -189,32 +201,16 @@ export class TimesheetResolver {
     @Arg('options') options: TimesheetOptions
   ): Promise<BaseResult> {
     try {
-      // Check for duplicate operation
-      if (opId) {
-        const existing = await this._appliedOpsSvc.findAppliedOp(
-          opId,
-          context.userId
-        )
-        if (existing) {
-          return {
-            success: true,
-            opId,
-            duplicate: true,
-            error: null
-          }
-        }
+      const claimed = await this._claimOperation(
+        opId,
+        context.userId,
+        'unsubmitPeriod'
+      )
+      if (!claimed) {
+        return this._duplicateResult(opId)
       }
 
       await this._timesheetSvc.unsubmitPeriod({ ...options, period })
-
-      // Mark operation as applied
-      if (opId) {
-        await this._appliedOpsSvc.markApplied(
-          opId,
-          context.userId,
-          'unsubmitPeriod'
-        )
-      }
 
       return {
         success: true,
@@ -223,6 +219,7 @@ export class TimesheetResolver {
         error: null
       }
     } catch (error) {
+      await this._releaseOperation(opId, context.userId)
       return {
         success: false,
         opId,
@@ -248,20 +245,13 @@ export class TimesheetResolver {
     @Arg('input', () => TimesheetIgnoreEventInput) input: TimesheetIgnoreEventInput
   ): Promise<BaseResult> {
     try {
-      // Check for duplicate operation
-      if (opId) {
-        const existing = await this._appliedOpsSvc.findAppliedOp(
-          opId,
-          context.userId
-        )
-        if (existing) {
-          return {
-            success: true,
-            opId,
-            duplicate: true,
-            error: null
-          }
-        }
+      const claimed = await this._claimOperation(
+        opId,
+        context.userId,
+        'setTimesheetEventIgnored'
+      )
+      if (!claimed) {
+        return this._duplicateResult(opId)
       }
 
       await this._ignoredEventsSvc.setEventIgnored(
@@ -271,15 +261,6 @@ export class TimesheetResolver {
         input.ignored
       )
 
-      // Mark operation as applied
-      if (opId) {
-        await this._appliedOpsSvc.markApplied(
-          opId,
-          context.userId,
-          'setTimesheetEventIgnored'
-        )
-      }
-
       return {
         success: true,
         opId,
@@ -287,6 +268,7 @@ export class TimesheetResolver {
         error: null
       }
     } catch (error) {
+      await this._releaseOperation(opId, context.userId)
       return {
         success: false,
         opId,
@@ -312,20 +294,13 @@ export class TimesheetResolver {
     @Arg('input', () => TimesheetIgnoreEventsInput) input: TimesheetIgnoreEventsInput
   ): Promise<BaseResult> {
     try {
-      // Check for duplicate operation
-      if (opId) {
-        const existing = await this._appliedOpsSvc.findAppliedOp(
-          opId,
-          context.userId
-        )
-        if (existing) {
-          return {
-            success: true,
-            opId,
-            duplicate: true,
-            error: null
-          }
-        }
+      const claimed = await this._claimOperation(
+        opId,
+        context.userId,
+        'ignoreAllTimesheetEvents'
+      )
+      if (!claimed) {
+        return this._duplicateResult(opId)
       }
 
       await this._ignoredEventsSvc.setMultipleEventsIgnored(
@@ -334,15 +309,6 @@ export class TimesheetResolver {
         input.eventIds
       )
 
-      // Mark operation as applied
-      if (opId) {
-        await this._appliedOpsSvc.markApplied(
-          opId,
-          context.userId,
-          'ignoreAllTimesheetEvents'
-        )
-      }
-
       return {
         success: true,
         opId,
@@ -350,6 +316,7 @@ export class TimesheetResolver {
         error: null
       }
     } catch (error) {
+      await this._releaseOperation(opId, context.userId)
       return {
         success: false,
         opId,
@@ -375,35 +342,19 @@ export class TimesheetResolver {
     @Arg('periodId') periodId: string
   ): Promise<BaseResult> {
     try {
-      // Check for duplicate operation
-      if (opId) {
-        const existing = await this._appliedOpsSvc.findAppliedOp(
-          opId,
-          context.userId
-        )
-        if (existing) {
-          return {
-            success: true,
-            opId,
-            duplicate: true,
-            error: null
-          }
-        }
+      const claimed = await this._claimOperation(
+        opId,
+        context.userId,
+        'clearTimesheetIgnoredEvents'
+      )
+      if (!claimed) {
+        return this._duplicateResult(opId)
       }
 
       await this._ignoredEventsSvc.clearIgnoredEvents(
         context.userId,
         periodId
       )
-
-      // Mark operation as applied
-      if (opId) {
-        await this._appliedOpsSvc.markApplied(
-          opId,
-          context.userId,
-          'clearTimesheetIgnoredEvents'
-        )
-      }
 
       return {
         success: true,
@@ -412,6 +363,7 @@ export class TimesheetResolver {
         error: null
       }
     } catch (error) {
+      await this._releaseOperation(opId, context.userId)
       return {
         success: false,
         opId,
