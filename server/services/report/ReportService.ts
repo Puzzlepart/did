@@ -49,6 +49,14 @@ type L1PreloadPresetCountsCacheEntry = {
   expiresAt: number
 }
 
+type PreloadPresetSnapshots = Partial<Record<ReportsQueryPreset, PreloadSnapshot>>
+
+type L1PreloadPresetSnapshotsCacheEntry = {
+  snapshots: PreloadPresetSnapshots
+  subscriptionId: string
+  expiresAt: number
+}
+
 /**
  * Report service
  *
@@ -82,6 +90,14 @@ export class ReportService {
   private static readonly _preloadPresetCountsInFlight = new Map<
     string,
     Promise<PreloadPresetCounts>
+  >()
+  private static readonly _preloadPresetSnapshotsL1Cache = new Map<
+    string,
+    L1PreloadPresetSnapshotsCacheEntry
+  >()
+  private static readonly _preloadPresetSnapshotsInFlight = new Map<
+    string,
+    Promise<PreloadPresetSnapshots>
   >()
   private readonly _preloadSnapshotCache: CacheService
 
@@ -178,6 +194,32 @@ export class ReportService {
     })
   }
 
+  private static _getPreloadPresetSnapshotsFromL1(
+    subscriptionId: string
+  ): PreloadPresetSnapshots | null {
+    const entry = this._preloadPresetSnapshotsL1Cache.get(subscriptionId)
+    if (!entry) return null
+
+    if (entry.expiresAt <= Date.now()) {
+      this._preloadPresetSnapshotsL1Cache.delete(subscriptionId)
+      return null
+    }
+
+    return entry.snapshots
+  }
+
+  private static _setPreloadPresetSnapshotsInL1(
+    subscriptionId: string,
+    snapshots: PreloadPresetSnapshots
+  ): void {
+    const ttlMilliseconds = this._getPreloadL1TtlSeconds() * 1000
+    this._preloadPresetSnapshotsL1Cache.set(subscriptionId, {
+      snapshots,
+      subscriptionId,
+      expiresAt: Date.now() + ttlMilliseconds
+    })
+  }
+
   public static invalidatePreloadSnapshotL1ForSubscription(
     subscriptionId?: string
   ): void {
@@ -189,11 +231,13 @@ export class ReportService {
       }
     }
     this._preloadPresetCountsL1Cache.delete(subscriptionId)
+    this._preloadPresetSnapshotsL1Cache.delete(subscriptionId)
   }
 
   public static clearPreloadSnapshotL1(): void {
     this._preloadSnapshotL1Cache.clear()
     this._preloadPresetCountsL1Cache.clear()
+    this._preloadPresetSnapshotsL1Cache.clear()
   }
 
   public static async invalidatePreloadSnapshotCache(
@@ -206,6 +250,7 @@ export class ReportService {
     this._preloadSnapshotWarmups.delete(subscriptionId)
     this._preloadSnapshotInFlight.clear()
     this._preloadPresetCountsInFlight.delete(subscriptionId)
+    this._preloadPresetSnapshotsInFlight.delete(subscriptionId)
 
     const cache = new CacheService(
       context,
@@ -507,6 +552,94 @@ export class ReportService {
     }
   }
 
+  /**
+   * Compute full preset snapshots (count + projectIds + userIds) for all
+   * four warm presets in a single SQL aggregation query. This avoids
+   * running four separate per-preset queries and eliminates full JS
+   * deserialize/filter scans.
+   */
+  private async _computeSqlitePresetSnapshots(
+    collectionName: string
+  ): Promise<PreloadPresetSnapshots | null> {
+    if (!this._isSqliteShimClient()) return null
+
+    const databaseName = (this.context?.db as any)?.databaseName
+    if (!databaseName) return null
+
+    const client = this.context.mcl as any
+    const rows = (await client._all(
+      `SELECT
+         CAST(json_extract(document_json, '$.year') AS INTEGER) AS year,
+         CAST(json_extract(document_json, '$.month') AS INTEGER) AS month,
+         json_extract(document_json, '$.projectId') AS projectId,
+         json_extract(document_json, '$.userId') AS userId,
+         COUNT(*) AS entryCount
+       FROM ${TABLE_NAME}
+       WHERE database_name = ? AND collection_name = ?
+       GROUP BY year, month, projectId, userId`,
+      [databaseName, collectionName]
+    )) as Array<{
+      year: number | null
+      month: number | null
+      projectId: string | null
+      userId: string | null
+      entryCount: number
+    }>
+
+    const currentDate = new DateObject().toObject()
+    const previousMonthDate = new DateObject().add('-1month').toObject()
+
+    const presetFilters: Array<{
+      preset: ReportsQueryPreset
+      match: (year: number, month: number) => boolean
+    }> = [
+      {
+        preset: 'LAST_MONTH',
+        match: (y, m) =>
+          y === previousMonthDate.year && m === previousMonthDate.month
+      },
+      {
+        preset: 'CURRENT_MONTH',
+        match: (y, m) => y === currentDate.year && m === currentDate.month
+      },
+      {
+        preset: 'LAST_YEAR',
+        match: (y) => y === currentDate.year - 1
+      },
+      {
+        preset: 'CURRENT_YEAR',
+        match: (y) => y === currentDate.year
+      }
+    ]
+
+    const snapshots: PreloadPresetSnapshots = {}
+
+    for (const { preset, match } of presetFilters) {
+      let count = 0
+      const projectIdSet = new Set<string>()
+      const userIdSet = new Set<string>()
+
+      for (const row of rows) {
+        const year = Number(row.year)
+        const month = Number(row.month)
+        if (!Number.isFinite(year)) continue
+        if (!match(year, month)) continue
+
+        count += Number(row.entryCount || 0)
+        if (row.projectId) projectIdSet.add(row.projectId)
+        if (row.userId) userIdSet.add(row.userId)
+      }
+
+      snapshots[preset] = {
+        count,
+        projectIds: Array.from(projectIdSet).sort(),
+        userIds: Array.from(userIdSet).sort()
+      }
+    }
+
+    return snapshots
+  }
+
   private async _getOrComputeSqlitePresetCounts(
     subscriptionId: string
   ): Promise<PreloadPresetCounts | null> {
@@ -563,6 +696,100 @@ export class ReportService {
       return await countPromise
     } finally {
       ReportService._preloadPresetCountsInFlight.delete(subscriptionId)
+    }
+  }
+
+  /**
+   * Get or compute full preset snapshots (count + projectIds + userIds)
+   * for all warm presets using a single SQL aggregation. Results are
+   * cached in L1 (in-process) and L2 (Redis) and also cross-populate
+   * the individual per-preset snapshot L1 cache so that
+   * `_getOrComputePreloadSnapshot` benefits immediately.
+   */
+  private async _getOrComputeSqlitePresetSnapshots(
+    subscriptionId: string
+  ): Promise<PreloadPresetSnapshots | null> {
+    if (!this._isSqliteShimClient()) return null
+
+    const l1Snapshots =
+      ReportService._getPreloadPresetSnapshotsFromL1(subscriptionId)
+    if (l1Snapshots) {
+      debug('[preloadPresetSnapshot]', 'L1 cache hit', { subscriptionId })
+      return l1Snapshots
+    }
+
+    const inFlightSnapshots =
+      ReportService._preloadPresetSnapshotsInFlight.get(subscriptionId)
+    if (inFlightSnapshots) {
+      debug('[preloadPresetSnapshot]', 'Using in-flight promise', {
+        subscriptionId
+      })
+      return await inFlightSnapshots
+    }
+
+    const snapshotPromise = (async () => {
+      const key = `preset_snapshots_v${ReportService.PRESET_COUNT_CACHE_VERSION}`
+      let cacheMiss = false
+      const l2Start = Date.now()
+
+      const snapshots = await this._preloadSnapshotCache.usingCache(
+        async () => {
+          cacheMiss = true
+          return await this._computeSqlitePresetSnapshots('time_entries')
+        },
+        {
+          key,
+          expiry: ReportService._getPreloadL2TtlSeconds()
+        }
+      )
+
+      if (!snapshots) return null
+
+      debug(
+        '[preloadPresetSnapshot]',
+        cacheMiss ? 'L2 cache miss' : 'L2 cache hit',
+        {
+          subscriptionId,
+          l2LookupMs: Date.now() - l2Start
+        }
+      )
+
+      ReportService._setPreloadPresetSnapshotsInL1(subscriptionId, snapshots)
+
+      // Cross-populate the individual per-preset snapshot L1 cache
+      // so that _getOrComputePreloadSnapshot gets instant hits.
+      for (const [preset, snapshot] of Object.entries(snapshots)) {
+        const cacheKey = this._buildPreloadSnapshotCacheKey({
+          preset: preset as ReportsQueryPreset,
+          query: {},
+          forecast: false,
+          subscriptionId
+        })
+        ReportService._setPreloadSnapshotInL1(
+          cacheKey,
+          subscriptionId,
+          snapshot
+        )
+      }
+
+      // Also populate the preset counts L1 cache for backward compat.
+      const counts: PreloadPresetCounts = {}
+      for (const [preset, snapshot] of Object.entries(snapshots)) {
+        counts[preset as ReportsQueryPreset] = snapshot.count
+      }
+      ReportService._setPreloadPresetCountsInL1(subscriptionId, counts)
+
+      return snapshots
+    })()
+
+    ReportService._preloadPresetSnapshotsInFlight.set(
+      subscriptionId,
+      snapshotPromise
+    )
+    try {
+      return await snapshotPromise
+    } finally {
+      ReportService._preloadPresetSnapshotsInFlight.delete(subscriptionId)
     }
   }
 
@@ -923,6 +1150,23 @@ export class ReportService {
     )
 
     if (usePresetCountFastPath && preset) {
+      // Try full preset snapshot fast path first — this primes the
+      // filter options cache for free so the follow-up filter options
+      // request can skip the general snapshot computation entirely.
+      const presetSnapshots = await this._getOrComputeSqlitePresetSnapshots(
+        subscriptionId
+      )
+      const presetSnapshot = presetSnapshots?.[preset]
+
+      if (presetSnapshot) {
+        debug('[getReportCount]', 'Using preset snapshot fast path', {
+          preset,
+          count: presetSnapshot.count
+        })
+        return presetSnapshot.count
+      }
+
+      // Fall back to count-only fast path.
       const presetCounts = await this._getOrComputeSqlitePresetCounts(
         subscriptionId
       )
@@ -967,11 +1211,30 @@ export class ReportService {
     forecast?: boolean
   ): Promise<ReportFilterOptions> {
     const enrichmentStart = Date.now()
-    const snapshot = await this._getOrComputePreloadSnapshot({
-      preset,
-      query,
-      forecast: Boolean(forecast)
-    })
+    let snapshot: PreloadSnapshot | undefined
+
+    // For unfiltered preset queries, try the preset snapshot fast path
+    // which may already be primed by a preceding getReportCount call.
+    if (
+      preset &&
+      !forecast &&
+      _.isEmpty(query) &&
+      ReportService.PRELOAD_CACHE_WARM_PRESETS.includes(preset)
+    ) {
+      const subscriptionId = this.context?.subscription?.id || 'global'
+      const presetSnapshots =
+        await this._getOrComputeSqlitePresetSnapshots(subscriptionId)
+      snapshot = presetSnapshots?.[preset]
+    }
+
+    if (!snapshot) {
+      snapshot = await this._getOrComputePreloadSnapshot({
+        preset,
+        query,
+        forecast: Boolean(forecast)
+      })
+    }
+
     const projectIds = snapshot.projectIds
     const userIds = snapshot.userIds
 

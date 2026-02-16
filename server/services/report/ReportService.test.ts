@@ -448,6 +448,7 @@ test.serial('ReportService uses SQLite preset count fast path for unfiltered pre
 test.serial('ReportService uses SQLite preset fast path for preset preload', async (t) => {
   let findCalls = 0
   let sqliteCalls = 0
+  const lastMonth = new DateObject().add('-1month').toObject()
 
   const { reportService } = createReportService({
     context: {
@@ -461,6 +462,12 @@ test.serial('ReportService uses SQLite preset fast path for preset preload', asy
       mcl: {
         _all: async (sql: string) => {
           sqliteCalls++
+          if (sql.includes('GROUP BY year, month, projectId, userId')) {
+            return [
+              { year: lastMonth.year, month: lastMonth.month, projectId: 'PZL ALPHA', userId: 'U1', entryCount: 7 },
+              { year: lastMonth.year, month: lastMonth.month, projectId: 'PZL BETA', userId: 'U2', entryCount: 4 }
+            ]
+          }
           if (sql.includes('COUNT(*) AS entryCount')) {
             return [
               { projectId: 'PZL ALPHA', userId: 'U1', entryCount: 7 },
@@ -521,7 +528,8 @@ test.serial('ReportService uses SQLite preset fast path for preset preload', asy
 
   t.is(count, 11)
   t.is(findCalls, 0)
-  t.is(sqliteCalls, 1)
+  // 2 SQL calls: per-preset snapshot (count) + combined preset snapshot (filter options)
+  t.is(sqliteCalls, 2)
   t.deepEqual(options.projectNames, ['Alpha', 'Beta'])
   t.deepEqual(options.employeeNames, ['Alice', 'Bob'])
 })
@@ -549,4 +557,191 @@ test.serial('ReportService schedules preset warmup for unfiltered preset preload
   await Promise.resolve()
 
   t.deepEqual(warmupCalls, ['sub-1'])
+})
+
+test.serial('ReportService preset snapshot fast path serves count and filter options from one SQL call', async (t) => {
+  const now = new DateObject().toObject()
+  const previousMonth = new DateObject().add('-1month').toObject()
+  let sqliteCalls = 0
+
+  const { reportService } = createReportService({
+    context: {
+      userId: 'user-1',
+      subscription: {
+        id: 'sub-preset-snap'
+      },
+      db: {
+        databaseName: 'tenant'
+      },
+      mcl: {
+        _all: async (sql: string) => {
+          if (sql.includes('GROUP BY year, month, projectId, userId')) {
+            sqliteCalls++
+            return [
+              { year: now.year, month: now.month, projectId: 'PZL ALPHA', userId: 'U1', entryCount: 3 },
+              { year: now.year, month: now.month, projectId: 'PZL BETA', userId: 'U2', entryCount: 2 },
+              { year: previousMonth.year, month: previousMonth.month, projectId: 'PZL ALPHA', userId: 'U1', entryCount: 4 },
+              { year: now.year - 1, month: 6, projectId: 'PZL GAMMA', userId: 'U3', entryCount: 10 }
+            ]
+          }
+          return []
+        }
+      }
+    },
+    projectService: {
+      find: async () => [
+        { _id: 'PZL ALPHA', tag: 'PZL ALPHA', name: 'Alpha', parentKey: null, customerKey: 'PZL', partnerKey: null },
+        { _id: 'PZL BETA', tag: 'PZL BETA', name: 'Beta', parentKey: null, customerKey: 'PZL', partnerKey: null }
+      ]
+    },
+    customerService: {
+      getCustomers: async () => [{ key: 'PZL', name: 'Puzzlepart' }]
+    },
+    userService: {
+      getUsers: async () => [
+        { id: 'U1', displayName: 'Alice' },
+        { id: 'U2', displayName: 'Bob' }
+      ]
+    }
+  })
+
+  ;(reportService as any)._preloadSnapshotCache = {
+    usingCache: async (compute: () => Promise<any>) => {
+      return await compute()
+    }
+  }
+
+  const count = await reportService.getReportCount('CURRENT_MONTH', {})
+  const options = await reportService.getReportFilterOptions('CURRENT_MONTH', {})
+
+  t.is(count, 5)
+  t.is(sqliteCalls, 1, 'Only one SQL call for both count and filter options')
+  t.deepEqual(options.projectNames, ['Alpha', 'Beta'])
+  t.deepEqual(options.employeeNames, ['Alice', 'Bob'])
+})
+
+test.serial('ReportService preset snapshot fast path computes all four presets at once', async (t) => {
+  const now = new DateObject().toObject()
+  const previousMonth = new DateObject().add('-1month').toObject()
+  let sqliteCalls = 0
+
+  const { reportService } = createReportService({
+    context: {
+      userId: 'user-1',
+      subscription: {
+        id: 'sub-all-presets'
+      },
+      db: {
+        databaseName: 'tenant'
+      },
+      mcl: {
+        _all: async (sql: string) => {
+          if (sql.includes('GROUP BY year, month, projectId, userId')) {
+            sqliteCalls++
+            return [
+              { year: now.year, month: now.month, projectId: 'P1', userId: 'U1', entryCount: 5 },
+              { year: previousMonth.year, month: previousMonth.month, projectId: 'P2', userId: 'U2', entryCount: 3 },
+              { year: now.year - 1, month: 8, projectId: 'P3', userId: 'U3', entryCount: 7 }
+            ]
+          }
+          return []
+        }
+      }
+    }
+  })
+
+  ;(reportService as any)._preloadSnapshotCache = {
+    usingCache: async (compute: () => Promise<any>) => {
+      return await compute()
+    }
+  }
+
+  const currentMonthCount = await reportService.getReportCount('CURRENT_MONTH', {})
+  const lastMonthCount = await reportService.getReportCount('LAST_MONTH', {})
+  const currentYearCount = await reportService.getReportCount('CURRENT_YEAR', {})
+  const lastYearCount = await reportService.getReportCount('LAST_YEAR', {})
+
+  const expectedCurrentYear = 5 + (previousMonth.year === now.year ? 3 : 0)
+  const expectedLastYear = 7 + (previousMonth.year === now.year - 1 ? 3 : 0)
+
+  t.is(currentMonthCount, 5)
+  t.is(lastMonthCount, 3)
+  t.is(currentYearCount, expectedCurrentYear)
+  t.is(lastYearCount, expectedLastYear)
+  t.is(sqliteCalls, 1, 'Single SQL call serves all four preset counts')
+})
+
+test.serial('ReportService preset snapshot cross-populates individual snapshot L1 cache', async (t) => {
+  const now = new DateObject().toObject()
+  let snapshotComputeCalls = 0
+
+  const { reportService } = createReportService({
+    context: {
+      userId: 'user-1',
+      subscription: {
+        id: 'sub-cross-pop'
+      },
+      db: {
+        databaseName: 'tenant'
+      },
+      mcl: {
+        _all: async (sql: string) => {
+          if (sql.includes('GROUP BY year, month, projectId, userId')) {
+            return [
+              { year: now.year, month: now.month, projectId: 'P1', userId: 'U1', entryCount: 2 }
+            ]
+          }
+          return []
+        }
+      }
+    },
+    timeEntryService: {
+      find: async () => {
+        snapshotComputeCalls++
+        return [{ projectId: 'P1', userId: 'U1' }]
+      }
+    }
+  })
+
+  ;(reportService as any)._preloadSnapshotCache = {
+    usingCache: async (compute: () => Promise<any>) => {
+      return await compute()
+    }
+  }
+
+  // First call: getReportCount via preset snapshot fast path
+  // This should cross-populate individual snapshot L1 cache.
+  await reportService.getReportCount('CURRENT_MONTH', {})
+
+  // Second call: getReportFilterOptions should use the
+  // cross-populated L1 cache (via preset snapshot fast path L1 hit).
+  // No additional snapshot compute should be needed.
+  await reportService.getReportFilterOptions('CURRENT_MONTH', {})
+
+  t.is(snapshotComputeCalls, 0, 'No JS deserialize/scan needed thanks to cross-population')
+})
+
+test.serial('ReportService preset snapshot falls back to count-only path when SQLite unavailable', async (t) => {
+  let findCalls = 0
+
+  const { reportService } = createReportService({
+    timeEntryService: {
+      find: async () => {
+        findCalls++
+        return [{ projectId: 'P1', userId: 'U1' }]
+      }
+    }
+  })
+
+  ;(reportService as any)._preloadSnapshotCache = {
+    usingCache: async (compute: () => Promise<any>) => {
+      return await compute()
+    }
+  }
+
+  const count = await reportService.getReportCount('CURRENT_MONTH', {})
+
+  // Without SQLite shim, falls through to general snapshot compute
+  t.is(count, 1)
+  t.is(findCalls, 1)
 })
