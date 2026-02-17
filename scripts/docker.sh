@@ -23,6 +23,10 @@ error() { echo -e "${RED}[docker][error]${NC} $*" >&2; }
 # Configuration
 OVERRIDE_LOCAL="docker-compose.local.yml"
 COMPOSE_CHAIN="docker-compose.yml:docker-compose.override.yml:${OVERRIDE_LOCAL}"
+AUTO_MAINTENANCE_ENABLED="${DOCKER_AUTO_MAINTENANCE_ENABLED:-1}"
+AUTO_MAINTENANCE_THRESHOLD_GB="${DOCKER_AUTO_MAINTENANCE_THRESHOLD_GB:-20}"
+AUTO_MAINTENANCE_DAYS="${DOCKER_AUTO_MAINTENANCE_DAYS:-7}"
+AUTO_MAINTENANCE_AGGRESSIVE="${DOCKER_AUTO_MAINTENANCE_AGGRESSIVE:-1}"
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Validation
@@ -47,19 +51,136 @@ check_docker() {
   fi
 }
 
+size_to_bytes() {
+  local size="${1:-0B}"
+  size="${size//[[:space:]]/}"
+  if [[ -z "$size" || "$size" == "0" || "$size" == "0B" ]]; then
+    echo 0
+    return
+  fi
+
+  if ! [[ "$size" =~ ^([0-9]+([.][0-9]+)?)([[:alpha:]]+)$ ]]; then
+    echo 0
+    return
+  fi
+
+  local number="${BASH_REMATCH[1]}"
+  local unit="${BASH_REMATCH[3]}"
+  local multiplier=1
+  case "${unit^^}" in
+    KB|KIB) multiplier=1024 ;;
+    MB|MIB) multiplier=$((1024 * 1024)) ;;
+    GB|GIB) multiplier=$((1024 * 1024 * 1024)) ;;
+    TB|TIB) multiplier=$((1024 * 1024 * 1024 * 1024)) ;;
+    B) multiplier=1 ;;
+    *) multiplier=1 ;;
+  esac
+
+  awk -v n="$number" -v m="$multiplier" 'BEGIN { printf "%.0f\n", n * m }'
+}
+
+bytes_to_gb() {
+  local bytes="${1:-0}"
+  awk -v value="$bytes" 'BEGIN { printf "%.1f", value / (1024 * 1024 * 1024) }'
+}
+
+get_reclaimable_bytes() {
+  local rows
+  rows=$(docker system df --format '{{.Type}}|{{.Reclaimable}}' 2>/dev/null || true)
+  if [[ -z "$rows" ]]; then
+    echo 0
+    return
+  fi
+
+  local total=0
+  while IFS='|' read -r _ reclaimable; do
+    [[ -z "${reclaimable:-}" ]] && continue
+    local size_part="${reclaimable%% *}"
+    local bytes
+    bytes=$(size_to_bytes "$size_part")
+    total=$(( total + bytes ))
+  done <<< "$rows"
+
+  echo "$total"
+}
+
+maybe_run_preflight_maintenance() {
+  if [[ "$AUTO_MAINTENANCE_ENABLED" != "1" ]]; then
+    return
+  fi
+
+  if ! [[ "$AUTO_MAINTENANCE_THRESHOLD_GB" =~ ^[0-9]+$ ]]; then
+    warn "Invalid DOCKER_AUTO_MAINTENANCE_THRESHOLD_GB=$AUTO_MAINTENANCE_THRESHOLD_GB. Skipping auto-maintenance preflight."
+    return
+  fi
+  if ! [[ "$AUTO_MAINTENANCE_DAYS" =~ ^[0-9]+$ ]]; then
+    warn "Invalid DOCKER_AUTO_MAINTENANCE_DAYS=$AUTO_MAINTENANCE_DAYS. Skipping auto-maintenance preflight."
+    return
+  fi
+
+  local reclaimable_bytes
+  reclaimable_bytes=$(get_reclaimable_bytes)
+  local threshold_bytes=$(( AUTO_MAINTENANCE_THRESHOLD_GB * 1024 * 1024 * 1024 ))
+
+  if (( reclaimable_bytes < threshold_bytes )); then
+    return
+  fi
+
+  local reclaimable_gb
+  reclaimable_gb=$(bytes_to_gb "$reclaimable_bytes")
+  warn "Docker reclaimable data is high (~${reclaimable_gb}GB). Running preflight maintenance."
+
+  local maintenance_args=(--days "$AUTO_MAINTENANCE_DAYS")
+  if [[ "$AUTO_MAINTENANCE_AGGRESSIVE" == "1" ]]; then
+    maintenance_args+=(--aggressive)
+  fi
+
+  if ./scripts/docker-maintenance.sh "${maintenance_args[@]}"; then
+    success "Preflight maintenance complete."
+  else
+    warn "Preflight maintenance failed; continuing startup."
+  fi
+}
+
 # ─────────────────────────────────────────────────────────────────────────────
 # Setup & Configuration
 # ─────────────────────────────────────────────────────────────────────────────
 
 ensure_local_override() {
   if [[ ! -f "$OVERRIDE_LOCAL" ]]; then
-    info "Creating $OVERRIDE_LOCAL (fill in your Azure AD credentials)."
+    info "Creating $OVERRIDE_LOCAL (optional machine-specific Docker overrides)."
     cat > "$OVERRIDE_LOCAL" <<'EOF'
+# Optional local Docker Compose overrides for did.
+# Add machine-specific overrides here when needed.
 services:
   did:
-    environment:
-      - MICROSOFT_CLIENT_ID=##Insert Azure AD Client ID##
-      - MICROSOFT_CLIENT_SECRET=##Insert Azure AD Client Secret##
+    # Example:
+    # environment:
+    #   - MICROSOFT_CLIENT_ID=your-client-id
+    #   - MICROSOFT_CLIENT_SECRET=your-client-secret
+EOF
+  fi
+}
+
+repair_placeholder_local_override() {
+  if [[ ! -f "$OVERRIDE_LOCAL" ]]; then
+    return
+  fi
+
+  if grep -q '##Insert' "$OVERRIDE_LOCAL"; then
+    local backup="${OVERRIDE_LOCAL}.bak.$(date +%Y%m%d-%H%M%S)"
+    cp "$OVERRIDE_LOCAL" "$backup"
+    warn "$OVERRIDE_LOCAL contains placeholder values and will override .env credentials."
+    warn "Backed up previous file to $backup and writing a safe template."
+    cat > "$OVERRIDE_LOCAL" <<'EOF'
+# Optional local Docker Compose overrides for did.
+# Add machine-specific overrides here when needed.
+services:
+  did:
+    # Example:
+    # environment:
+    #   - MICROSOFT_CLIENT_ID=your-client-id
+    #   - MICROSOFT_CLIENT_SECRET=your-client-secret
 EOF
   fi
 }
@@ -82,8 +203,8 @@ EOF
 
 check_placeholder_secrets() {
   if [[ -f "$OVERRIDE_LOCAL" ]] && grep -q '##Insert' "$OVERRIDE_LOCAL"; then
-    warn "docker-compose.local.yml contains placeholder secrets."
-    warn "Please update with your Azure AD credentials before signing in."
+    warn "docker-compose.local.yml still contains placeholder values."
+    warn "These will override .env values; remove them or set real credentials."
   fi
 }
 
@@ -135,19 +256,26 @@ wait_for_healthy() {
 cmd_start() {
   local fresh=0
   local wait=0
+  local preflight=1
 
   while [[ $# -gt 0 ]]; do
     case "$1" in
       --fresh|--clean) fresh=1; shift ;;
       --wait) wait=1; shift ;;
+      --skip-preflight) preflight=0; shift ;;
       *) warn "Unknown start flag: $1"; shift ;;
     esac
   done
 
   ensure_local_override
+  repair_placeholder_local_override
   ensure_env_file
   check_placeholder_secrets
   describe_backups
+
+  if (( preflight == 1 )); then
+    maybe_run_preflight_maintenance
+  fi
 
   if (( fresh == 1 )); then
     info "Removing existing containers + volumes"
@@ -268,6 +396,7 @@ Commands:
 Start flags:
   --fresh       Remove volumes before starting (clean slate)
   --wait        Wait for health check before returning
+  --skip-preflight  Skip automatic Docker disk preflight cleanup check
 
 Examples:
   $0                      # Start containers

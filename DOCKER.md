@@ -17,6 +17,9 @@ npm run create-env
 
 # 3) Optional: wait for health check
 ./scripts/docker.sh start --wait
+
+# 4) Optional: skip auto disk preflight cleanup for this run
+./scripts/docker.sh start --skip-preflight
 ```
 
 Access:
@@ -102,6 +105,33 @@ Equivalent npm scripts:
 - `npm run docker:redis`
 - `npm run docker:status`
 - `npm run docker:clean`
+
+## Automatic Disk Guard
+
+`./scripts/docker.sh start` now runs a preflight check before startup:
+- Reads reclaimable Docker data from `docker system df`
+- Automatically runs `./scripts/docker-maintenance.sh` when reclaimable data is above threshold
+
+Default behavior:
+- Auto-maintenance is enabled
+- Threshold: 20 GB reclaimable
+- Cleanup age window: 7 days
+- Aggressive image pruning: enabled
+
+Environment overrides:
+
+```bash
+DOCKER_AUTO_MAINTENANCE_ENABLED=1
+DOCKER_AUTO_MAINTENANCE_THRESHOLD_GB=20
+DOCKER_AUTO_MAINTENANCE_DAYS=7
+DOCKER_AUTO_MAINTENANCE_AGGRESSIVE=1
+```
+
+You can skip the preflight per run:
+
+```bash
+./scripts/docker.sh start --skip-preflight
+```
 
 ## Agent / Worktree Setup
 

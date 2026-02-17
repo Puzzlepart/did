@@ -48,7 +48,8 @@ services:
     networks:
       - did-network
     restart: unless-stopped
-    command: redis-server --appendonly yes
+    # Dev setup: rely on AOF and disable RDB snapshots to avoid MISCONF write lockups when snapshots fail.
+    command: redis-server --appendonly yes --save "" --stop-writes-on-bgsave-error no
     logging: *default-logging
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
