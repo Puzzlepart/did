@@ -5,6 +5,7 @@ import { initReactI18next } from 'react-i18next'
 export const DEFAULT_LANGUAGE = 'en-GB'
 const __RESOURCES = {
   'en-GB': require('./en-GB.json'),
+  'nb-IO': require('./nb-IO.json'),
   nb: require('./nb.json'),
   nn: require('./nn.json')
 }
