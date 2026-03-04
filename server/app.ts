@@ -95,11 +95,10 @@ export class App {
       res.end = function (...args) {
         // If 404, do not log; otherwise proceed with logger
         if (res.statusCode !== 404) {
-          originalEnd.apply(this, args)
-          return
+          return originalEnd.apply(this, args)
         }
         // For 404 we still end the response but skip morgan (by not calling logger first)
-        originalEnd.apply(this, args)
+        return originalEnd.apply(this, args)
       }
       return next()
     })
