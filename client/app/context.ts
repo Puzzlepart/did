@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import { AnyAction } from '@reduxjs/toolkit'
 import { IToastProps } from 'components'
 import get from 'get-value'

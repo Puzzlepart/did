@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import { useMap } from 'hooks/common/useMap'
 import { FC, useCallback } from 'react'
 import { BaseControlOptions, FormInputControlBase } from './types'

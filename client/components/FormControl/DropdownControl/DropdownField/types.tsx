@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import { DropdownProps, OptionProps } from '@fluentui/react-components'
 
 /**

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import { RadioGroupProps, RadioProps } from '@fluentui/react-components'
 import { FormInputControlBase } from '../types'
 
