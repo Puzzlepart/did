@@ -1,6 +1,4 @@
 /* eslint-disable unicorn/no-array-callback-reference */
-/* eslint-disable quotes */
-global['fetch'] = require('node-fetch')
 import { Client as MSGraphClient } from '@microsoft/microsoft-graph-client'
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'

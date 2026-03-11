@@ -63,3 +63,5 @@ _todo
 
 # code reviews
 CODE_REVIEW_*
+
+.claude/

@@ -1,7 +1,13 @@
-@import '@primer/css/labels/index.scss';
-
 .entityLabel {
-  @include labels-base;
-  @include labels-large;
-  margin: 4px 4px 4px 0px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  gap: 6px;
+  line-height: 16px;
+  margin: 4px 4px 4px 0;
+  max-width: 100%;
+  padding: 6px 10px;
+  white-space: nowrap;
 }

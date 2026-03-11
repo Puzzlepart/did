@@ -23,6 +23,7 @@
       "get-value",
       "passport"
     ],
+    "skipLibCheck": true,
     "outDir": "dist"
   },
   "include": ["./server/**/*.ts", "shared/utils/generateId.ts"],

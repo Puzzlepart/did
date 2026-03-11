@@ -70,7 +70,6 @@ Thumbs.db
 
 # Build artifacts
 artifacts
-.deploy
 .deployment
 .changelog
 
@@ -84,7 +83,6 @@ artifacts
 .LSOverride
 
 # Development helper scripts (exclude most, allow watch.js specifically)
-.scripts
 .tasks/*
 !.tasks/watch.js
 
