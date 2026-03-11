@@ -17,55 +17,60 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## ➤ Table of Contents
 
 * [➤ Changelog](#-changelog)
-	* [➤ 0.19.0 - 20.01.2026](#-0190---20012026)
+	* [➤ 0.20.0 - 11.03.2026](#-0200---11032026)
 		* [Highlights](#highlights)
-		* [Added](#added)
 		* [Changed](#changed)
-		* [Fixed](#fixed)
 		* [Documentation](#documentation)
+		* [Verification](#verification)
+	* [➤ 0.19.0 - 20.01.2026](#-0190---20012026)
+		* [Highlights](#highlights-1)
+		* [Added](#added)
+		* [Changed](#changed-1)
+		* [Fixed](#fixed)
+		* [Documentation](#documentation-1)
 		* [Testing](#testing)
 		* [Internal](#internal)
 		* [Notes](#notes)
 	* [➤ 0.18.0 - 08.01.2026](#-0180---08012026)
-		* [Highlights](#highlights-1)
+		* [Highlights](#highlights-2)
 		* [Added](#added-1)
-		* [Changed](#changed-1)
+		* [Changed](#changed-2)
 		* [Fixed](#fixed-1)
-		* [Documentation](#documentation-1)
+		* [Documentation](#documentation-2)
 		* [Testing](#testing-1)
 		* [Internal](#internal-1)
 		* [Notes](#notes-1)
 	* [➤ 0.17.0 - 16.12.2025](#-0170---16122025)
-		* [Highlights](#highlights-2)
+		* [Highlights](#highlights-3)
 		* [Added](#added-2)
-		* [Changed](#changed-2)
+		* [Changed](#changed-3)
 		* [Fixed](#fixed-2)
-		* [Documentation](#documentation-2)
+		* [Documentation](#documentation-3)
 		* [CI / Chores](#ci--chores)
 		* [Internal](#internal-2)
 		* [Notes](#notes-2)
 	* [➤ 0.16.1 - 30.10.2025](#-0161---30102025)
-		* [Highlights](#highlights-3)
+		* [Highlights](#highlights-4)
 		* [Added](#added-3)
-		* [Changed](#changed-3)
+		* [Changed](#changed-4)
 		* [Fixed](#fixed-3)
 		* [CI / Chores](#ci--chores-1)
 		* [Internal](#internal-3)
 		* [Notes](#notes-3)
 	* [➤ 0.16.0 - 24.09.2025](#-0160---24092025)
-		* [Highlights](#highlights-4)
+		* [Highlights](#highlights-5)
 		* [Added](#added-4)
-		* [Changed](#changed-4)
+		* [Changed](#changed-5)
 		* [Fixed](#fixed-4)
-		* [Documentation](#documentation-3)
+		* [Documentation](#documentation-4)
 		* [CI / Chores](#ci--chores-2)
 		* [Internal](#internal-4)
 		* [Notes](#notes-4)
 	* [➤ 0.15.11 - 15.09.2025](#-01511---15092025)
 		* [Added](#added-5)
-		* [Changed](#changed-5)
+		* [Changed](#changed-6)
 		* [Fixed](#fixed-5)
-		* [Documentation](#documentation-4)
+		* [Documentation](#documentation-5)
 		* [CI / Chores](#ci--chores-3)
 		* [Internal](#internal-5)
 		* [Notes](#notes-5)
@@ -78,14 +83,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 	* [➤ 0.15.7 - 25.03.2025](#-0157---25032025)
 		* [Fixed](#fixed-7)
 	* [➤ 0.15.6 - 24.03.2025](#-0156---24032025)
-		* [Changed](#changed-6)
+		* [Changed](#changed-7)
 	* [➤ 0.15.5 - 20.03.2025](#-0155---20032025)
 		* [Added](#added-8)
-		* [Changed](#changed-7)
-	* [➤ 0.15.4 - 20.03.2025](#-0154---20032025)
 		* [Changed](#changed-8)
-	* [➤ 0.15.3 - 20.03.2025](#-0153---20032025)
+	* [➤ 0.15.4 - 20.03.2025](#-0154---20032025)
 		* [Changed](#changed-9)
+	* [➤ 0.15.3 - 20.03.2025](#-0153---20032025)
+		* [Changed](#changed-10)
 	* [➤ 0.15.1 - 19.03.2025](#-0151---19032025)
 		* [Fixed](#fixed-8)
 	* [➤ 0.15.0 - 19.03.2025](#-0150---19032025)
@@ -97,14 +102,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 	* [➤ 0.14.16 - 18.03.2025](#-01416---18032025)
 		* [Fixed](#fixed-12)
 	* [➤ 0.14.15 - 17.03.2025](#-01415---17032025)
-		* [Changed](#changed-10)
+		* [Changed](#changed-11)
 		* [Fixed](#fixed-13)
 	* [➤ 0.14.12 - 13.03.2025](#-01412---13032025)
 		* [Added](#added-9)
 		* [Fixed](#fixed-14)
 	* [➤ 0.13.3 - 25.02.2025](#-0133---25022025)
 		* [Fixed](#fixed-15)
-		* [Changed](#changed-11)
+		* [Changed](#changed-12)
 		* [Added](#added-10)
 	* [➤ 0.13.2 - 22.02.2024](#-0132---22022024)
 		* [Fixed](#fixed-16)
@@ -113,15 +118,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 	* [➤ 0.13.0 - 21.02.2024](#-0130---21022024)
 		* [Fixed](#fixed-18)
 		* [Added](#added-11)
-		* [Changed](#changed-12)
+		* [Changed](#changed-13)
 	* [➤ 0.12.0 - 17.04.2023](#-0120---17042023)
 		* [Added](#added-12)
 		* [Fixed](#fixed-19)
-		* [Changed](#changed-13)
+		* [Changed](#changed-14)
 	* [➤ 0.11.4 - 21.12.2022](#-0114---21122022)
 		* [Added](#added-13)
 		* [Fixed](#fixed-20)
-		* [Changed](#changed-14)
+		* [Changed](#changed-15)
 	* [➤ 0.11.3 - 25.11.2022](#-0113---25112022)
 		* [Fixed](#fixed-21)
 	* [➤ 0.11.2 - 18.11.2022](#-0112---18112022)
@@ -131,15 +136,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 	* [➤ 0.11.0 - 16.11.2022](#-0110---16112022)
 		* [Added](#added-14)
 		* [Fixed](#fixed-24)
-		* [Changed](#changed-15)
+		* [Changed](#changed-16)
 	* [➤ 0.10.0 - 27.04.2021](#-0100---27042021)
 		* [Added](#added-15)
 		* [Fixed](#fixed-25)
-		* [Changed](#changed-16)
+		* [Changed](#changed-17)
 	* [➤ 0.9.0 - 15.12.2020](#-090---15122020)
 		* [Added](#added-16)
 		* [Fixed](#fixed-26)
-		* [Changed](#changed-17)
+		* [Changed](#changed-18)
 		* [Removed](#removed)
 	* [➤ 0.8.0 - 15.10.2020](#-080---15102020)
 		* [Added](#added-17)
@@ -163,6 +168,62 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 	* [➤ 0.2.0 - 05.03.2020](#-020---05032020)
 		* [Added](#added-22)
 </details>
+
+
+[](#0200---11032026)
+
+## ➤ 0.20.0 - 11.03.2026
+
+### Highlights
+
+- 📦 **Dependency Upgrade Sweep**: Upgraded core runtime, build, and UI dependencies across client and server
+- 🧰 **Lint Stack Modernized**: Upgraded `@typescript-eslint` parser/plugin to support TypeScript 5.9
+- 🚀 **Client Output Target Updated**: Raised client TypeScript target from ES5 to ES2018 for modern browser environments
+
+### Changed
+
+- **Tooling & TypeScript**
+  - Upgraded `typescript` to `5.9.x`
+  - Upgraded `@typescript-eslint/eslint-plugin` to `8.56.1`
+  - Upgraded `@typescript-eslint/parser` to `8.56.1`
+  - Kept `eslint` on `8.57.1` (compatible with the upgraded TypeScript ESLint stack)
+  - Added `skipLibCheck: true` to root `tsconfig.json` to handle type inconsistencies across upgraded third-party declarations
+  - Fixed `export type` for type-only re-exports (`FetchPolicy`, `IDatePeriod`) for `isolatedModules` compatibility
+
+- **Client Build Configuration**
+  - `client/tsconfig.json`: `compilerOptions.target` changed from `es5` to `es2018`
+
+- **Dependencies**
+  - Upgraded multiple core dependencies, including Apollo Server, Fluent UI packages, GraphQL, TypeGraphQL, Webpack, Sass, and related typing packages
+  - Removed `node-fetch` — replaced by native `fetch` (requires Node ≥18, already enforced by `engines` field)
+  - Moved `@types/mongodb`, `@types/react-window` from `dependencies` to `devDependencies`
+  - Removed `@primer/css` — no longer used after EntityLabel refactor
+
+- **Docker Development Workflow**
+  - Added `.tasks/runDockerWatch.js`: smart wrapper that runs `npm ci` only when `package.json` or `package-lock.json` has changed, with up to 3 retries, then falls through to `npm run watch`
+  - Dockerfile `CMD` updated to use `runDockerWatch.js` instead of invoking `npm run watch` directly
+  - Simplified `docker:rebuild:watch` npm script to use `docker compose up --build`
+
+- **Scripts & Project Structure**
+  - Moved `.scripts/` → `scripts/` and `.deploy/` → `scripts/` for cleaner top-level layout
+  - Updated `.dockerignore` to reflect new script paths
+
+- **EntityLabel Component**
+  - Replaced `@primer/css` mixin-based styles (`labels-base`, `labels-large`) with self-contained CSS in `EntityLabel.module.scss`, removing the external CSS framework dependency
+
+### Documentation
+
+- Added changelog entry for version `0.20.0`
+- Removed outdated holiday configuration document from the previous `docs/` path
+- Moved `DOCKER.md` to `docker/DOCKER.md`
+
+### Verification
+
+- `npm run lint` passes with TypeScript 5.9-compatible lint tooling
+- `npm run build:server` passes
+- `npm run package:client` passes
+- `npm test` passes (506 tests)
+
 
 
 [](#0190---20012026)
