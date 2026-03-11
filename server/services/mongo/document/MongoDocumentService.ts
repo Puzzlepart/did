@@ -1,6 +1,13 @@
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { Collection, Db, FilterQuery, OptionalId } from 'mongodb'
+import {
+  Collection,
+  Db,
+  FilterQuery,
+  InsertOneWriteOpResult,
+  OptionalId,
+  WithId
+} from 'mongodb'
 import _ from 'lodash'
 import { RequestContext } from '../../../graphql/requestContext'
 import { CacheService } from '../../cache'
@@ -261,15 +268,19 @@ export class MongoDocumentService<T> {
    *
    * @param document_ - Document
    */
-  public insert(document_: OptionalId<any>) {
+  public insert(
+    document_: OptionalId<any>
+  ): Promise<InsertOneWriteOpResult<WithId<T>>> {
     const [document] = this._handleFieldTypes('set', document_)
-    return this.collection.insertOne({
-      ...document,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      createdBy: this.context.user?.id,
-      updatedBy: this.context.user?.id
-    })
+    return this.collection.insertOne(
+      {
+        ...document,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        createdBy: this.context.user?.id,
+        updatedBy: this.context.user?.id
+      } as OptionalId<T>
+    ) as Promise<InsertOneWriteOpResult<WithId<T>>>
   }
 
   /**

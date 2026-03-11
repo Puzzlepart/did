@@ -12,7 +12,6 @@ on:
       - 'webpack/**'
       - 'package.json'
       - '.deployment'
-      - '.deploy/**'
       - '.tasks/archivePackage.js'
       - '.github/workflows/on_push_dev_deploy.yml'
       - '.github/workflows/deploy-reusable.yml'

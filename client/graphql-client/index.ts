@@ -68,4 +68,4 @@ export const client = new ApolloClient({
 /**
  * @ignore
  */
-export { FetchPolicy } from '@apollo/client'
+export type { FetchPolicy } from '@apollo/client'

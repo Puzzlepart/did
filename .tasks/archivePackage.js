@@ -59,7 +59,7 @@ async function run({ includeNodeModules = false, includePackageLockFile = true, 
 
     log('Archiving deployment files...')
     archive.file('.deployment')
-    archive.file('.deploy/deploy.sh')
+    archive.file('scripts/deploy.sh')
 
     log('Archiving revision metadata...')
     archive.append(`${revision}\n`, { name: 'revision.txt' })

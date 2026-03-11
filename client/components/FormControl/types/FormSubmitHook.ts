@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import { useFormControlModel } from '../useFormControlModel'
 import { ISubmitProps } from './ISubmitProps'
 
