@@ -195,7 +195,7 @@ export class MSGraphService {
    * OData string literals are enclosed in single quotes, and single quotes are escaped by doubling them.
    */
   private escapeODataString(str: string): string {
-    return String(str).replace(/'/g, "''")
+    return String(str).replace(/'/g, '\'\'')
   }
 
   public async searchUsers(search: string, limit = 10): Promise<any> {
@@ -314,7 +314,7 @@ export class MSGraphService {
     startDateTimeIso: string,
     endDateTimeIso: string,
     cache: boolean = true,
-    filterString = "sensitivity ne 'private' and isallday eq false and iscancelled eq false",
+    filterString = 'sensitivity ne \'private\' and isallday eq false and iscancelled eq false',
     orderBy = 'start/dateTime asc'
   ): Promise<EventObject[]> {
     try {

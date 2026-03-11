@@ -84,6 +84,7 @@ artifacts
 
 # Development helper scripts (exclude most, allow watch.js specifically)
 .tasks/*
+!.tasks/runDockerWatch.js
 !.tasks/watch.js
 
 # Local secrets and seed data (recommended)
