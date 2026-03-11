@@ -48,7 +48,7 @@ RUN if [ ! -f .env ]; then cp .env.sample .env; fi
 EXPOSE 9001
 
 # Start development server
-CMD ["npm", "run", "watch"]
+CMD ["node", ".tasks/runDockerWatch.js"]
 
 # Stage 3: Build stage
 FROM base AS build

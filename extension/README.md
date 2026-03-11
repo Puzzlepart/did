@@ -89,7 +89,7 @@ This extension uses Manifest V3, the latest Chrome/Edge extension manifest versi
 
 - **`manifest_version: 3`** - Uses latest extension API
 - **`side_panel`** - Configures the sidebar interface
-- **`permissions: ["sidePanel"]`** - Grants sidebar API access
+- **`permissions: ["sidePanel", "storage"]`** - Grants sidebar API and storage access
 - **`host_permissions`** - Allows communication with did domains
 - **`background.service_worker`** - Background script for extension lifecycle
 

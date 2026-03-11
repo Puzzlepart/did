@@ -53,8 +53,8 @@ import {
   BinRecycle24Regular,
   BuildingFilled,
   BuildingRegular,
-  BuildingSkyscraperFilled,
-  BuildingSkyscraperRegular,
+  BuildingSkyscraper24Filled,
+  BuildingSkyscraper24Regular,
   CalendarFilled,
   CalendarRegular,
   CalendarAdd24Filled,
@@ -89,8 +89,8 @@ import {
   ClipboardMonthRegular,
   Cloud24Filled,
   Cloud24Regular,
-  CollectionsFilled,
-  CollectionsRegular,
+  Collections24Filled,
+  Collections24Regular,
   ContentSettings24Filled,
   ContentSettings24Regular,
   ContentView24Filled,
@@ -147,8 +147,8 @@ import {
   Lightbulb24Regular,
   LinkEdit24Filled,
   LinkEdit24Regular,
-  ListBarFilled,
-  ListBarRegular,
+  ListBar24Filled,
+  ListBar24Regular,
   NoteEdit24Filled,
   NoteEdit24Regular,
   PeopleAdd24Filled,
@@ -197,8 +197,8 @@ import {
   Timeline24Regular,
   Timer224Filled,
   Timer224Regular,
-  TimerFilled,
-  TimerRegular,
+  Timer24Filled,
+  Timer24Regular,
   Umbrella24Filled,
   Umbrella24Regular,
   WeatherSunnyLow24Filled,
@@ -388,8 +388,8 @@ export const iconCatalog = {
     filled: Lightbulb24Filled
   },
   ListBar: {
-    regular: ListBarRegular,
-    filled: ListBarFilled
+    regular: ListBar24Regular,
+    filled: ListBar24Filled
   },
   ContentSettings: {
     regular: ContentSettings24Regular,
@@ -400,8 +400,8 @@ export const iconCatalog = {
     filled: BuildingFilled
   },
   BuildingSkyscraper: {
-    regular: BuildingSkyscraperRegular,
-    filled: BuildingSkyscraperFilled
+    regular: BuildingSkyscraper24Regular,
+    filled: BuildingSkyscraper24Filled
   },
   Home: {
     regular: Home24Regular,
@@ -480,8 +480,8 @@ export const iconCatalog = {
     filled: Timeline24Filled
   },
   Collections: {
-    regular: CollectionsRegular,
-    filled: CollectionsFilled
+    regular: Collections24Regular,
+    filled: Collections24Filled
   },
   Info: {
     regular: Info24Regular,
@@ -640,8 +640,8 @@ export const iconCatalog = {
     filled: CheckmarkCircle24Filled
   },
   Timer: {
-    regular: TimerRegular,
-    filled: TimerFilled
+    regular: Timer24Regular,
+    filled: Timer24Filled
   },
   PeopleTeam: {
     regular: PeopleTeam24Regular,

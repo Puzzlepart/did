@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import { ButtonProps } from '@fluentui/react-components'
 import { useAppContext } from 'AppContext'
 import { useTranslation } from 'react-i18next'

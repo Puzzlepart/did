@@ -8,7 +8,6 @@ type StyledComponentDefaultProps = HTMLAttributes<HTMLDivElement>
  *
  * @template T - The props type for the component.
  */
-// eslint-disable-next-line @typescript-eslint/ban-types
 export interface StyledComponent<T = StyledComponentDefaultProps>
   extends FC<T> {
   className?: string

@@ -10,8 +10,6 @@ import { IEntityLabelProps } from './types'
  * The `<EntityLabel />` component is used to add contextual metadata
  * to a design. Visually it styles text, adds padding, and rounded corners.
  *
- * Uses Fluent UI v9 design patterns with custom styling.
- *
  * @category Reusable Component
  */
 export const EntityLabel: ReusableComponent<IEntityLabelProps> = ({

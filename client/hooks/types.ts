@@ -6,7 +6,6 @@
  * @template TProps The type of the props object passed to the hook.
  * @template TReturnType The type of the value returned by the hook.
  */
-// eslint-disable-next-line @typescript-eslint/ban-types
 export type ComponentLogicHook<TProps = {}, TReturnType = any> = (
   props?: TProps
 ) => TReturnType

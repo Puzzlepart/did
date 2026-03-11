@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import { IListColumn } from 'components'
 import { EntityLabel } from 'components/EntityLabel'
 import { ComponentLogicHook } from 'hooks'

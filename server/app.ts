@@ -11,7 +11,7 @@ import express from 'express'
 import bearerToken from 'express-bearer-token'
 import favicon from 'express-favicon'
 import createError from 'http-errors'
-import { MongoClient } from 'mongodb'
+import { MongoClient, MongoClientOptions } from 'mongodb'
 import logger from 'morgan'
 import path from 'path'
 import _ from 'underscore'
@@ -95,11 +95,10 @@ export class App {
       res.end = function (...args) {
         // If 404, do not log; otherwise proceed with logger
         if (res.statusCode !== 404) {
-          originalEnd.apply(this, args)
-          return
+          return originalEnd.apply(this, args)
         }
         // For 404 we still end the response but skip morgan (by not calling logger first)
-        originalEnd.apply(this, args)
+        return originalEnd.apply(this, args)
       }
       return next()
     })
@@ -136,8 +135,8 @@ export class App {
         minPoolSize: 10, // Minimum connections to maintain
         // Retry failed writes once (helps with Cosmos DB throttling)
         retryWrites: true
-      }
-    )
+      } as MongoClientOptions
+    ) as MongoClient
     this.setupSession()
     this.setupViewEngine()
     this.setupAssets()
@@ -206,7 +205,9 @@ export class App {
 
     this.instance.use('/health_check', healthCheckLimiter, (_, res) => {
       try {
-        const isMongoConnected = this._mcl?.topology?.isConnected() ?? false
+        const isMongoConnected =
+          (this._mcl as unknown as { topology?: { isConnected?: () => boolean } })
+            ?.topology?.isConnected?.() ?? false
 
         const healthStatus = {
           status: isMongoConnected ? 'ok' : 'error',

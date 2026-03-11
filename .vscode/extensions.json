@@ -1,8 +1,0 @@
-{
-  "recommendations": [
-    "dbaeumer.vscode-eslint",
-    "mikestead.dotenv",
-    "lokalise.i18n-ally",
-    "eamodio.gitlens",
-  ]
-}
