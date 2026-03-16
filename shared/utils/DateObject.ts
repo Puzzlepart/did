@@ -226,10 +226,11 @@ export class DateObject {
    * @param include - Properties to include
    */
   public toObject(...include: string[]) {
+    const { isoWeek, isoYear } = DateUtils.getIsoWeekAndYear(this.$)
     const dateObject = {
-      week: DateUtils.getWeek(this.$),
+      week: isoWeek,
       month: DateUtils.getMonthIndex(this.$),
-      year: DateUtils.getYear(this.$),
+      year: isoYear,
       monthName: this.format('MMMM')
     }
     return _.isEmpty(include) ? dateObject : _.pick(dateObject, ...include)
