@@ -2,6 +2,18 @@
 
 **did** (always stylised in lowercase) is a calendar-to-timesheet web application built with React/TypeScript frontend and Node.js/Express backend, using GraphQL for API communication with Microsoft Graph API integration.
 
+## Subfolder Context
+
+Scoped AGENTS.md files exist for areas with distinct concerns. Read the relevant one when working in that area:
+
+| Folder | Covers |
+|---|---|
+| [`client/AGENTS.md`](client/AGENTS.md) | Component patterns, styling, GraphQL client, i18n, accessibility, error handling, performance |
+| [`server/AGENTS.md`](server/AGENTS.md) | Auth flow, multi-tenant MongoDB, Redis, TypeGraphQL resolvers, security middleware, logging |
+| [`shared/AGENTS.md`](shared/AGENTS.md) | RBAC/permissions config, shared utilities, cross-platform constraints |
+| [`docker/AGENTS.md`](docker/AGENTS.md) | Docker commands, agent/worktree setup scripts, sample data |
+| [`webpack/AGENTS.md`](webpack/AGENTS.md) | Webpack 5 config structure, loaders, plugins, production build flags |
+
 ## Essential Commands
 
 ### Development
@@ -24,82 +36,12 @@
 - `npm run commit` - Interactive commit with emojis using sexy-commits (recommended)
 - Format: `commit "[changes]" "[type]" "[message]"` where type is from package.json gitmoji config
 
-## Architecture Patterns
+## TypeScript Setup
 
-### Component Structure
-All components follow this pattern in `/client/components/[ComponentName]/`:
-```
-ComponentName/
-├── ComponentName.tsx       # Main component (functional with hooks)
-├── ComponentName.module.scss # SCSS module (import as `styles`)
-├── index.ts               # Re-exports
-├── types.ts              # TypeScript interfaces
-└── useComponentName.ts    # Logic hook (business logic separation)
-```
-
-### GraphQL Organization
-- Queries: `/client/graphql-queries/[entity]/`
-- Mutations: `/client/graphql-mutations/[entity]/`
-- Fragments: `/client/graphql-client/fragments/`
-- Server resolvers: `/server/graphql/resolvers/`
-- Apollo Client configured with InMemoryCache and cache-and-network fetchPolicy
-
-### Styling Conventions
-- SCSS modules with `.module.scss` extension
-- Import styles as `styles` from corresponding module
-- Fluent UI components throughout
-- BEM-like naming within SCSS files
-
-### TypeScript Setup
-- Separate tsconfig for client (ES2018) and server (Node.js)
-- Decorators enabled for TypeGraphQL on server
-- Prefer interfaces over types
+- Separate `tsconfig.json` for client (ES2018 target) and server (Node.js target)
+- Decorators enabled server-side for TypeGraphQL
+- Prefer interfaces over type aliases
 - Explicit return types required
-
-## Key Integration Points
-
-### Microsoft Graph API
-- Primary calendar and user data source
-- Authentication via Azure AD (passport-azure-ad)
-- Calendar events automatically become time entries
-- User profiles include manager relationships
-
-### Database & Caching
-- **Multi-Tenant Architecture**: Each customer has their own MongoDB database
-  - Configuration/metadata stored in `main` database
-  - Time entries, projects, users stored in customer-specific databases (e.g., `puzzlepart`, `crayon`)
-  - Database name determined by user's subscription during authentication
-  - Scripts/tools must specify customer database explicitly
-- MongoDB for persistent data storage
-- Redis for sessions and API response caching
-- TypeDI dependency injection on server
-- Connection strings in environment variables
-
-### Authentication Flow
-- Primary: Azure AD OpenID Connect (`azuread-openidconnect`)
-- Experimental: Google OAuth 2.0 for external users
-- Session-based with Redis storage
-- Bearer token support for API access
-
-## Development Workflows
-
-### Adding New Components
-1. Create component structure following the pattern above
-2. Include JSDoc comments for all functions/components
-3. Separate logic into `use[ComponentName].ts` hook
-4. Add SCSS module for styling
-5. Export from component index.ts
-
-### Working with GraphQL
-1. Define fragments in `/client/graphql-client/fragments/`
-2. Organize queries/mutations by entity domain
-3. Use Apollo Client hooks in components
-4. Server resolvers use TypeGraphQL decorators
-
-### Internationalization
-- Use `useTranslation` hook from react-i18next
-- Add strings to `/client/i18n/[language].json` files
-- Support for en-GB, nb (Norwegian Bokmål), nn (Norwegian Nynorsk)
 
 ## Environment Setup
 
@@ -119,9 +61,6 @@ REDIS_CACHE_HOSTNAME=localhost
 REDIS_CACHE_KEY=your_redis_key
 REDIS_CACHE_PORT=6379
 # Optional: Explicit TLS/SSL port (falls back to 6380 automatically when REDIS_CACHE_KEY is set and REDIS_CACHE_PORT=6379)
-# For Azure Redis (TLS) you typically set REDIS_CACHE_HOSTNAME to the primary host name and supply REDIS_CACHE_KEY.
-# If you leave REDIS_CACHE_PORT at 6379 the application will internally switch to 6380 when a key is present.
-# Use REDIS_CACHE_SSL_PORT only if your TLS port differs from 6380.
 # REDIS_CACHE_SSL_PORT=6380
 API_TOKEN_SECRET=your_api_secret
 ```
@@ -132,134 +71,15 @@ API_TOKEN_SECRET=your_api_secret
 
 ## Testing Strategy
 
-### Framework & Setup
 - AVA test framework with TypeScript support
 - Tests alongside source files with `.test.ts` extension
-- 2-minute timeout per test (configurable)
+- 2-minute timeout per test
 - Worker threads enabled for performance
-
-### Running Tests
 - `npm test` - Run all tests with verbose output
-- Tests automatically run on PRs via GitHub Actions
-- Use `[ava]` in commit message to trigger tests
-- Use `[skip-ci]` to skip CI entirely
+- Tests run automatically on PRs via GitHub Actions
+- Use `[ava]` in commit message to trigger tests; `[skip-ci]` to skip CI entirely
 
-## Build System Details
-
-### Webpack Configuration
-- Custom Webpack 5 config in `/webpack/`
-- TypeScript compilation with ts-loader
-- SCSS modules with CSS extraction
-- Bundle analysis available with `analyze` flag
-- Hot reloading in development mode
-
-### Production Optimizations
-- Terser minification with custom config
-- CSS extraction and optimization
-- Source maps disabled in production
-- Asset compression with gzip middleware
-
-## Error Handling & Debugging
-
-### Client-Side
-- React Error Boundary in `/client/parts/ErrorFallback/`
-- Console logging disabled in production (eslint rule)
-- User-friendly error messages with toast notifications
-
-### Server-Side
-- Debug module for structured logging (`debug('namespace')`)
-- Express error handling middleware
-- GraphQL error formatting and reporting
-- Rate limiting on API endpoints
-
-## Security Considerations
-
-### Authentication & Authorization
-- Role-based permissions system in `/shared/config/security/`
-- JWT tokens for API authentication
-- Session-based auth for web interface
-- CORS configuration for API access
-
-### Data Protection
-- Helmet middleware for security headers
-- Input validation with class-validator
-- SQL injection protection via MongoDB
-- Environment variable validation
-
-## Docker Support
-
-### Development
-- `npm run docker:start` - Start containers (or `./scripts/docker.sh`)
-- `npm run docker:stop` - Stop containers
-- `npm run docker:logs` - View container logs
-- `npm run docker:shell` - Access container shell
-- `npm run docker:db` - MongoDB shell
-- `npm run docker:redis` - Redis CLI
-- `npm run docker:status` - Show container status
-- `npm run docker:clean` - Remove containers and volumes
-
-### Agent/Worktree Environments
-For isolated development in worktrees or CI:
-- `./scripts/agent-setup.sh` - Setup with unique ports (avoids conflict with main dev)
-- `./scripts/agent-teardown.sh` - Cleanup agent environment
-
-### Production
-- Production deployment is done using slot swapping in azure app service, there is no specific dockerfile for prod
-- docker-compose for service orchestration
-- Environment-specific overrides in compose files
-
-## Performance Guidelines
-
-### Client Optimizations
-- Implement virtualization for long lists (>100 items)
-- Use React.memo for expensive components
-- Use memoization for expensive calculations
-- Optimize GraphQL queries to fetch only needed fields
-- Lazy load routes and components where possible
-
-### Server Optimizations
-- Redis caching for frequent queries
-- Database query optimization
-- GraphQL resolver batching
-- Rate limiting to prevent abuse
-
-## Accessibility Requirements
-
-- Ensure all interactive elements have appropriate ARIA attributes
-- Maintain keyboard navigation support
-- Use semantic HTML elements
-- Follow WCAG guidelines for color contrast and visual hierarchy
-- Provide alternative text for images and icons
-- Ensure proper focus management in dynamic content
-
-## Project-Specific Guidelines
-
-### Internationalization
-- Use `useTranslation` hook from react-i18next for all user-facing text
-- Add new strings to `/client/i18n/[language].json` files
-- Support for en-GB, nb (Norwegian Bokmål), nn (Norwegian Nynorsk)
-- Maintain consistent terminology across languages
-
-### Data Management
-- User data should include manager information when appropriate
-- Excel exports should maintain consistent formatting with column widths and filters
-- When creating search functionality, implement count display and proper loading states
-- Calendar events automatically become time entries via Microsoft Graph API
-
-### Component Development
-- Follow the established component structure pattern
-- Include JSDoc comments for all functions/components
-- Separate business logic into `use[ComponentName].ts` hooks
-- Use SCSS modules for styling with BEM-like naming conventions
-- Import styles as `styles` from corresponding `.module.scss` files
-
-### Testing Standards
-- Unit tests should be placed next to the file they test with `.test.ts` extension
-- Mock external dependencies when testing components
-- Use AVA test framework with TypeScript support
-- Maintain 2-minute timeout per test for comprehensive testing
-
-## Deployment Notes
+## Deployment
 
 ### Branch Strategy
 - `main` - Production (did.crayonconsulting.no)
@@ -268,6 +88,6 @@ For isolated development in worktrees or CI:
 
 ### Azure App Service
 - Slot swapping for zero-downtime deployments
-- Environment-specific configuration
+- Environment-specific configuration per slot
 - Automatic scaling based on load
-- Maintenance mode via `MAINTENANCE_MODE=true` environment variable
+- Maintenance mode: set `MAINTENANCE_MODE=true` environment variable
