@@ -1,5 +1,5 @@
 <!-- ⚠️ This README has been generated from the file(s) ".readme/README.md" ⚠️--><p align="center">
-  <img src="./server/public/images/favicon/android-chrome-192x192.png" alt="Logo" width="192" height="192" />
+  <img src="./server/public/images/logo-gradient.svg" alt="Logo" width="192" height="240" />
 </p> <p align="center">
   <b>the calendar is your timesheet</b></br>
   <sub>Keep your calendar up-to-date with what you work on, and that's it. You're done.<sub>
