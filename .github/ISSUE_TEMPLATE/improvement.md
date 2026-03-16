@@ -3,14 +3,14 @@ name: Improvement
 about: Improvements with specification. Suggest improvements in the discussions section.
 labels: enhancement
 ---
-- [ ] I have searched for existing issues to avoid creating duplicates
 
-### TLDR
+### TL;DR
+
 <!-- Try to summarize the improvement suggestion -->
 
-### Description
-<!-- 
+### Description of the improvement suggestion
+
+<!--
 Try to detail the improvement suggestion
 Screenshots, sketches and mockups help a lot!
 -->
-
