@@ -279,7 +279,7 @@
   }
 
   .selectionCell {
-    width: auto;
+    width: auto !important;
     max-width: none;
     justify-content: flex-start;
     padding: 0;
@@ -288,6 +288,8 @@
   .cell,
   .treeGridCell {
     align-items: flex-start;
+    width: 100% !important;
+    max-width: none !important;
   }
 
   .cell[data-label]:not([data-label='']),
