@@ -66,17 +66,46 @@ EOF
 
 ensure_env_file() {
   if [[ ! -f .env ]]; then
-    warn ".env not found. Creating minimal .env (adjust as needed)."
-    cat > .env <<'EOF'
+    warn ".env not found. Creating from .env.sample (edit values before signing in)."
+    if [[ -f .env.sample ]]; then
+      cp .env.sample .env
+      info "Copied .env.sample → .env. Review and update placeholder values."
+    else
+      warn ".env.sample not found either. Creating minimal .env."
+      cat > .env <<'EOF'
 NODE_ENV=development
 PORT=9001
 EOF
+    fi
   fi
 
   # Ensure COMPOSE_FILE line present
   if ! grep -q '^COMPOSE_FILE=' .env; then
     info "Adding COMPOSE_FILE to .env"
     echo "COMPOSE_FILE=${COMPOSE_CHAIN}" >> .env
+  fi
+}
+
+check_required_env() {
+  local missing=()
+  local required_vars=(
+    "SESSION_SIGNING_KEY"
+    "API_TOKEN_SECRET"
+  )
+  for var in "${required_vars[@]}"; do
+    local val
+    val=$(grep "^${var}=" .env 2>/dev/null | cut -d= -f2-)
+    if [[ -z "$val" || "$val" == your-* ]]; then
+      missing+=("$var")
+    fi
+  done
+  if [[ ${#missing[@]} -gt 0 ]]; then
+    warn "The following required .env variables are missing or still have placeholder values:"
+    for var in "${missing[@]}"; do
+      warn "  - $var"
+    done
+    warn "The app will start but some features (sessions, API tokens) may not work."
+    warn "Edit .env and update these values. See .env.sample for reference."
   fi
 }
 
@@ -155,6 +184,7 @@ cmd_start() {
 
   ensure_local_override
   ensure_env_file
+  check_required_env
   check_placeholder_secrets
   describe_seed_data
 
