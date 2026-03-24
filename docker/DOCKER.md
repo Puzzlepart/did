@@ -1,11 +1,11 @@
 ## Docker Script
 
-Use `/scripts/docker.sh` for all Docker development operations:
+Use `./scripts/docker.sh` for all Docker development operations:
 
 ```bash
-/scripts/docker.sh              # Start containers (default)
-/scripts/docker.sh start --fresh  # Clean start with fresh volumes
-/scripts/docker.sh status       # Show config and container status
+./scripts/docker.sh              # Start containers (default)
+./scripts/docker.sh start --fresh  # Clean start with fresh volumes
+./scripts/docker.sh status       # Show config and container status
 ```
 ## Common Reset Recipes
 
@@ -23,7 +23,7 @@ docker builder du
 
 Run a safe cleanup that keeps active containers and volumes:
 ```bash
-/scripts/docker-maintenance.sh --days 7
+./scripts/docker-maintenance.sh --days 7
 ```
 
 Via npm:
@@ -33,7 +33,7 @@ npm run docker:maintenance -- --days 7
 
 Optional flags:
 ```bash
-/scripts/docker-maintenance.sh --aggressive --include-volumes --clean-dist
+./scripts/docker-maintenance.sh --aggressive --include-volumes --clean-dist
 ```
 
 Notes:
@@ -199,7 +199,7 @@ MongoDB can be pre-populated with tenant data for development:
      └── puzzlepart/
          ├── users.json
          ├── projects.json
-         └── timeentries.json
+         └── time_entries.json
    ```
 
 3. **Start services** - data will be imported automatically on first MongoDB startup:
