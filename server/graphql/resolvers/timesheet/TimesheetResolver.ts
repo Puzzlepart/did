@@ -116,7 +116,7 @@ export class TimesheetResolver {
     try {
       await this._timesheetSvc.submitPeriod({ ...options, period })
       return {
-        success: false,
+        success: true,
         error: null
       }
     } catch (error) {

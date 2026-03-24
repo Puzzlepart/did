@@ -93,7 +93,19 @@ export class GraphUsersService extends MongoDocumentService<ActiveDirectoryUser>
         .find({ $text: { $search: safe } })
         .limit(limit)
         .sort({ score: { $meta: 'textScore' } })
-        .project({ score: { $meta: 'textScore' } })
+        .project({
+          score: { $meta: 'textScore' },
+          _id: 1,
+          id: 1,
+          displayName: 1,
+          givenName: 1,
+          surname: 1,
+          mail: 1,
+          jobTitle: 1,
+          mobilePhone: 1,
+          preferredLanguage: 1,
+          accountEnabled: 1
+        })
         .toArray()
       return users as ActiveDirectoryUser[]
     } catch (error) {

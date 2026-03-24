@@ -23,16 +23,20 @@ export const useCustomQueryFilterCriterias = (param: string, id: string) => {
   >()
 
   useEffect(() => {
-    const [, f] = id.split('_')
-    if (f) {
+    try {
+      const [, f] = id.split('_')
+      if (f) {
+        filterCriterias.$set(
+          new Map(Object.entries(JSON.parse(window.atob(f))) as any)
+        )
+        return
+      }
       filterCriterias.$set(
-        new Map(Object.entries(JSON.parse(window.atob(f))) as any)
+        new Map(Object.entries(getUrlState(param, 'hash', true))) as any
       )
-      return
+    } catch {
+      // Malformed URL state — leave filter criteria empty rather than crash
     }
-    filterCriterias.$set(
-      new Map(Object.entries(getUrlState(param, 'hash', true))) as any
-    )
   }, [id])
 
   useEffect(() => {

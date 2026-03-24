@@ -32,14 +32,18 @@ export function getUrlState<T = any>(
   location: 'hash' | 'search',
   obj = false
 ): T {
-  if (location === 'hash') {
-    const urlState = parseUrlHash()
-    const value = urlState[key]
+  try {
+    if (location === 'hash') {
+      const urlState = parseUrlHash()
+      const value = urlState[key]
+      if (!obj) return value as T
+      return value ? JSON.parse(window.atob(value)) : ({} as T)
+    }
+    const url = new URL(window.location.href)
+    const value = url.searchParams.get(key)
     if (!obj) return value as T
     return value ? JSON.parse(window.atob(value)) : ({} as T)
+  } catch {
+    return (obj ? {} : undefined) as T
   }
-  const url = new URL(window.location.href)
-  const value = url.searchParams.get(key)
-  if (!obj) return value as T
-  return value ? JSON.parse(window.atob(value)) : ({} as T)
 }

@@ -98,10 +98,18 @@ export const authCallbackHandler =
           debug('Error logging in user: %s', error_.message)
           return response.render('index', { error: JSON.stringify(error_) })
         }
-        const redirectUrl =
+        let redirectUrl =
           request.session[REDIRECT_URL_PROPERTY] ||
           user['startPage'] ||
           '/timesheet'
+        // Restrict redirect to internal relative paths to prevent open redirect
+        if (
+          typeof redirectUrl !== 'string' ||
+          !redirectUrl.startsWith('/') ||
+          redirectUrl.startsWith('//')
+        ) {
+          redirectUrl = '/timesheet'
+        }
         return response.redirect(redirectUrl)
       })
     })(request, response, next)
