@@ -70,16 +70,15 @@ export class DateObject {
    * @param input - Object input
    * @param startOf - Optional start of (e.g. year or isoWeek)
    */
-  public fromObject(input: ObjectInput, startOf: any = 'isoWeek'): DateObject {
+  public fromObject(input: ObjectInput): DateObject {
     const year =
       typeof input.year === 'string' ? Number.parseInt(input.year) : input.year
     const isoWeek =
       typeof input.week === 'string' ? Number.parseInt(input.week) : input.week
-    
+
     // Use proper ISO week calculation to get the correct date
     const weekStartDate = DateUtils.getIsoWeekStartDate(isoWeek, year)
-    this.$ = weekStartDate.$
-    if (startOf) this.$ = this.$.startOf('isoWeek')
+    this.$ = weekStartDate.$.startOf('isoWeek')
     return this
   }
 

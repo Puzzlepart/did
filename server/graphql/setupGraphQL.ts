@@ -89,7 +89,7 @@ export const setupGraphQL = async (
       },
       plugins: [
         ApolloServerPluginUsageReporting({
-          sendVariableValues: { all: true },
+          sendVariableValues: { none: true },
           generateClientInfo,
           sendReportsImmediately: environment<boolean>(
             'APOLLO_SCHEMA_REPORTING_SEND_REPORTS_IMMEDIATELY',
