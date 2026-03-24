@@ -1,7 +1,7 @@
 import { Dayjs, ManipulateType, OpUnitType } from 'dayjs'
 import _ from 'underscore'
 import s from 'underscore.string'
-import { HolidayObject } from '../../server/graphql'
+import { IHolidayObject } from '../types/HolidayObject'
 import DateUtils, { $dayjs, DateInput } from './date'
 
 export type ObjectInput = {
@@ -242,7 +242,7 @@ export class DateObject {
    *
    * @param holidays Collection of holidays to check towards
    */
-  public isNationalHoliday(holidays: HolidayObject[] = []): HolidayObject {
+  public isNationalHoliday(holidays: IHolidayObject[] = []): IHolidayObject {
     return _.find(holidays, ({ date }) => {
       return new DateObject(date).isSameDay(this)
     })

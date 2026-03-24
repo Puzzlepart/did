@@ -26,7 +26,7 @@ export function useCustomers() {
       state,
       dispatch
     }),
-    [state]
+    [state, query.data, query.loading]
   )
 
   useEffect(() => {

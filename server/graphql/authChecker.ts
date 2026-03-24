@@ -37,7 +37,7 @@ export const authChecker: AuthChecker<RequestContext, IAuthOptions> = (
   [authOptions]
 ) => {
   if (!authOptions) {
-    if (!context.permissions) {
+    if (!context.permissions || context.permissions.length === 0) {
       debug('Authentication required - no permissions present')
       throw new GraphQLError('Authentication required', {
         extensions: { code: 'UNAUTHENTICATED' }
