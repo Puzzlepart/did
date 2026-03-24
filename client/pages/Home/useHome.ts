@@ -15,9 +15,13 @@ export function useHome(paramName = 'client_response') {
   const { user, subscription } = useAppContext()
   const location = useLocation<{ prevPath: string }>()
   const urlSearchParameters = new URLSearchParams(document.location.search)
-  const loginError: ISigninError =
-    urlSearchParameters.get(paramName) &&
-    JSON.parse(atob(urlSearchParameters.get(paramName) as string))
+  let loginError: ISigninError = null
+  try {
+    const raw = urlSearchParameters.get(paramName)
+    if (raw) loginError = JSON.parse(atob(raw))
+  } catch {
+    // Malformed URL parameter — ignore rather than crash
+  }
 
   useLoginRedirect(loginError)
 
