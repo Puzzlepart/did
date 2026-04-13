@@ -5,19 +5,18 @@ import {
   DropdownControlOptions,
   FormControl,
   InputControl,
+  ValidatorFunction,
   useFormControlModel,
   useFormControls
 } from 'components/FormControl'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { StyledComponent } from 'types'
+import { ApiToken, ApiTokenInput, StyledComponent } from 'types'
 import { fuzzyMap } from 'utils'
 import { EditPermissions } from 'pages/Admin/RolesPermissions'
 import { useExpiryOptions } from 'pages/Admin/ApiTokens/ApiTokenForm/useExpiryOptions'
-import { ApiTokenInput } from 'types'
 import { useMutation } from '@apollo/client'
 import { useAppContext } from 'AppContext'
-import { ApiToken } from 'types'
 import $addPersonalAccessToken from './addPersonalAccessToken.gql'
 
 interface IPersonalAccessTokenFormProps {
@@ -99,11 +98,10 @@ export const PersonalAccessTokenForm: StyledComponent<
       <EditPermissions
         {...register<BaseControlOptions>('permissions', {
           validators: [
-            {
-              state: 'invalid',
-              func: (v: string[]) => !v || v.length === 0,
-              message: t('admin.apiTokens.permissionsRequired')
-            }
+            ((value: string[]) =>
+              !value || value.length === 0
+                ? [t('admin.apiTokens.permissionsRequired'), 'error']
+                : null) as ValidatorFunction<string[]>
           ]
         })}
         label={t('userSettings.apiTokens.permissionsLabel')}
