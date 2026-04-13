@@ -1,0 +1,9 @@
+query PersonalAccessTokens {
+  tokens: personalAccessTokens {
+    name
+    description
+    created
+    expires
+    secret: apiKey
+  }
+}

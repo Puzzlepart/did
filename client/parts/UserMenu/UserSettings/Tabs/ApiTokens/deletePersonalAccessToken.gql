@@ -1,0 +1,8 @@
+mutation DeletePersonalAccessToken($name: String!) {
+  result: deletePersonalAccessToken(name: $name) {
+    success
+    error {
+      message
+    }
+  }
+}

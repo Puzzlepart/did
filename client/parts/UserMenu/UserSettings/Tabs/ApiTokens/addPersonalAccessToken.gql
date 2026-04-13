@@ -1,0 +1,3 @@
+mutation AddPersonalAccessToken($token: ApiTokenInput!) {
+  apiKey: addPersonalAccessToken(token: $token)
+}
