@@ -5,7 +5,6 @@ import { useConfirmationDialog } from 'pzl-react-reusable-components/lib/Confirm
 import { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ApiToken } from 'types'
-import $addPersonalAccessToken from './addPersonalAccessToken.gql'
 import $deletePersonalAccessToken from './deletePersonalAccessToken.gql'
 import $personalAccessTokens from './personalAccessTokens.gql'
 
@@ -18,27 +17,22 @@ export function usePersonalAccessTokens() {
   )
   const items: ApiToken[] = data?.tokens ?? []
 
-  const [addToken] = useMutation($addPersonalAccessToken)
   const [deleteToken] = useMutation($deletePersonalAccessToken)
   const [newToken, setNewToken] = useState<ApiToken>(null)
   const [selectedToken, onSelectionChanged] = useState<ApiToken>(null)
   const [confirmationDialog, getResponse] = useConfirmationDialog()
 
   const onTokenAdded = useCallback(
-    async (token: ApiToken) => {
-      try {
-        const { data } = await addToken({ variables: { token } })
-        const created = { ...token, apiKey: data.apiKey }
-        setNewToken(created)
-        displayToast(t('userSettings.apiTokens.tokenCreated'), 'success')
-        refetch()
-        setTimeout(() => setNewToken(null), 10_000)
-      } catch (error) {
-        displayToast(error.message, 'error')
-      }
+    (token: ApiToken) => {
+      setNewToken(token)
+      refetch()
     },
-    [addToken, refetch]
+    [refetch]
   )
+
+  const clearNewToken = useCallback(() => {
+    setNewToken(null)
+  }, [])
 
   const onDelete = useCallback(async () => {
     const { response } = await getResponse({
@@ -59,18 +53,14 @@ export function usePersonalAccessTokens() {
     refetch()
   }, [selectedToken])
 
-  const onKeyCopied = useCallback(() => {
-    setNewToken(null)
-  }, [])
-
   return {
     items,
     newToken,
+    clearNewToken,
     selectedToken,
     onSelectionChanged,
     onTokenAdded,
     onDelete,
-    onKeyCopied,
     confirmationDialog
   }
 }

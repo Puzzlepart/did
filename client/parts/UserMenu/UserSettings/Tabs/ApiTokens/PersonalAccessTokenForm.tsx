@@ -23,7 +23,6 @@ interface IPersonalAccessTokenFormProps {
   open: boolean
   onTokenAdded: (token: ApiToken) => void
   onDismiss: () => void
-  tokens: ApiToken[]
 }
 
 export const PersonalAccessTokenForm: StyledComponent<
@@ -46,7 +45,6 @@ export const PersonalAccessTokenForm: StyledComponent<
         const { data } = await addToken({
           variables: { token: model.$ }
         })
-        displayToast(t('userSettings.apiTokens.tokenCreated'), 'success', 20)
         const created = { ...(model.$ as ApiToken), ...data }
         model.reset()
         props.onTokenAdded(created)
@@ -71,17 +69,6 @@ export const PersonalAccessTokenForm: StyledComponent<
       <InputControl
         {...register('name', { required: true })}
         label={t('userSettings.apiTokens.tokenNameLabel')}
-      />
-      <InputControl
-        {...register('description', {
-          required: true,
-          validators: [{ minLength: 20 }]
-        })}
-        rows={8}
-        label={t('common.descriptionFieldLabel')}
-        description={t('userSettings.apiTokens.tokenDescriptionDescription', {
-          minLength: 20
-        })}
       />
       <DropdownControl
         {...register<DropdownControlOptions>('expires', {
