@@ -22,6 +22,18 @@ export function useColumns(
       minWidth: 100,
       maxWidth: 100
     }),
+    createColumnDef<ApiToken>(
+      'type',
+      t('admin.apiTokens.tokenType'),
+      {
+        minWidth: 80,
+        maxWidth: 100
+      },
+      (token) =>
+        token.type === 'personal'
+          ? t('admin.apiTokens.tokenTypePersonal')
+          : t('admin.apiTokens.tokenTypeSubscription')
+    ),
     createColumnDef('description', t('common.descriptionFieldLabel'), {
       minWidth: 180,
       maxWidth: 220,
