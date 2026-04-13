@@ -268,7 +268,11 @@
       "displaySecretKeyButtonLabel": "Vis meg nøkkelen",
       "permissionsRequired": "Du må velge minst én tillatelse for API-nøkkelen. Ingen vits i å ha en rolle hvis du ikke kan gjøre noe med den? Det er som å ha en jobb uten oppgaver.",
       "tokenDescriptionDescription": "Beskriv (minst {{minLength}} tegn) hvordan du har tenkt å bruke API-token, og forklar kort hvorfor du trenger de valgte tillatelsene.",
-      "warningTooManyPermissions": "Du har valgt {{count}} tillatelser. \nVi anbefaler ikke å være for grådig med tillatelser, men hvis du vet hva du gjør - kjør på."
+      "warningTooManyPermissions": "Du har valgt {{count}} tillatelser. \nVi anbefaler ikke å være for grådig med tillatelser, men hvis du vet hva du gjør - kjør på.",
+      "tokenType": "Type",
+      "tokenTypeSubscription": "Abonnement",
+      "tokenTypePersonal": "Personlig",
+      "tokenOwner": "Eier"
     },
     "users": {
       "headerText": "Brukere",
@@ -375,7 +379,9 @@
       "enableSimpleHierachyDescription": "Aktiver prosjekthierarki som støtter innstilling av overordnet prosjekt, visning av overordnede og underordnede prosjekter.",
       "enableSimpleHierachyLabel": "Aktiver hierarki",
       "autoLoadTimeEntriesLabel": "Last inn tidsoppføringer automatisk",
-      "autoLoadTimeEntriesDescription": "Når aktivert, lastes tidsoppføringer automatisk uten at du trenger å gjøre noe."
+      "autoLoadTimeEntriesDescription": "Når aktivert, lastes tidsoppføringer automatisk uten at du trenger å gjøre noe.",
+      "personalAccessTokensEnabledLabel": "Tillat personlige tilgangsnøkler",
+      "personalAccessTokensEnabledDescription": "Når aktivert kan brukere opprette personlige API-nøkler for skripting og automatisering."
     },
     "rolesPermissions": {
       "headerText": "Roller og tillatelser",
@@ -616,6 +622,24 @@
     "summaryDescription": "Få en tabelloversikt over tidsregistreringer per ansatt og periode.",
     "customQueryWeekDisabled": "Du kan ikke filtrere på uke samtidig som du filtrerer på startdato, sluttdato eller måned.",
     "customQueryMonthDisabled": "Du kan ikke filtrere på måned samtidig som du filtrerer på startdato, sluttdato eller uke."
+  },
+  "userSettings": {
+    "apiTokens": {
+      "tabTitle": "API-nøkler",
+      "emptyState": "Du har ingen personlige tilgangsnøkler ennå. Opprett en for å bruke API-et fra skript eller integrasjoner.",
+      "addNew": "Opprett nøkkel",
+      "delete": "Slett",
+      "tokenNameLabel": "Navn på nøkkel",
+      "tokenDescriptionDescription": "Beskriv hva denne nøkkelen skal brukes til (minimum {{minLength}} tegn).",
+      "tokenExpiryLabel": "Utløper",
+      "permissionsLabel": "Tillatelser",
+      "permissionsDescription": "Velg hvilke tillatelser denne nøkkelen skal ha. Du kan kun gi tillatelser du selv har.",
+      "apiKeyGenerated": "Din nye personlige tilgangsnøkkel. Kopier den nå - du vil ikke kunne se den igjen.",
+      "tokenCreated": "Personlig tilgangsnøkkel opprettet.",
+      "tokenDeleted": "Personlig tilgangsnøkkel slettet.",
+      "deleteConfirmTitle": "Slett personlig tilgangsnøkkel",
+      "deleteConfirmMessage": "Er du sikker på at du vil slette nøkkelen \"{{name}}\"? Integrasjoner som bruker denne nøkkelen vil slutte å fungere."
+    }
   },
   "common": {
     "datePicker": {
