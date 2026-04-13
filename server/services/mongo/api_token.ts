@@ -75,13 +75,19 @@ export class ApiTokenService extends MongoDocumentService<ApiToken> {
    *
    * @param name - Token name
    * @param subscriptionId - Subscription id
+   * @param userId - Optional user id (for personal tokens, ensures ownership)
    */
   public async deleteToken(
     name: string,
-    subscriptionId: string
+    subscriptionId: string,
+    userId?: string
   ): Promise<void> {
     try {
-      await this.collection.deleteOne({ name, subscriptionId })
+      const query: FilterQuery<ApiToken> = { name, subscriptionId }
+      if (userId) {
+        query.userId = userId
+      }
+      await this.collection.deleteOne(query)
     } catch (error) {
       throw error
     }
