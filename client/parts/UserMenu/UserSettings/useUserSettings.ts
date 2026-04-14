@@ -26,8 +26,7 @@ export function useUserSettings() {
     panel: {
       title: t('common.userSettingsPanelHeaderText'),
       open: panel.value,
-      onDismiss: () => panel.setFalse(),
-      size: 'large'
+      onDismiss: () => panel.setFalse()
     },
     submitProps: {
       text: t('common.save'),

@@ -24,26 +24,26 @@ export const ApiTokensTab: React.FC = () => {
 
   const columns = [
     createColumnDef('name', t('userSettings.apiTokens.tokenNameLabel'), {
-      minWidth: 100,
-      maxWidth: 180
+      minWidth: 60,
+      maxWidth: 120
     }),
     createColumnDef('created', t('common.createdLabel'), {
-      minWidth: 100,
-      maxWidth: 150,
+      minWidth: 60,
+      maxWidth: 100,
       renderAs: 'timeFromNow'
     }),
     createColumnDef('expires', t('common.expiresLabel'), {
-      minWidth: 100,
-      maxWidth: 150,
+      minWidth: 60,
+      maxWidth: 100,
       renderAs: 'timeFromNow'
     })
   ]
 
   return (
-    <div>
+    <div style={{ overflow: 'hidden' }}>
       {newToken?.apiKey && (
         <MessageBar intent='success' style={{ marginBottom: 12 }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, width: '100%' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, minWidth: 0 }}>
             <Label weight='semibold'>
               {t('userSettings.apiTokens.apiKeyGenerated')}
             </Label>
@@ -54,7 +54,7 @@ export const ApiTokensTab: React.FC = () => {
               <Input
                 readOnly
                 value={newToken.apiKey}
-                style={{ width: '100%', cursor: 'pointer', fontFamily: 'monospace', fontSize: 12 }}
+                style={{ cursor: 'pointer', fontFamily: 'monospace', fontSize: 12 }}
               />
             </CopyToClipboard>
             <Text size={200}>
