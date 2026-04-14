@@ -13,7 +13,7 @@ import {
   validateHolidayName,
   validateHoursOff
 } from './holidayUtils'
-import { HolidayObject } from '../../server/graphql/resolvers/timesheet/types/HolidayObject'
+import { IHolidayObject } from '../types/HolidayObject'
 
 // Validation Functions - validateHoursOff
 test('validateHoursOff should accept valid hours', (t) => {
@@ -236,7 +236,7 @@ const createHoliday = (
   date: string,
   hoursOff: number = 8,
   recurring: boolean = true
-): HolidayObject => ({
+): IHolidayObject => ({
   _id: 'test',
   date: new Date(date),
   name: 'Test Holiday',
@@ -302,7 +302,7 @@ test('getHolidayHoursInPeriod should handle invalid holiday dates gracefully', (
       hoursOff: 8,
       recurring: true
     }
-  ] as HolidayObject[]
+  ] as IHolidayObject[]
 
   const result = getHolidayHoursInPeriod('2025-12-22', '2025-12-28', holidays)
   t.is(result, 0) // Invalid holiday skipped

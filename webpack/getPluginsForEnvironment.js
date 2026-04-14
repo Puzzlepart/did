@@ -51,7 +51,15 @@ function getPluginsForEnvironment() {
     }),
     exportedVarsPlugin
   ]
-  if (!constants.get('IS_DEVELOPMENT')) return plugins
+  if (!constants.get('IS_DEVELOPMENT')) {
+    const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+    plugins.push(new MiniCssExtractPlugin({ filename: '../css/[name].[contenthash:8].css' }))
+    if (process.argv.includes('--analyze')) {
+      const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+      plugins.push(new BundleAnalyzerPlugin())
+    }
+    return plugins
+  }
   const LiveReloadPlugin = tryRequire('webpack-livereload-plugin')
   const ForkTsCheckerWebpackPlugin = tryRequire('fork-ts-checker-webpack-plugin')
   const CustomCompileHooks = require('./compileHooks')

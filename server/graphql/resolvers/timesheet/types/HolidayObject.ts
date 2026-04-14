@@ -1,5 +1,6 @@
 import 'reflect-metadata'
 import { Field, Float, ID, ObjectType } from 'type-graphql'
+import { IHolidayObject } from '../../../../../shared/types/HolidayObject'
 
 /**
  * An Object type that describes a Holiday
@@ -10,7 +11,7 @@ import { Field, Float, ID, ObjectType } from 'type-graphql'
   description: 'An Object type that describes a Holiday',
   simpleResolvers: true
 })
-export class HolidayObject {
+export class HolidayObject implements IHolidayObject {
   @Field(() => ID)
   _id: string
 

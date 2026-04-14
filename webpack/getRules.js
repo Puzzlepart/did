@@ -1,12 +1,13 @@
 /**
  * Get rules config for webpack
- * 
+ *
  * @param configFile - TS config file
  * @param isDevelopment - Is development
  *
  * @returns rules config for webpack
  */
 function getRules(configFile, isDevelopment) {
+  const MiniCssExtractPlugin = isDevelopment ? null : require('mini-css-extract-plugin')
   return [
     {
       test: /\.ts(x?)$/,
@@ -30,7 +31,7 @@ function getRules(configFile, isDevelopment) {
     {
       test: /\.scss$/,
       use: [
-        { loader: 'style-loader' },
+        isDevelopment ? { loader: 'style-loader' } : { loader: MiniCssExtractPlugin.loader },
         { loader: 'css-modules-typescript-loader' },
         { loader: 'css-loader', options: { modules: true } },
         { loader: 'sass-loader' },
