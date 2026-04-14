@@ -11,7 +11,7 @@ For example:
 - `craycon/users.json` — Imported to the `users` collection in the `craycon` database
 - `craycon/projects.json` — Imported to the `projects` collection in the `craycon` database
 - `craycon/customers.json` — Imported to the `customers` collection in the `craycon` database
-- `craycon/timeentries.json` — Imported to the `timeentries` collection in the `craycon` database
+- `craycon/time_entries.json` — Imported to the `time_entries` collection in the `craycon` database
 
 This structure helps organize data for multiple databases and ensures clarity when importing.
 
@@ -30,7 +30,7 @@ mongoexport --uri="mongodb+srv://user:pass@cluster.mongodb.net/database" --colle
 mongoexport --uri="mongodb+srv://user:pass@cluster.mongodb.net/database" --collection=customers --out=customers.json
 
 # Export time entries (optionally with query to limit data)
-mongoexport --uri="mongodb+srv://user:pass@cluster.mongodb.net/database" --collection=timeentries --query='{"date":{"$gte":{"$date":"2024-01-01T00:00:00.000Z"}}}' --out=timeentries.json
+mongoexport --uri="mongodb+srv://user:pass@cluster.mongodb.net/database" --collection=time_entries --query='{"date":{"$gte":{"$date":"2024-01-01T00:00:00.000Z"}}}' --out=time_entries.json
 ```
 
 ## Security Note
