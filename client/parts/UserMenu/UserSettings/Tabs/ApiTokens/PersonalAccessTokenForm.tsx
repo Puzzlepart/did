@@ -42,8 +42,12 @@ export const PersonalAccessTokenForm: StyledComponent<
     text: t('common.save'),
     onClick: async () => {
       try {
+        const token = {
+          ...model.$,
+          expires: new DateObject().add(model.value('expires')).jsDate
+        }
         const { data } = await addToken({
-          variables: { token: model.$ }
+          variables: { token }
         })
         const created = { ...(model.$ as ApiToken), ...data }
         model.reset()
@@ -72,9 +76,7 @@ export const PersonalAccessTokenForm: StyledComponent<
       />
       <DropdownControl
         {...register<DropdownControlOptions>('expires', {
-          required: true,
-          preTransformValue: ({ optionValue }) =>
-            new DateObject().add(optionValue).jsDate
+          required: true
         })}
         label={t('userSettings.apiTokens.tokenExpiryLabel')}
         values={fuzzyMap<any>(expiryOptions, (value, key) => ({
