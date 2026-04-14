@@ -85,8 +85,8 @@ services:
     environment:
       - ME_CONFIG_MONGODB_SERVER=mongodb
       - ME_CONFIG_MONGODB_PORT=27017
-      - ME_CONFIG_BASICAUTH_USERNAME=admin
-      - ME_CONFIG_BASICAUTH_PASSWORD=admin123
+      - ME_CONFIG_BASICAUTH_USERNAME=${ME_BASICAUTH_USERNAME:-admin}
+      - ME_CONFIG_BASICAUTH_PASSWORD=${ME_BASICAUTH_PASSWORD:-admin123}
     depends_on:
       - mongodb
     networks:
@@ -98,11 +98,13 @@ services:
 
   # Redis Commander for Redis administration (optional)
   redis-commander:
-    image: rediscommander/redis-commander:latest
+    image: rediscommander/redis-commander@sha256:19cd0c49f418779fa2822a0496c5e6516d0c792effc39ed20089e6268477e40a
     ports:
       - "8082:8081"
     environment:
       - REDIS_HOSTS=local:redis:6379
+      - HTTP_USER=${REDIS_COMMANDER_USER:-admin}
+      - HTTP_PASSWORD=${REDIS_COMMANDER_PASSWORD:-admin123}
     depends_on:
       - redis
     networks:

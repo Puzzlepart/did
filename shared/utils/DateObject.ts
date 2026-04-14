@@ -1,7 +1,7 @@
 import { Dayjs, ManipulateType, OpUnitType } from 'dayjs'
 import _ from 'underscore'
 import s from 'underscore.string'
-import { HolidayObject } from '../../server/graphql'
+import { IHolidayObject } from '../types/HolidayObject'
 import DateUtils, { $dayjs, DateInput } from './date'
 
 export type ObjectInput = {
@@ -68,18 +68,16 @@ export class DateObject {
    * If week and year is not specified, today's date is used
    *
    * @param input - Object input
-   * @param startOf - Optional start of (e.g. year or isoWeek)
    */
-  public fromObject(input: ObjectInput, startOf: any = 'isoWeek'): DateObject {
+  public fromObject(input: ObjectInput): DateObject {
     const year =
       typeof input.year === 'string' ? Number.parseInt(input.year) : input.year
     const isoWeek =
       typeof input.week === 'string' ? Number.parseInt(input.week) : input.week
-    
+
     // Use proper ISO week calculation to get the correct date
     const weekStartDate = DateUtils.getIsoWeekStartDate(isoWeek, year)
-    this.$ = weekStartDate.$
-    if (startOf) this.$ = this.$.startOf('isoWeek')
+    this.$ = weekStartDate.$.startOf('isoWeek')
     return this
   }
 
@@ -242,7 +240,7 @@ export class DateObject {
    *
    * @param holidays Collection of holidays to check towards
    */
-  public isNationalHoliday(holidays: HolidayObject[] = []): HolidayObject {
+  public isNationalHoliday(holidays: IHolidayObject[] = []): IHolidayObject {
     return _.find(holidays, ({ date }) => {
       return new DateObject(date).isSameDay(this)
     })

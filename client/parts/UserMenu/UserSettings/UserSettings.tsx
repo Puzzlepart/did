@@ -1,10 +1,12 @@
 import { FormControl } from 'components'
 import { Tabs } from 'components/Tabs'
+import get from 'get-value'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyledComponent } from 'types'
+import { useSubscriptionSettings } from 'AppContext'
 import { MenuItem } from '../MenuItem'
-import { General, Timesheet, Vacation } from './Tabs'
+import { General, Timesheet, Vacation, ApiTokensTab } from './Tabs'
 import { useUserSettings } from './useUserSettings'
 
 /**
@@ -13,6 +15,10 @@ import { useUserSettings } from './useUserSettings'
 export const UserSettings: StyledComponent = () => {
   const { t } = useTranslation()
   const { openPanel, formControlProps } = useUserSettings()
+  const settings = useSubscriptionSettings()
+  const patEnabled = get(settings, 'security.personalAccessTokensEnabled', {
+    default: true
+  })
 
   return useMemo(
     () => (
@@ -46,13 +52,25 @@ export const UserSettings: StyledComponent = () => {
                   iconName: 'WeatherSunnyLow'
                 },
                 formControlProps
-              ]
+              ],
+              ...(patEnabled
+                ? {
+                    apiTokens: [
+                      ApiTokensTab,
+                      {
+                        text: t('userSettings.apiTokens.tabTitle'),
+                        iconName: 'Key'
+                      },
+                      formControlProps
+                    ]
+                  }
+                : {})
             }}
           />
         </FormControl>
       </div>
     ),
-    [formControlProps.model]
+    [formControlProps.model, patEnabled]
   )
 }
 

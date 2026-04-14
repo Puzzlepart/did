@@ -1,5 +1,5 @@
-mutation DeleteApiToken ($name: String!) {
-  result: deleteApiToken(name: $name) {
+mutation DeleteApiToken ($name: String!, $type: String, $userId: String) {
+  result: deleteApiToken(name: $name, type: $type, userId: $userId) {
     success
     error {
       message

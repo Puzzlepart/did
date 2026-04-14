@@ -258,6 +258,19 @@ export function useSubscriptionConfig() {
             placeholder: t('admin.domainRestrictionExternalPlaceholder'),
             contentBefore: '@'
           }
+        },
+        {
+          id: 'personalAccessTokensEnabled',
+          type: 'bool',
+          props: {
+            label: t(
+              'admin.subscriptionSettings.personalAccessTokensEnabledLabel'
+            ),
+            description: t(
+              'admin.subscriptionSettings.personalAccessTokensEnabledDescription'
+            ),
+            defaultValue: true
+          }
         }
       ]
     },

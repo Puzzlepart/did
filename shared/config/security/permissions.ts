@@ -11,7 +11,7 @@ import { IPermissionInfo, PermissionScope } from './types'
  */
 export const getPermissions = (
   t: TFunction
-): Record<string, IPermissionInfo> => ({
+): Record<PermissionScope, IPermissionInfo> => ({
   [PermissionScope.ACCESS_TIMESHEET]: {
     name: t('permissions.accessTimesheet'),
     description: t('permissions.accessTimesheetDescription'),

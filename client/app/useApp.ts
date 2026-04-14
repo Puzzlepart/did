@@ -23,6 +23,7 @@ function useLastActiveUpdater() {
   useEffect(() => {
     const activityDetector = createActivityDetector()
     activityDetector.on('active', updateLastActive)
+    return () => activityDetector.stop()
   }, [])
 }
 

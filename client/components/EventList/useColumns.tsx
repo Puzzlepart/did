@@ -119,6 +119,6 @@ export function useColumns(props: IEventListProps) {
           ...col,
           isResizable: props.resizableColumns
         })),
-    [props.additionalColumns]
+    [props.additionalColumns, props.useTimeColumn, props.titleColumn, props.resizableColumns, props.durationColumn, props.columnWidths]
   )
 }

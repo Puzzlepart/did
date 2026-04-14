@@ -1,4 +1,4 @@
-import { HolidayObject } from '../../server/graphql/resolvers/timesheet/types/HolidayObject'
+import { IHolidayObject } from '../types/HolidayObject'
 import { $dayjs } from './date'
 import dayjs from 'dayjs'
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
@@ -68,7 +68,7 @@ export class HolidayValidationError extends Error {
   constructor(
     message: string,
     public readonly field: string,
-    public readonly value: any
+    public readonly value: unknown
   ) {
     super(message)
     this.name = 'HolidayValidationError'
@@ -275,7 +275,7 @@ export function calculateEasterSunday(year: number): Date {
  */
 export function generateMovableHolidays(
   year: number
-): Array<Omit<HolidayObject, '_id' | 'periodId'>> {
+): Array<Omit<IHolidayObject, '_id' | 'periodId'>> {
   const easter = $dayjs(calculateEasterSunday(year))
 
   return [
@@ -344,7 +344,7 @@ export function generateMovableHolidays(
 export function getHolidayHoursInPeriod(
   startDate: string,
   endDate: string,
-  holidays: HolidayObject[],
+  holidays: IHolidayObject[],
   workWeekHours?: number
 ): number {
   if (!holidays || holidays.length === 0) {
@@ -473,7 +473,7 @@ export function getExpectedHoursForPeriod(
   workWeekHours: number,
   startDate: string,
   endDate: string,
-  holidays: HolidayObject[]
+  holidays: IHolidayObject[]
 ): number {
   const holidayHours = getHolidayHoursInPeriod(startDate, endDate, holidays)
   return Math.max(0, workWeekHours - holidayHours)
@@ -515,7 +515,7 @@ export function getWorkingDaysInPeriod(
  * (hoursOff=8, recurring=true) when stored in the database.
  */
 export const NORWAY_HOLIDAYS: Array<
-  Pick<HolidayObject, 'date' | 'name' | 'hoursOff' | 'recurring' | 'notes'>
+  Pick<IHolidayObject, 'date' | 'name' | 'hoursOff' | 'recurring' | 'notes'>
 > = [
   {
     date: new Date('2025-01-01'),

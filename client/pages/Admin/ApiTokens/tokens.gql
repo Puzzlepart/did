@@ -5,5 +5,7 @@ query ApiTokens {
       created
       expires
       secret: apiKey
+      type
+      userId
     }
   }

@@ -270,7 +270,11 @@
       "displaySecretKeyButtonLabel": "Vis meg nøkkelen",
       "displaySecretKeyButtonTooltip": "Klikk for å avsløre den hemmelig nøkkelen i {{displayDuration}} sekunder, og klikk deretter på feltene for å kopiere den.",
       "keyLabel": "Hemmelig nøkkel",
-      "yearPlural": "{{years}} år"
+      "yearPlural": "{{years}} år",
+      "tokenType": "Type",
+      "tokenTypeSubscription": "Abonnement",
+      "tokenTypePersonal": "Personleg",
+      "tokenOwner": "Eigar"
     },
     "users": {
       "headerText": "Brukarar",
@@ -375,7 +379,9 @@
       "enableSimpleHierachyLabel": "Aktiver hierarki",
       "enableSimpleHierachyDescription": "Aktiver prosjekthierarki som støtter innstilling av overordnet prosjekt, visning av overordnede og underordnede prosjekter.",
       "autoLoadTimeEntriesLabel": "Last inn tidsoppføringer automatisk",
-      "autoLoadTimeEntriesDescription": "Når aktivert, lastes tidsoppføringer automatisk uten at du trenger å gjøre noe."
+      "autoLoadTimeEntriesDescription": "Når aktivert, lastes tidsoppføringer automatisk uten at du trenger å gjøre noe.",
+      "personalAccessTokensEnabledLabel": "Tillat personlege tilgangsnøklar",
+      "personalAccessTokensEnabledDescription": "Når dette er aktivert, kan brukarar oppretta personlege API-nøklar for skript og automatisering."
     },
     "rolesPermissions": {
       "headerText": "Roller og tillatelser",
@@ -616,6 +622,24 @@
     "summaryDescription": "Få ei tabelloversikt over tidsregistreringar per tilsett og periode.",
     "customQueryWeekDisabled": "Du kan ikkje filtrere på veke samstundes som du filtrerer på startdato, sluttdato eller månad.",
     "customQueryMonthDisabled": "Du kan ikkje filtrere på månad samstundes som du filtrerer på startdato, sluttdato eller veke."
+  },
+  "userSettings": {
+    "apiTokens": {
+      "tabTitle": "API-nøklar",
+      "emptyState": "Du har ingen personlege tilgangsnøklar enno. Opprett ein for å få tilgang til API-et frå skript eller integrasjonar.",
+      "addNew": "Opprett nøkkel",
+      "delete": "Slett",
+      "tokenNameLabel": "Namn på nøkkel",
+      "tokenDescriptionDescription": "Skildre kva denne nøkkelen skal brukast til (minimum {{minLength}} teikn).",
+      "tokenExpiryLabel": "Utløp",
+      "permissionsLabel": "Tillatingar",
+      "permissionsDescription": "Vel kva tillatingar denne nøkkelen skal ha. Du kan berre gi tillatingar du sjølv har.",
+      "apiKeyGenerated": "Den nye personlege tilgangsnøkkelen din. Kopier han no - du vil ikkje kunna sjå han igjen.",
+      "tokenCreated": "Personleg tilgangsnøkkel oppretta.",
+      "tokenDeleted": "Personleg tilgangsnøkkel sletta.",
+      "deleteConfirmTitle": "Slett personleg tilgangsnøkkel",
+      "deleteConfirmMessage": "Er du sikker på at du vil sletta nøkkelen \"{{name}}\"? Alle integrasjonar som brukar denne nøkkelen vil slutta å fungera."
+    }
   },
   "common": {
     "datePicker": {

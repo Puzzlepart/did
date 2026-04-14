@@ -27,7 +27,7 @@ export function useProjects() {
       state,
       dispatch
     }),
-    [state, query.loading]
+    [state, query.data, query.loading]
   )
   const renderDetails =
     urlParameters.currentTab?.includes('_') || Boolean(state.selected)
