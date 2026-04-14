@@ -68,7 +68,6 @@ export class DateObject {
    * If week and year is not specified, today's date is used
    *
    * @param input - Object input
-   * @param startOf - Optional start of (e.g. year or isoWeek)
    */
   public fromObject(input: ObjectInput): DateObject {
     const year =
