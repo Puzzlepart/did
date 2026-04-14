@@ -1,6 +1,6 @@
 import { Button, Input, Label, MessageBar } from '@fluentui/react-components'
 import { Copy20Regular, Checkmark20Regular } from '@fluentui/react-icons'
-import { SelectionMode } from 'components/List/types'
+import { CheckboxVisibility, SelectionMode } from 'components/List/types'
 import { List, ListMenuItem } from 'components'
 import React, { useState } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
@@ -76,6 +76,7 @@ export const ApiTokensTab: React.FC = () => {
         columns={columns}
         items={items}
         autoFitColumns={false}
+        checkboxVisibility={CheckboxVisibility.hidden}
         selectionProps={[SelectionMode.single, onSelectionChanged]}
         menuItems={[
           new ListMenuItem(t('userSettings.apiTokens.addNew'))
