@@ -71,6 +71,7 @@ export const ApiTokensTab: React.FC = () => {
       <List
         columns={columns}
         items={items}
+        autoFitColumns={false}
         selectionProps={[SelectionMode.single, onSelectionChanged]}
         menuItems={[
           new ListMenuItem(t('userSettings.apiTokens.addNew'))
