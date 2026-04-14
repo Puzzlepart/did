@@ -121,7 +121,7 @@ export class SubscriptionResolver {
         ...invitation,
         status: 'pending',
         invitedAt: new Date(),
-        invitedBy: context.user.id,
+        invitedBy: context.user?.id || context.userId,
         provider: 'microsoft',
         startPage: '/reports',
         theme: 'auto',
