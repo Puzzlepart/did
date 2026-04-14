@@ -1,4 +1,4 @@
-import { Button, Input, Label, MessageBar, Text } from '@fluentui/react-components'
+import { Button, Input, Label, MessageBar } from '@fluentui/react-components'
 import { Copy20Regular, Checkmark20Regular } from '@fluentui/react-icons'
 import { SelectionMode } from 'components/List/types'
 import { List, ListMenuItem } from 'components'
@@ -25,12 +25,12 @@ export const ApiTokensTab: React.FC = () => {
 
   const columns = [
     createColumnDef('name', t('userSettings.apiTokens.tokenNameLabel'), {
-      minWidth: 60,
-      maxWidth: 120
+      minWidth: 110,
+      maxWidth: 170
     }),
     createColumnDef('created', t('common.createdLabel'), {
-      minWidth: 60,
-      maxWidth: 100,
+      minWidth: 160,
+      maxWidth: 200,
       renderAs: 'timeFromNow'
     }),
     createColumnDef('expires', t('common.expiresLabel'), {
