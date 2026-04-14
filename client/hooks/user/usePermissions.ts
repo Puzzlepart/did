@@ -42,7 +42,7 @@ export function usePermissions(
   const permissionIds = Object.keys(permissions) as PermissionScope[]
 
   return useMemo(() => {
-    let _permissions = { ...permissions }
+    let _permissions: Partial<Record<PermissionScope, IPermissionInfo>> = { ...permissions }
     if (scopeIds) {
       _permissions = _.pick(_permissions, scopeIds)
     }
