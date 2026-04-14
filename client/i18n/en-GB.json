@@ -269,7 +269,11 @@
       "displaySecretKeyButtonLabel": "Show me the secret",
       "permissionsRequired": "You need to provide at least one permission for the API-key. No point in having a role if you can't do anything with it? It's like having a job with no tasks.",
       "tokenDescriptionDescription": "Describe briefly (minimum {{minLength}} characters) how you intend to use the API-token, and explain briefly why you need the selected permissions.",
-      "warningTooManyPermissions": "You've selected {{count}} permissions. We recommend not too be too greedy with permissions, but if you know what you're doing - sure."
+      "warningTooManyPermissions": "You've selected {{count}} permissions. We recommend not too be too greedy with permissions, but if you know what you're doing - sure.",
+      "tokenType": "Type",
+      "tokenTypeSubscription": "Subscription",
+      "tokenTypePersonal": "Personal",
+      "tokenOwner": "Owner"
     },
     "labels": {
       "confirmDeleteTitle": "Delete label",
@@ -310,7 +314,9 @@
       "enableSimpleHierachyLabel": "Enable Hierarchy",
       "enableSimpleHierachyDescription": "Enable project hierarchy supporting setting parent project, displaying parent and child projects.",
       "autoLoadTimeEntriesLabel": "Automatically Load Time Entries",
-      "autoLoadTimeEntriesDescription": "When enabled, time entries will be loaded automatically without requiring manual action."
+      "autoLoadTimeEntriesDescription": "When enabled, time entries will be loaded automatically without requiring manual action.",
+      "personalAccessTokensEnabledLabel": "Allow personal access tokens",
+      "personalAccessTokensEnabledDescription": "When enabled, users can create personal API tokens for scripting and automation."
     },
     "rolesPermissions": {
       "headerText": "Roles and permissions",
@@ -617,6 +623,24 @@
     "customQueryWeekDisabled": "You cannot filter by week while filtering on start date, end date or month.",
     "customQueryMonthDisabled": "You cannot filter by month while filtering on start date, end date or week."
   },
+  "userSettings": {
+    "apiTokens": {
+      "tabTitle": "API tokens",
+      "emptyState": "You don't have any personal access tokens yet. Create one to access the API from scripts or integrations.",
+      "addNew": "Create token",
+      "delete": "Delete",
+      "tokenNameLabel": "Token name",
+      "tokenDescriptionDescription": "Describe what this token will be used for (minimum {{minLength}} characters).",
+      "tokenExpiryLabel": "Expiry",
+      "permissionsLabel": "Permissions",
+      "permissionsDescription": "Select which permissions this token should have. You can only grant permissions you currently have.",
+      "apiKeyGenerated": "Your new personal access token. Copy it now - you won't be able to see it again.",
+      "tokenCreated": "Personal access token created.",
+      "tokenDeleted": "Personal access token deleted.",
+      "deleteConfirmTitle": "Delete personal access token",
+      "deleteConfirmMessage": "Are you sure you want to delete the token \"{{name}}\"? Any integrations using this token will stop working."
+    }
+  },
   "common": {
     "datePicker": {
       "goToToday": "Go to today",
@@ -758,6 +782,8 @@
     "roleUser": "User",
     "roleAdmin": "Administrator",
     "save": "Save",
+    "copied": "Copied!",
+    "copyToClipboard": "Click to copy",
     "titleLabel": "Title",
     "timeLabel": "Time",
     "durationLabel": "Duration",

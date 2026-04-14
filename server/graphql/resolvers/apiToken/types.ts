@@ -53,6 +53,18 @@ export class ApiToken {
    * The subscription ID associated with the API token.
    */
   subscriptionId?: string
+
+  /**
+   * The type of API token - 'subscription' (admin-created) or 'personal' (user-created).
+   */
+  @Field(() => String, { nullable: true, defaultValue: 'subscription' })
+  type?: 'subscription' | 'personal'
+
+  /**
+   * The user ID that owns this token (personal tokens only).
+   */
+  @Field(() => String, { nullable: true, defaultValue: null })
+  userId?: string
 }
 
 /**

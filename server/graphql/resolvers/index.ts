@@ -1,5 +1,6 @@
 import { NonEmptyArray } from 'type-graphql'
 import { ApiTokenResolver } from './apiToken'
+import { PersonalAccessTokenResolver } from './personalAccessToken'
 import { CustomerResolver } from './customer'
 import { LabelResolver } from './label'
 import { NotificationResolver } from './notification'
@@ -14,6 +15,7 @@ import { UserResolver } from './user'
 
 export default [
   ApiTokenResolver,
+  PersonalAccessTokenResolver,
   CustomerResolver,
   LabelResolver,
   NotificationResolver,
@@ -27,6 +29,7 @@ export default [
   ReportLinkResolver
 ] as NonEmptyArray<any>
 export { ApiTokenResolver } from './apiToken'
+export { PersonalAccessTokenResolver } from './personalAccessToken'
 export { CustomerResolver } from './customer/CustomerResolver'
 export { LabelResolver } from './label'
 export { NotificationResolver } from './notification'

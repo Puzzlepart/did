@@ -74,6 +74,13 @@ export class RequestContext {
   public permissions?: string[]
 
   /**
+   * Source of authentication for this request.
+   * 'pat' for personal access tokens, 'api' for subscription API tokens,
+   * null for interactive user sessions.
+   */
+  public tokenSource?: 'pat' | 'api' | null
+
+  /**
    * Mongo client instance
    */
   public mcl?: MongoClient
@@ -115,13 +122,14 @@ export class RequestContext {
       context.subscription = get(request, 'user.subscription', { default: {} })
       const apiKey = get(request, 'api_key')
       if (apiKey) {
-        // API key path remains snapshot-based as before
-        const { permissions, subscription } = await handleTokenAuthentication(
-          apiKey,
-          database
-        )
+        const { permissions, subscription, tokenSource, userId } =
+          await handleTokenAuthentication(apiKey, database)
         context.permissions = permissions
         context.subscription = subscription
+        context.tokenSource = tokenSource
+        if (userId) {
+          context.userId = userId
+        }
       } else {
         // Populate basic user context
         context.user = get(request, 'user')
@@ -229,10 +237,11 @@ const handleTokenAuthentication = async (
   apiKey: string,
   database: MongoDatabase
 ) => {
-  const { expires, subscriptionId: _id } = verify(
+  const payload = verify(
     apiKey,
     environment('API_TOKEN_SECRET')
   ) as any
+  const { expires, subscriptionId: _id, type, userId } = payload
   const expired = new DateObject(expires).jsDate < new Date()
   if (expired) throw new GraphQLError('The specified token is expired.')
   const [token, subscription] = await Promise.all([
@@ -248,5 +257,11 @@ const handleTokenAuthentication = async (
   ])
   if (!token || !subscription)
     throw new GraphQLError('Failed to authenticate with the specified token.')
-  return { subscription, permissions: token.permissions }
+  const tokenSource: 'pat' | 'api' = type === 'personal' ? 'pat' : 'api'
+  return {
+    subscription,
+    permissions: token.permissions,
+    tokenSource,
+    userId: type === 'personal' ? userId : null
+  }
 }
