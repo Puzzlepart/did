@@ -16,6 +16,33 @@ import { MongoDocumentService } from './document'
 @Service({ global: false })
 export class ApiTokenService extends MongoDocumentService<ApiToken> {
   /**
+   * Builds a token query for lookup/delete operations.
+   *
+   * `type` is included to avoid ambiguous deletes between subscription
+   * tokens and personal tokens that happen to share the same name.
+   */
+  private buildTokenQuery(
+    name: string,
+    subscriptionId: string,
+    options?: {
+      type?: 'subscription' | 'personal'
+      userId?: string
+    }
+  ): FilterQuery<ApiToken> {
+    const query: FilterQuery<ApiToken> = { name, subscriptionId }
+    if (options?.type) {
+      query.type =
+        options.type === 'subscription'
+          ? { $in: ['subscription', null] }
+          : options.type
+    }
+    if (options?.userId) {
+      query.userId = options.userId
+    }
+    return query
+  }
+
+  /**
    * Constructor for `ApiTokenService`
    *
    * @param context - Injected context through `typedi`
@@ -80,13 +107,13 @@ export class ApiTokenService extends MongoDocumentService<ApiToken> {
   public async deleteToken(
     name: string,
     subscriptionId: string,
-    userId?: string
+    options?: {
+      type?: 'subscription' | 'personal'
+      userId?: string
+    }
   ): Promise<void> {
     try {
-      const query: FilterQuery<ApiToken> = { name, subscriptionId }
-      if (userId) {
-        query.userId = userId
-      }
+      const query = this.buildTokenQuery(name, subscriptionId, options)
       await this.collection.deleteOne(query)
     } catch (error) {
       throw error

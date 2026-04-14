@@ -21,6 +21,16 @@ export class MongoDocumentService<T> {
   private _extensions: Extensions = new Map()
 
   /**
+   * Resolves the current actor ID for audit fields.
+   *
+   * PAT-authenticated requests populate `context.userId` without
+   * populating the interactive `context.user` object.
+   */
+  protected get actorUserId(): string | undefined {
+    return this.context.user?.id || this.context.userId
+  }
+
+  /**
    * Constructer for `MongoDocumentService`
    *
    * Specify `cachePrefix` to use an underlying `CacheService`
@@ -254,8 +264,8 @@ export class MongoDocumentService<T> {
       ...document_,
       createdAt: new Date(),
       updatedAt: new Date(),
-      createdBy: this.context.user?.id,
-      updatedBy: this.context.user?.id
+      createdBy: this.actorUserId,
+      updatedBy: this.actorUserId
     }))
     return this.collection.insertMany(documents)
   }
@@ -277,8 +287,8 @@ export class MongoDocumentService<T> {
         ...document,
         createdAt: new Date(),
         updatedAt: new Date(),
-        createdBy: this.context.user?.id,
-        updatedBy: this.context.user?.id
+        createdBy: this.actorUserId,
+        updatedBy: this.actorUserId
       } as OptionalId<T>
     ) as Promise<InsertOneWriteOpResult<WithId<T>>>
   }
@@ -297,7 +307,7 @@ export class MongoDocumentService<T> {
       $set: {
         ...document,
         updatedAt: new Date(),
-        updatedBy: this.context.user?.id
+        updatedBy: this.actorUserId
       }
     })
   }

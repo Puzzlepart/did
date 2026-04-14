@@ -58,13 +58,14 @@ export function useColumns(
           minWidth: 100,
           maxWidth: 180
         },
-        (token) => (
-          <ApiKeyDisplay
-            toggleDisplay
-            apiKey={token['secret']}
-            onKeyCopied={() => onKeyCopied(token)}
-          />
-        )
+        (token) =>
+          token.type === 'personal' ? null : (
+            <ApiKeyDisplay
+              toggleDisplay
+              apiKey={token['secret']}
+              onKeyCopied={() => onKeyCopied(token)}
+            />
+          )
       )
   ].filter(Boolean)
 }

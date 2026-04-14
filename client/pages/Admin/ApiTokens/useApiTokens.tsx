@@ -43,7 +43,13 @@ export function useApiTokens() {
       ]
     })
     if (!response) return
-    await deleteApiToken({ variables: { name: selectedToken.name } })
+    await deleteApiToken({
+      variables: {
+        name: selectedToken.name,
+        type: selectedToken.type || 'subscription',
+        userId: selectedToken.userId
+      }
+    })
     displayToast(t('admin.tokenDeletedText', selectedToken), 'success')
     refetch()
   }, [selectedToken])

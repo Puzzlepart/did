@@ -26,18 +26,37 @@ export class PersonalAccessTokenResolver {
   constructor(private readonly _apiToken: ApiTokenService) {}
 
   /**
+   * PAT management must be performed from an interactive user session.
+   */
+  private assertInteractiveSession(context: RequestContext): void {
+    if (context.tokenSource) {
+      throw new GraphQLError(
+        'Interactive session required to manage personal access tokens.',
+        { extensions: { code: 'FORBIDDEN' } }
+      )
+    }
+  }
+
+  /**
    * Get the current user's personal access tokens.
    */
   @Authorized<IAuthOptions>({ requiresUserContext: true })
   @Query(() => [ApiToken], {
     description: 'Get personal access tokens for the current user'
   })
-  personalAccessTokens(@Ctx() context: RequestContext): Promise<ApiToken[]> {
-    return this._apiToken.getTokens({
+  async personalAccessTokens(
+    @Ctx() context: RequestContext
+  ): Promise<ApiToken[]> {
+    this.assertInteractiveSession(context)
+    const tokens = await this._apiToken.getTokens({
       subscriptionId: context.subscription.id,
       userId: context.userId,
       type: 'personal'
     })
+    return tokens.map((token) => ({
+      ...token,
+      apiKey: undefined
+    }))
   }
 
   /**
@@ -51,6 +70,7 @@ export class PersonalAccessTokenResolver {
     @Arg('token') token: ApiTokenInput,
     @Ctx() context: RequestContext
   ): Promise<string> {
+    this.assertInteractiveSession(context)
     const patEnabled = get(
       context.subscription,
       'settings.security.personalAccessTokensEnabled',
@@ -108,6 +128,7 @@ export class PersonalAccessTokenResolver {
     @Arg('name') name: string,
     @Ctx() context: RequestContext
   ): Promise<BaseResult> {
+    this.assertInteractiveSession(context)
     const [token] = await this._apiToken.getTokens({
       subscriptionId: context.subscription.id,
       userId: context.userId,
@@ -122,7 +143,10 @@ export class PersonalAccessTokenResolver {
     await this._apiToken.deleteToken(
       name,
       context.subscription.id,
-      context.userId
+      {
+        type: 'personal',
+        userId: context.userId
+      }
     )
     return { success: true, error: null }
   }

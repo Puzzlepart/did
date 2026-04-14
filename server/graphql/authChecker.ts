@@ -45,14 +45,11 @@ export const authChecker: AuthChecker<RequestContext, IAuthOptions> = (
     }
     return true
   }
-  if (authOptions.requiresUserContext) {
-    if (!context.userId) {
-      debug('User context required - no userId present')
-      throw new GraphQLError('User context required', {
-        extensions: { code: 'UNAUTHENTICATED' }
-      })
-    }
-    return true
+  if (authOptions.requiresUserContext && !context.userId) {
+    debug('User context required - no userId present')
+    throw new GraphQLError('User context required', {
+      extensions: { code: 'UNAUTHENTICATED' }
+    })
   }
   if (
     authOptions.scope &&
