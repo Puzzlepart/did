@@ -103,8 +103,8 @@ services:
       - "8082:8081"
     environment:
       - REDIS_HOSTS=local:redis:6379
-      - HTTP_USER=${REDIS_COMMANDER_USER:-}
-      - HTTP_PASSWORD=${REDIS_COMMANDER_PASSWORD:-}
+      - HTTP_USER=${REDIS_COMMANDER_USER:-admin}
+      - HTTP_PASSWORD=${REDIS_COMMANDER_PASSWORD:-admin123}
     depends_on:
       - redis
     networks:

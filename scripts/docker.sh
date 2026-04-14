@@ -205,8 +205,8 @@ cmd_start() {
     info "App: http://localhost:9001"
     info "Health: http://localhost:9001/health_check"
     if (( with_tools == 1 )); then
-      info "MongoDB Express: http://localhost:8081 (admin/admin123)"
-      info "Redis Commander: http://localhost:8082"
+      info "MongoDB Express: http://localhost:8081 (${ME_BASICAUTH_USERNAME:-admin}/${ME_BASICAUTH_PASSWORD:-admin123})"
+      info "Redis Commander: http://localhost:8082 (${REDIS_COMMANDER_USER:-admin}/***)"
     fi
     info "Tail logs: docker compose logs -f did"
 
