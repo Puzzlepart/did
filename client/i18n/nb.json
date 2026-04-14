@@ -782,6 +782,8 @@
     "roleUser": "Bruker",
     "roleAdmin": "Administrator",
     "save": "Lagre",
+    "copied": "Kopiert!",
+    "copyToClipboard": "Klikk for a kopiere",
     "titleLabel": "Tittel",
     "timeLabel": "Tidspunkt",
     "durationLabel": "Varighet",

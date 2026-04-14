@@ -1,4 +1,5 @@
-import { Input, Label, MessageBar, Text } from '@fluentui/react-components'
+import { Button, Input, Label, MessageBar, Text } from '@fluentui/react-components'
+import { Copy20Regular, Checkmark20Regular } from '@fluentui/react-icons'
 import { SelectionMode } from 'components/List/types'
 import { List, ListMenuItem } from 'components'
 import React, { useState } from 'react'
@@ -42,26 +43,29 @@ export const ApiTokensTab: React.FC = () => {
   return (
     <div style={{ overflow: 'hidden' }}>
       {newToken?.apiKey && (
-        <MessageBar intent='success' style={{ marginBottom: 12 }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, minWidth: 0 }}>
+        <MessageBar intent={copied ? 'success' : 'warning'} style={{ marginBottom: 12 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10, minWidth: 0 }}>
             <Label weight='semibold'>
               {t('userSettings.apiTokens.apiKeyGenerated')}
             </Label>
+            <Input
+              readOnly
+              value={newToken.apiKey}
+              style={{ fontFamily: 'monospace', fontSize: 12 }}
+            />
             <CopyToClipboard
               text={newToken.apiKey}
               onCopy={() => setCopied(true)}
             >
-              <Input
-                readOnly
-                value={newToken.apiKey}
-                style={{ cursor: 'pointer', fontFamily: 'monospace', fontSize: 12 }}
-              />
+              <Button
+                appearance={copied ? 'subtle' : 'primary'}
+                icon={copied ? <Checkmark20Regular /> : <Copy20Regular />}
+                size='large'
+                style={{ width: '100%' }}
+              >
+                {copied ? t('common.copied') : t('common.copyToClipboard')}
+              </Button>
             </CopyToClipboard>
-            <Text size={200}>
-              {copied
-                ? t('admin.apiTokens.apiKeyCopied', newToken)
-                : t('userSettings.apiTokens.apiKeyGenerated')}
-            </Text>
           </div>
         </MessageBar>
       )}

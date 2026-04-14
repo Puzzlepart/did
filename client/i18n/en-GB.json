@@ -782,6 +782,8 @@
     "roleUser": "User",
     "roleAdmin": "Administrator",
     "save": "Save",
+    "copied": "Copied!",
+    "copyToClipboard": "Click to copy",
     "titleLabel": "Title",
     "timeLabel": "Time",
     "durationLabel": "Duration",
