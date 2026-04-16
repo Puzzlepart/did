@@ -9,7 +9,27 @@ import { IProjectPickerControlProps } from './types'
  */
 export function useProjectPickerControl(props: IProjectPickerControlProps) {
   const onSelected: ISearchProjectProps['onSelected'] = (project) => {
-    props.model.set(props.name, project?.tag ?? null)
+    if (props.multiple) {
+      const value = props.transformValue
+        ? props.transformValue(project)
+        : (project?.tag ?? null)
+      const current = props.model.value(props.name) ?? []
+      const values = Array.isArray(current) ? current : []
+      if (value && !values.includes(value)) {
+        props.model.set(props.name, [...values, value])
+      }
+    } else {
+      props.model.set(props.name, project?.tag ?? null)
+    }
+  }
+
+  const onRemove = (valueToRemove: string) => {
+    const current = props.model.value(props.name) ?? []
+    const values = Array.isArray(current) ? current : []
+    props.model.set(
+      props.name,
+      values.filter((v: string) => v !== valueToRemove)
+    )
   }
 
   const filterFunc: ISearchProjectProps['filterFunc'] = (project) => {
@@ -18,5 +38,5 @@ export function useProjectPickerControl(props: IProjectPickerControlProps) {
       project?.customerKey === props.model.value('customerKey')
     )
   }
-  return { onSelected, filterFunc }
+  return { onSelected, onRemove, filterFunc }
 }

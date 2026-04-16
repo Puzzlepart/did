@@ -94,9 +94,17 @@ export type ReportsQueryPreset =
 export class ReportsQuery {
   /**
    * ID of the project to filter on.
+   *
+   * @deprecated Use `projectIds` instead.
    */
   @Field({ nullable: true })
   projectId?: string
+
+  /**
+   * IDs of the projects to filter on.
+   */
+  @Field(() => [String], { nullable: true })
+  projectIds?: string[]
 
   /**
    * IDs of the users to filter on.

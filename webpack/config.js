@@ -35,6 +35,15 @@ const config = {
     hints: false,
     maxEntrypointSize: 512000,
     maxAssetSize: 512000
+  },
+  watchOptions: {
+    // Polling is required inside Docker on macOS (inotify events don't
+    // propagate from the host volume into the container).
+    poll: 2000,
+    aggregateTimeout: 500,
+    // Ignore node_modules and the HtmlWebpackPlugin output directory —
+    // without this, writing index.hbs triggers an infinite rebuild loop.
+    ignored: [/node_modules/, /server[\\/]views/, /server[\\/]public/]
   }
 }
 

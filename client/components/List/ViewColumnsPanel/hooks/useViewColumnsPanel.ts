@@ -14,6 +14,7 @@ export const useViewColumnsPanel = () => {
   const [columns, setColumns] = useState<IListColumn[]>(context.props.columns)
   const persist = useViewColumnsPersist(columns)
   const lastSyncSignature = useRef<string>('')
+  const snapshotRef = useRef<IListColumn[]>(null)
   const dispatchRef = useRef(context.dispatch)
   dispatchRef.current = context.dispatch
 
@@ -43,6 +44,30 @@ export const useViewColumnsPanel = () => {
       persist.update()
     }
   }, [columns, persist])
+
+  /**
+   * Take a snapshot of the current column state when the panel opens
+   */
+  const takeSnapshot = () => {
+    snapshotRef.current = columns.map((c) => ({ ...c, data: { ...c.data } }))
+  }
+
+  /**
+   * Revert to the snapshot taken when the panel opened
+   */
+  const cancel = () => {
+    if (snapshotRef.current) {
+      setColumns(snapshotRef.current)
+      snapshotRef.current = null
+    }
+  }
+
+  /**
+   * Reset columns to their original definitions (default visibility and order)
+   */
+  const reset = () => {
+    setColumns(context.props.columns)
+  }
 
   /**
    * Toggle the visibility of a column
@@ -77,6 +102,9 @@ export const useViewColumnsPanel = () => {
   return {
     columns,
     toggleColumnVisibility,
-    reorderColumns
+    reorderColumns,
+    takeSnapshot,
+    cancel,
+    reset
   }
 }

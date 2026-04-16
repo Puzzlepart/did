@@ -4,6 +4,12 @@ import { useBrowserStorage } from 'hooks'
 import { useCallback, useMemo, useRef, useEffect } from 'react'
 
 type PersistedColumnWidths = Record<string, number>
+
+/**
+ * Maximum reasonable column width in pixels. Any persisted or computed
+ * width above this is treated as corrupted data and clamped.
+ */
+const MAX_COLUMN_WIDTH = 2000
 type StorageLike = {
   readonly length: number
   clear: () => void
@@ -94,8 +100,9 @@ export function useColumnWidthPersist(
       const defaultWidth = Math.max(minWidth, defaultWidthRaw)
       const idealWidth = col.idealWidth ?? defaultWidth
       const persistedWidth = persistedWidths[col.key]
+      const effectiveMax = col.maxWidth ?? MAX_COLUMN_WIDTH
       const baseWidth = persistedWidth ?? idealWidth
-      const clamped = Math.max(minWidth, baseWidth)
+      const clamped = Math.min(effectiveMax, Math.max(minWidth, baseWidth))
       map[col.key] = clamped
     }
     return map
@@ -111,8 +118,8 @@ export function useColumnWidthPersist(
           : undefined
       const clampWidth = (value: number) => {
         const clampedMin = Math.max(minWidth, value)
-        if (maxWidth === undefined || maxWidth === null) return clampedMin
-        return Math.min(maxWidth, clampedMin)
+        const effectiveMax = maxWidth ?? MAX_COLUMN_WIDTH
+        return Math.min(effectiveMax, clampedMin)
       }
       const defaultWidthRaw = col.defaultWidth ?? col.minWidth ?? 100
       const defaultWidth = clampWidth(
@@ -146,8 +153,8 @@ export function useColumnWidthPersist(
           ? maxRaw
           : undefined
       const clampedMin = Math.max(min, data.width)
-      const clamped =
-        max === undefined || max === null ? clampedMin : Math.min(max, clampedMin)
+      const effectiveMax = max ?? MAX_COLUMN_WIDTH
+      const clamped = Math.min(effectiveMax, clampedMin)
       setPersistedWidths(prev => ({
         ...prev,
         [data.columnId]: clamped
@@ -165,7 +172,8 @@ export function useColumnWidthPersist(
       for (const k in prev) {
         if (allowed.has(k)) {
           const mw = minWidthByCol[k] ?? 0
-          const v = Math.max(mw, prev[k])
+          const colMaxWidth = columns.find(c => c.key === k)?.maxWidth ?? MAX_COLUMN_WIDTH
+          const v = Math.min(colMaxWidth, Math.max(mw, prev[k]))
           next[k] = v
           if (v !== prev[k]) changed = true
         } else {

@@ -153,9 +153,11 @@ export const CustomQueryTab: TabComponent = (props) => {
 
           <div className={styles.formRow}>
             <ProjectPickerControl
-              {...formControl.register('projectId')}
+              {...formControl.register('projectIds')}
               label={t('common.projectIdLabel')}
               all
+              multiple
+              transformValue={(project) => project?.tag}
               maxSuggestions={8}
             />
           </div>

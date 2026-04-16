@@ -466,9 +466,11 @@ export class ReportService {
         ...presetQuery,
         ..._.pick(
           {
-            projectId: {
-              $eq: queryWithoutPagination.projectId
-            },
+            projectId: !_.isEmpty(queryWithoutPagination.projectIds)
+              ? { $in: queryWithoutPagination.projectIds }
+              : queryWithoutPagination.projectId
+                ? { $eq: queryWithoutPagination.projectId }
+                : undefined,
             userId: {
               $in: queryWithoutPagination.userIds
             },
@@ -482,7 +484,8 @@ export class ReportService {
           },
           [
             ...Object.keys(queryWithoutPagination),
-            !_.isEmpty(queryWithoutPagination?.userIds) && 'userId'
+            !_.isEmpty(queryWithoutPagination?.userIds) && 'userId',
+            !_.isEmpty(queryWithoutPagination?.projectIds) && 'projectId'
           ]
         )
       },
