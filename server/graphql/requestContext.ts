@@ -119,7 +119,10 @@ export class RequestContext {
       const context = new RequestContext()
       debug(`Creating context for request ${colors.magenta(context.requestId)}`)
       context.mcl = mcl
-      context.subscription = get(request, 'user.subscription', { default: {} })
+      const sessionSubscription = get(request, 'user.subscription', {
+        default: {}
+      })
+      context.subscription = sessionSubscription
       const apiKey = get(request, 'api_key')
       if (apiKey) {
         const { permissions, subscription, tokenSource, userId } =
@@ -131,6 +134,31 @@ export class RequestContext {
           context.userId = userId
         }
       } else {
+        // Refresh subscription metadata from the main database on every request
+        // so downstream resolvers see current tenant settings and feature flags
+        // without requiring sign-out. Falls back to session copy on miss or error.
+        const subscriptionId = sessionSubscription?.id
+        if (subscriptionId) {
+          try {
+            const fresh = await database
+              .collection('subscriptions')
+              .findOne({ _id: subscriptionId })
+            if (fresh) {
+              context.subscription = { ...fresh, id: fresh._id }
+            } else {
+              debug(
+                `Subscription ${subscriptionId} not found in DB; using session copy`
+              )
+              context.subscription = sessionSubscription
+            }
+          } catch (subscriptionError) {
+            debug(
+              `Subscription refresh failed for ${subscriptionId}: ${subscriptionError?.message}; using session copy`
+            )
+            context.subscription = sessionSubscription
+          }
+        }
+
         // Populate basic user context
         context.user = get(request, 'user')
         context.userId = get(request, 'user.id')
