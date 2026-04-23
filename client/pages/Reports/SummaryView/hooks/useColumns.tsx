@@ -1,4 +1,4 @@
-import $date from 'DateUtils'
+import { DateObject } from 'DateUtils'
 import {
   IListColumn,
   IListColumnData,
@@ -11,24 +11,33 @@ import { ColumnHeader } from '../ColumnHeader'
 import { PeriodColumn } from '../PeriodColumn'
 
 /**
+ * Format a date range as a compact string, e.g. "23-29.03"
+ */
+function formatCompactDateRange(startDate: any, endDate: any): string {
+  const start = new DateObject(startDate)
+  const end = new DateObject(endDate)
+  const startDay = start.format('D')
+  const endDay = end.format('D')
+  const endMonth = end.format('MM')
+
+  if (start.isSameMonth(end)) {
+    return `${startDay}-${endDay}.${endMonth}`
+  }
+  const startMonth = start.format('MM')
+  return `${startDay}.${startMonth}-${endDay}.${endMonth}`
+}
+
+/**
  * Columns hook for SummaryView
  */
 export function useColumns(): IListColumn[] {
   const { queryPreset } = useReportsContext()
   const periods = (queryPreset?.periods ?? []) as any[]
-  const userColumn = useUserListColumn()
+  const userColumn = useUserListColumn(undefined, { minWidth: 190 })
   const columns: IListColumn[] = [userColumn]
   for (const p of periods) {
     const data: IListColumnData = {}
-    data.subText = $date.getTimespanString({
-      startDate: p.startDate,
-      endDate: p.endDate,
-      monthFormat: 'MMM',
-      includeMonth: {
-        startDate: false,
-        endDate: true
-      }
-    })
+    data.subText = formatCompactDateRange(p.startDate, p.endDate)
     data.onRenderColumnHeader = ({
       column,
       className

@@ -5,8 +5,7 @@
     padding: 16px;
 
     .filterCriterias {
-        width: 500px;
-        transition: width 0.5s ease-in-out;
+        width: 100%;
 
         .header {
             cursor: pointer;
@@ -24,8 +23,6 @@
         }
 
         &.isCollapsed {
-            width: 100%;
-            transition: width 0.5s ease-in-out;
             .subHeader,
             .formSection,
             .actions {

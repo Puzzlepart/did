@@ -1,5 +1,5 @@
 import { Panel } from 'components/Panel'
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import { useTranslation } from 'react-i18next'
 import { useListContext } from '../context'
@@ -16,16 +16,51 @@ import styles from './ViewColumnsPanel.module.scss'
 export const ViewColumnsPanel: FC = () => {
   const { t } = useTranslation()
   const context = useListContext()
-  const { columns, toggleColumnVisibility, reorderColumns } =
-    useViewColumnsPanel()
+  const {
+    columns,
+    toggleColumnVisibility,
+    reorderColumns,
+    takeSnapshot,
+    cancel,
+    reset
+  } = useViewColumnsPanel()
   const { handleDragEnd } = useDragAndDrop(reorderColumns)
+  const isOpen = context.state.viewColumnsPanel?.open
+
+  useEffect(() => {
+    if (isOpen) takeSnapshot()
+  }, [isOpen])
+
+  const dismiss = () => context.dispatch(TOGGLE_VIEW_COLUMNS_PANEL())
+
+  const onCancel = () => {
+    cancel()
+    dismiss()
+  }
 
   return (
     <Panel
       {...context.state.viewColumnsPanel}
-      onDismiss={() => context.dispatch(TOGGLE_VIEW_COLUMNS_PANEL())}
+      onDismiss={dismiss}
       title={t('list.viewColumnsPanel.title')}
       description={t('list.viewColumnsPanel.description')}
+      headerActions={[
+        {
+          text: t('common.resetButtonLabel', { defaultValue: 'Reset' }),
+          appearance: 'subtle',
+          onClick: reset
+        },
+        {
+          text: t('common.save'),
+          appearance: 'primary',
+          onClick: dismiss
+        },
+        {
+          text: t('common.cancelButtonLabel'),
+          appearance: 'subtle',
+          onClick: onCancel
+        }
+      ]}
     >
       <div className={styles.columnsContainer}>
         <DragDropContext onDragEnd={handleDragEnd}>
