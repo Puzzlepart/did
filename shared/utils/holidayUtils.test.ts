@@ -353,3 +353,104 @@ test('findDuplicateHolidays should handle empty holiday arrays', (t) => {
 test('getHolidayHoursInPeriod should handle null/undefined inputs gracefully', (t) => {
   t.is(getHolidayHoursInPeriod('2025-12-22', '2025-12-28', null as any), 0)
 })
+
+// Regression tests: non-canonical date inputs (normalization path)
+test('getHolidayHoursInPeriod with ISO datetime string yields same result as YYYY-MM-DD', (t) => {
+  // holiday.date as ISO datetime string - cast via IHolidayObject[] to exercise the normalization path
+  const holidayWithDatetime = [
+    {
+      _id: 'test-dt',
+      date: '2025-05-17T00:00:00Z' as any as Date,
+      name: 'Grunnlovsdag',
+      hoursOff: 8,
+      recurring: false
+    }
+  ] as IHolidayObject[]
+
+  const canonicalHoliday = [createHoliday('2025-05-17', 8, false)]
+
+  const resultDatetime = getHolidayHoursInPeriod(
+    '2025-05-01',
+    '2025-05-31',
+    holidayWithDatetime
+  )
+  const resultCanonical = getHolidayHoursInPeriod(
+    '2025-05-01',
+    '2025-05-31',
+    canonicalHoliday
+  )
+
+  t.is(resultDatetime, resultCanonical)
+  t.is(resultDatetime, 8)
+})
+
+test('getHolidayHoursInPeriod with Date object on period boundary yields same result as string', (t) => {
+  const boundaryDate = new Date('2025-05-17')
+
+  const holidayWithDateObj = [
+    {
+      _id: 'test-dateobj',
+      date: boundaryDate,
+      name: 'Grunnlovsdag',
+      hoursOff: 8,
+      recurring: false
+    }
+  ] as IHolidayObject[]
+
+  const canonicalHoliday = [createHoliday('2025-05-17', 8, false)]
+
+  // Holiday is on the exact start boundary
+  const resultDateObj = getHolidayHoursInPeriod(
+    '2025-05-17',
+    '2025-05-31',
+    holidayWithDateObj
+  )
+  const resultCanonical = getHolidayHoursInPeriod(
+    '2025-05-17',
+    '2025-05-31',
+    canonicalHoliday
+  )
+
+  t.is(resultDateObj, resultCanonical)
+  t.is(resultDateObj, 8)
+})
+
+test('getHolidayHoursInPeriod handles Feb 29 recurring holiday across leap and non-leap years', (t) => {
+  // Feb 29 recurring holiday: counted in 2024 (leap year, Feb 29 exists).
+  // In non-leap years Day.js normalizes Feb 29 -> Feb 28, so the holiday
+  // lands on Feb 28 rather than being skipped entirely. This documents the
+  // actual contract: the leap-year console.warn guard only fires when
+  // .year(year) still produces month=1 date=29; Day.js clips to Feb 28 first.
+  const feb29Holiday = [
+    {
+      _id: 'feb29',
+      date: new Date('2024-02-29'),
+      name: 'Leap Day',
+      hoursOff: 8,
+      recurring: true
+    }
+  ] as IHolidayObject[]
+
+  // 2024 is a leap year - should count once (Feb 29 is in range)
+  const resultLeapYear = getHolidayHoursInPeriod(
+    '2024-01-01',
+    '2024-12-31',
+    feb29Holiday
+  )
+  t.is(resultLeapYear, 8)
+
+  // Span covering both 2024 (leap) and 2025 (non-leap).
+  // Day.js clips Feb 29 -> Feb 28 in 2025, so the holiday counts in both years.
+  const resultMultiYear = getHolidayHoursInPeriod(
+    '2024-01-01',
+    '2025-12-31',
+    feb29Holiday
+  )
+  t.is(resultMultiYear, 16)
+})
+
+test('getHolidayHoursInPeriod returns 0 when end date is before start date', (t) => {
+  const holidays = [createHoliday('2025-05-17', 8, false)]
+  const result = getHolidayHoursInPeriod('2025-05-31', '2025-05-01', holidays)
+  t.is(result, 0)
+})
