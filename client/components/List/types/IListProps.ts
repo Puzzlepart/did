@@ -293,4 +293,20 @@ export interface IListProps<T = any>
     e: KeyboardEvent | TouchEvent | MouseEvent | undefined,
     data: { columnId: string; width: number }
   ) => void
+
+  /**
+   * Enable autosizing of initial column widths based on sampled row content.
+   * Persisted widths still take precedence if available.
+   *
+   * @default true
+   */
+  autoSizeColumns?: boolean
+
+  /**
+   * Number of rows sampled when estimating autosized column widths.
+   *
+   * @default 50
+   */
+  autoSizeSampleSize?: number
+
 }

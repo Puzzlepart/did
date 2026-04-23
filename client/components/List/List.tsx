@@ -391,9 +391,37 @@ export const List: ReusableComponent<IListProps> = (props) => {
   // Column resizing support
   const resizableColumns = props.resizableColumns ?? true
   const autoFitColumns = props.autoFitColumns ?? true
+  const autoSizeColumns = props.autoSizeColumns ?? true
+  const autoSizeSampleSize = props.autoSizeSampleSize ?? 50
+  const autoSizedColumnWidths = useMemo<Record<string, number>>(() => {
+    if (!autoSizeColumns || columns.length === 0) return {}
+    return columns.reduce<Record<string, number>>((acc, column) => {
+      const minWidth = column.minWidth ?? 50
+      const maxWidth = column.maxWidth ?? 2000
+      const sampleValues = items
+        .slice(0, autoSizeSampleSize)
+        .map((item) => {
+          if (!column.fieldName) return ''
+          const rawValue = item?.[column.fieldName]
+          if (rawValue === null || rawValue === undefined) return ''
+          if (typeof rawValue === 'string' || typeof rawValue === 'number') {
+            return String(rawValue)
+          }
+          return ''
+        })
+      const maxTextLength = Math.max(
+        column.name?.length ?? 0,
+        ...sampleValues.map((value) => value.length)
+      )
+      const estimatedWidth = Math.ceil(maxTextLength * 7.4) + 36
+      acc[column.key] = Math.min(maxWidth, Math.max(minWidth, estimatedWidth))
+      return acc
+    }, {})
+  }, [autoSizeColumns, autoSizeSampleSize, columns, items])
   const { columnSizingOptions, handleColumnResize } = useColumnWidthPersist(
     columns,
-    props.persistColumnWidths
+    props.persistColumnWidths,
+    autoSizedColumnWidths
   )
   const dataGridColumnSizingOptions = useMemo(() => {
     if (!shouldShowSelectionColumn) return columnSizingOptions

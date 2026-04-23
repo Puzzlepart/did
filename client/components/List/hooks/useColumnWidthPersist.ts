@@ -1,7 +1,7 @@
 import { TableColumnSizingOptions } from '@fluentui/react-components'
 import { IListColumn } from '../types'
 import { useBrowserStorage } from 'hooks'
-import { useCallback, useMemo, useRef, useEffect } from 'react'
+import { useCallback, useMemo, useEffect } from 'react'
 
 type PersistedColumnWidths = Record<string, number>
 
@@ -10,14 +10,6 @@ type PersistedColumnWidths = Record<string, number>
  * width above this is treated as corrupted data and clamped.
  */
 const MAX_COLUMN_WIDTH = 2000
-type StorageLike = {
-  readonly length: number
-  clear: () => void
-  getItem: (key: string) => string | null
-  key: (index: number) => string | null
-  removeItem: (key: string) => void
-  setItem: (key: string, value: string) => void
-}
 
 /**
  * Custom hook to persist column widths in localStorage and generate
@@ -31,38 +23,16 @@ type StorageLike = {
  */
 export function useColumnWidthPersist(
   columns: IListColumn[],
-  persistKey?: string
+  persistKey?: string,
+  autoSizedWidths?: Record<string, number>
 ) {
-  // Generate a stable ephemeral key per hook instance to avoid collisions when persistKey is not provided.
-  const ephemeralKeyRef = useRef<string>(
-    `__ephemeral_column_widths__${Math.random().toString(36).slice(2)}`
-  )
-  const storageKey = persistKey
-    ? `${persistKey}_column_widths`
-    : ephemeralKeyRef.current
-
-  const memoryStoreRef = useRef<StorageLike | null>(null)
-  if (!memoryStoreRef.current) {
-    const cache = new Map<string, string>()
-    memoryStoreRef.current = {
-      get length() { return cache.size },
-      clear: () => { cache.clear() },
-      getItem: (key) => cache.get(key) ?? null,
-      key: (index) => {
-        const keys = Array.from(cache.keys())
-        return keys[index] ?? null
-      },
-      removeItem: (key) => { cache.delete(key) },
-      setItem: (key, value) => {
-        cache.set(key, String(value))
-      }
-    }
-  }
+  const defaultPersistKey = columns.map((column) => column.key).join('_')
+  const storageKey = `${persistKey ?? defaultPersistKey}_column_widths`
 
   const storage = useBrowserStorage<PersistedColumnWidths>({
     key: storageKey,
     initialValue: {},
-    store: persistKey ? window.localStorage : memoryStoreRef.current
+    store: window.localStorage
   })
   const persistedWidths = storage[0] ?? {}
   const setPersistedWidthsRaw = storage[3]
@@ -98,7 +68,8 @@ export function useColumnWidthPersist(
       const minWidth = minWidthByCol[col.key]
       const defaultWidthRaw = col.defaultWidth ?? col.minWidth ?? 100
       const defaultWidth = Math.max(minWidth, defaultWidthRaw)
-      const idealWidth = col.idealWidth ?? defaultWidth
+      const autoSizedWidth = autoSizedWidths?.[col.key]
+      const idealWidth = autoSizedWidth ?? col.idealWidth ?? defaultWidth
       const persistedWidth = persistedWidths[col.key]
       const effectiveMax = col.maxWidth ?? MAX_COLUMN_WIDTH
       const baseWidth = persistedWidth ?? idealWidth
@@ -106,7 +77,7 @@ export function useColumnWidthPersist(
       map[col.key] = clamped
     }
     return map
-  }, [columns, minWidthByCol, persistedWidths])
+  }, [autoSizedWidths, columns, minWidthByCol, persistedWidths])
 
   const columnSizingOptions = useMemo<TableColumnSizingOptions>(() => {
     return columns.reduce<TableColumnSizingOptions>((acc, col) => {
@@ -122,10 +93,13 @@ export function useColumnWidthPersist(
         return Math.min(effectiveMax, clampedMin)
       }
       const defaultWidthRaw = col.defaultWidth ?? col.minWidth ?? 100
+      const autoSizedWidth = autoSizedWidths?.[col.key]
       const defaultWidth = clampWidth(
-        persistedWidth === undefined ? defaultWidthRaw : persistedWidth
+        persistedWidth === undefined
+          ? (autoSizedWidth ?? defaultWidthRaw)
+          : persistedWidth
       )
-      const idealWidthRaw = col.idealWidth ?? defaultWidth
+      const idealWidthRaw = autoSizedWidth ?? col.idealWidth ?? defaultWidth
       const idealWidth = clampWidth(
         persistedWidth === undefined ? idealWidthRaw : persistedWidth
       )
@@ -139,7 +113,7 @@ export function useColumnWidthPersist(
         }
       }
     }, {})
-  }, [columns, persistedWidths, minWidthByCol])
+  }, [autoSizedWidths, columns, persistedWidths, minWidthByCol])
 
   const handleColumnResize = useCallback(
     (
