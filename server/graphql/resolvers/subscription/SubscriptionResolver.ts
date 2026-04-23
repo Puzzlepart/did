@@ -108,7 +108,10 @@ export class SubscriptionResolver {
     }
   }
 
-  @Authorized<IAuthOptions>({ scope: PermissionScope.INVITE_EXTERNAL_USERS })
+  @Authorized<IAuthOptions>({
+    scope: PermissionScope.INVITE_EXTERNAL_USERS,
+    requiresUserContext: true
+  })
   @Mutation(() => BaseResult, { description: 'Invite external user' })
   async inviteExternalUser(
     @Ctx() context: RequestContext,
@@ -121,7 +124,7 @@ export class SubscriptionResolver {
         ...invitation,
         status: 'pending',
         invitedAt: new Date(),
-        invitedBy: context.user.id,
+        invitedBy: context.user?.id || context.userId,
         provider: 'microsoft',
         startPage: '/reports',
         theme: 'auto',

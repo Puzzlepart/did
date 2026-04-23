@@ -213,7 +213,7 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
           lockedPeriods.push({
             periodId,
             reason,
-            lockedBy: this.context.user.id,
+            lockedBy: this.actorUserId,
             lockedAt: new Date()
           })
         }

@@ -64,7 +64,7 @@ export class ReportLinkService extends MongoDocumentService<ReportLink> {
       const result = await this.insert({
         _id: this._generateId(reportLink),
         ...reportLink,
-        createdBy: this.context.user.displayName
+        createdBy: this.context.user?.displayName || this.context.userId
       })
       return result
     } catch (error) {
@@ -81,7 +81,7 @@ export class ReportLinkService extends MongoDocumentService<ReportLink> {
     try {
       await this.update(_.pick(reportLink, 'name'), {
         ...reportLink,
-        updatedBy: this.context.user.displayName
+        updatedBy: this.context.user?.displayName || this.context.userId
       })
     } catch (error) {
       throw error
