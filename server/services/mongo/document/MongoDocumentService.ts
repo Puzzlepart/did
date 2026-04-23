@@ -287,8 +287,8 @@ export class MongoDocumentService<T> {
         ...document,
         createdAt: new Date(),
         updatedAt: new Date(),
-        createdBy: document.createdBy ?? this.actorUserId,
-        updatedBy: document.updatedBy ?? this.actorUserId
+        createdBy: document_.createdBy ?? this.actorUserId,
+        updatedBy: document_.updatedBy ?? this.actorUserId
       } as OptionalId<T>
     ) as Promise<InsertOneWriteOpResult<WithId<T>>>
   }
@@ -307,7 +307,7 @@ export class MongoDocumentService<T> {
       $set: {
         ...document,
         updatedAt: new Date(),
-        updatedBy: document.updatedBy ?? this.actorUserId
+        updatedBy: document_.updatedBy ?? this.actorUserId
       }
     })
   }
