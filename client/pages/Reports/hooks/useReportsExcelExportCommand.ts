@@ -169,7 +169,7 @@ export function useReportsExcelExportCommand(props: IReportsListProps) {
   const hasItems = (props.items ?? []).length > 0
 
   const commandBarItem: ListCommandBarItem = isCustomQuery
-    ? hasItems
+    ? (hasItems
       ? {
           key: 'EXPORT_TO_EXCEL_DIRECT',
           text: t('reports.exportToExcel'),
@@ -177,7 +177,7 @@ export function useReportsExcelExportCommand(props: IReportsListProps) {
           disabled: false,
           iconName: 'ExcelDocument'
         }
-      : undefined
+      : undefined)
     : {
         key: 'EXPORT_TO_EXCEL_PROGRESS',
         text: isExporting ? progressMessage : t('reports.exportToExcel'),
