@@ -97,7 +97,7 @@ export class CustomerService extends MongoDocumentService<Customer> {
           })
           return _customers
         },
-        { key: ['getcustomers', query] }
+        { key: ['getcustomers', query], hash: 'sha256' }
       )
     } catch (error) {
       throw error

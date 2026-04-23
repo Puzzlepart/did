@@ -321,7 +321,7 @@ export class MSGraphService {
       const cacheOptions: CacheOptions = {
         key: ['events', startDateTimeIso, endDateTimeIso],
         scope: CacheScope.USER,
-        expiry: 20,
+        expiry: 60,
         disabled: !cache
       }
       const events = await this._cache.usingCache(async () => {

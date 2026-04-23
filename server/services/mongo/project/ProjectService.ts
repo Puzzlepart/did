@@ -112,7 +112,7 @@ export class ProjectService extends MongoDocumentService<Project> {
   public getProjects(query?: FilterQuery<Project>): Promise<Project[]> {
     return this.cache.usingCache<Project[]>(() => this.find(query), {
       key: ['getprojects', query],
-      expiry: 30
+      expiry: 180
     })
   }
 
