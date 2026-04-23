@@ -116,7 +116,6 @@ export const ReportsList: TabComponent<IReportsListProps> = (props) => {
           }
           enableViewColumnsEdit
           persistViewColumns={ReportsList.displayName}
-          persistColumnWidths='reports_list'
           autoFitColumns={false}
           filters={props.filters}
           error={props.error}

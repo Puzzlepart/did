@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [[ template:toc ]]
 </details>
 
+[[load:.changelog/0.21.0.md]]
+
 [[load:.changelog/0.20.0.md]]
 
 [[load:.changelog/0.19.0.md]]

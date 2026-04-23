@@ -271,13 +271,6 @@ export interface IListProps<T = any>
   resizableColumns?: boolean
 
   /**
-   * Persist column widths to localStorage using this key.
-   * When provided, user-resized column widths are saved and restored.
-   * If not provided, widths are not persisted across page reloads.
-   */
-  persistColumnWidths?: string
-
-  /**
    * Auto-fit columns to container width. When true (default), columns
    * are squeezed to fit the container and the last column extends to fill.
    * When false, columns can exceed container width, enabling horizontal scroll.
@@ -293,4 +286,20 @@ export interface IListProps<T = any>
     e: KeyboardEvent | TouchEvent | MouseEvent | undefined,
     data: { columnId: string; width: number }
   ) => void
+
+  /**
+   * Enable autosizing of initial column widths based on sampled row content.
+   * Columns using `onRender` / `renderAs` fall back to their admin-configured
+   * widths since raw field values aren't representative.
+   *
+   * @default true
+   */
+  autoSizeColumns?: boolean
+
+  /**
+   * Number of rows sampled when estimating autosized column widths.
+   *
+   * @default 50
+   */
+  autoSizeSampleSize?: number
 }

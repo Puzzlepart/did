@@ -9,6 +9,7 @@ import {
   Skeleton,
   SkeletonItem,
   TableColumnId,
+  TableColumnSizingOptions,
   mergeClasses,
   tokens,
   useScrollbarWidth,
@@ -54,7 +55,7 @@ import {
 } from './types'
 import { useList } from './useList'
 import { useListGroups } from './useListGroups'
-import { useColumnWidthPersist } from './hooks'
+import { DEFAULT_MIN_WIDTH, MAX_COLUMN_WIDTH, estimateColumnWidth } from './hooks'
 import { SET_SORT } from './reducer'
 import { SearchBox as ListSearchBox } from './ListHeader/SearchBox'
 import { ListToolbar } from './ListHeader/ListToolbar'
@@ -388,13 +389,27 @@ export const List: ReusableComponent<IListProps> = (props) => {
     return `minmax(${minWidth}px, 1fr)`
   }, [])
 
-  // Column resizing support
+  // Column sizing support
   const resizableColumns = props.resizableColumns ?? true
   const autoFitColumns = props.autoFitColumns ?? true
-  const { columnSizingOptions, handleColumnResize } = useColumnWidthPersist(
-    columns,
-    props.persistColumnWidths
-  )
+  const autoSizeColumns = props.autoSizeColumns ?? true
+  const autoSizeSampleSize = props.autoSizeSampleSize ?? 50
+  const columnSizingOptions = useMemo<TableColumnSizingOptions>(() => {
+    const options: TableColumnSizingOptions = {}
+    for (const column of columns) {
+      const minWidth = column.minWidth ?? DEFAULT_MIN_WIDTH
+      const maxWidth = Math.min(column.maxWidth ?? MAX_COLUMN_WIDTH, MAX_COLUMN_WIDTH)
+      const idealWidth = autoSizeColumns
+        ? estimateColumnWidth(column, items, autoSizeSampleSize)
+        : Math.min(maxWidth, Math.max(minWidth, column.idealWidth ?? column.defaultWidth ?? minWidth))
+      const defaultWidth = Math.min(
+        maxWidth,
+        Math.max(minWidth, column.defaultWidth ?? idealWidth)
+      )
+      options[column.key] = { minWidth, defaultWidth, idealWidth }
+    }
+    return options
+  }, [columns, items, autoSizeColumns, autoSizeSampleSize])
   const dataGridColumnSizingOptions = useMemo(() => {
     if (!shouldShowSelectionColumn) return columnSizingOptions
     return {
@@ -417,10 +432,9 @@ export const List: ReusableComponent<IListProps> = (props) => {
       e: KeyboardEvent | TouchEvent | MouseEvent | undefined,
       data: { columnId: TableColumnId; width: number }
     ) => {
-      handleColumnResize(e, { columnId: String(data.columnId), width: data.width })
       props.onColumnResize?.(e, { columnId: String(data.columnId), width: data.width })
     },
-    [handleColumnResize, props.onColumnResize]
+    [props.onColumnResize]
   )
 
   const dataGridStyle = useMemo(() => {

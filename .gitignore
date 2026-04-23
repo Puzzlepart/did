@@ -62,3 +62,6 @@ logs/
 CODE_REVIEW_*
 
 .claude/
+
+# Git worktrees
+did-*/
