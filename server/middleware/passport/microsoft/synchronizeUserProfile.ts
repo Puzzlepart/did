@@ -67,7 +67,7 @@ export async function synchronizeUserProfile(
     user.id
   )
   try {
-    const msGraphSvc = new MSGraphService(new MSOAuthService({ user }))
+    const msGraphSvc = new MSGraphService(new MSOAuthService({ user } as any))
     const [data, userPhoto] = await Promise.all([
       msGraphSvc.getCurrentUser(properties),
       msGraphSvc.getUserPhoto('48x48')
