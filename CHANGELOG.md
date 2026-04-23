@@ -17,158 +17,271 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## ➤ Table of Contents
 
 * [➤ Changelog](#-changelog)
-	* [➤ 0.20.0 - 16.03.2026](#-0200---16032026)
+	* [➤ 0.21.0 - 23.04.2026](#-0210---23042026)
 		* [Highlights](#highlights)
+		* [Added](#added)
 		* [Changed](#changed)
 		* [Fixed](#fixed)
+		* [Infrastructure](#infrastructure)
 		* [Documentation](#documentation)
 		* [Verification](#verification)
-	* [➤ 0.19.0 - 20.01.2026](#-0190---20012026)
+	* [➤ 0.20.0 - 16.03.2026](#-0200---16032026)
 		* [Highlights](#highlights-1)
-		* [Added](#added)
 		* [Changed](#changed-1)
 		* [Fixed](#fixed-1)
 		* [Documentation](#documentation-1)
-		* [Testing](#testing)
-		* [Internal](#internal)
-		* [Notes](#notes)
-	* [➤ 0.18.0 - 08.01.2026](#-0180---08012026)
+		* [Verification](#verification-1)
+	* [➤ 0.19.0 - 20.01.2026](#-0190---20012026)
 		* [Highlights](#highlights-2)
 		* [Added](#added-1)
 		* [Changed](#changed-2)
 		* [Fixed](#fixed-2)
 		* [Documentation](#documentation-2)
-		* [Testing](#testing-1)
-		* [Internal](#internal-1)
-		* [Notes](#notes-1)
-	* [➤ 0.17.0 - 16.12.2025](#-0170---16122025)
+		* [Testing](#testing)
+		* [Internal](#internal)
+		* [Notes](#notes)
+	* [➤ 0.18.0 - 08.01.2026](#-0180---08012026)
 		* [Highlights](#highlights-3)
 		* [Added](#added-2)
 		* [Changed](#changed-3)
 		* [Fixed](#fixed-3)
 		* [Documentation](#documentation-3)
-		* [CI / Chores](#ci--chores)
-		* [Internal](#internal-2)
-		* [Notes](#notes-2)
-	* [➤ 0.16.1 - 30.10.2025](#-0161---30102025)
+		* [Testing](#testing-1)
+		* [Internal](#internal-1)
+		* [Notes](#notes-1)
+	* [➤ 0.17.0 - 16.12.2025](#-0170---16122025)
 		* [Highlights](#highlights-4)
 		* [Added](#added-3)
 		* [Changed](#changed-4)
 		* [Fixed](#fixed-4)
-		* [CI / Chores](#ci--chores-1)
-		* [Internal](#internal-3)
-		* [Notes](#notes-3)
-	* [➤ 0.16.0 - 24.09.2025](#-0160---24092025)
+		* [Documentation](#documentation-4)
+		* [CI / Chores](#ci--chores)
+		* [Internal](#internal-2)
+		* [Notes](#notes-2)
+	* [➤ 0.16.1 - 30.10.2025](#-0161---30102025)
 		* [Highlights](#highlights-5)
 		* [Added](#added-4)
 		* [Changed](#changed-5)
 		* [Fixed](#fixed-5)
-		* [Documentation](#documentation-4)
-		* [CI / Chores](#ci--chores-2)
-		* [Internal](#internal-4)
-		* [Notes](#notes-4)
-	* [➤ 0.15.11 - 15.09.2025](#-01511---15092025)
+		* [CI / Chores](#ci--chores-1)
+		* [Internal](#internal-3)
+		* [Notes](#notes-3)
+	* [➤ 0.16.0 - 24.09.2025](#-0160---24092025)
+		* [Highlights](#highlights-6)
 		* [Added](#added-5)
 		* [Changed](#changed-6)
 		* [Fixed](#fixed-6)
 		* [Documentation](#documentation-5)
+		* [CI / Chores](#ci--chores-2)
+		* [Internal](#internal-4)
+		* [Notes](#notes-4)
+	* [➤ 0.15.11 - 15.09.2025](#-01511---15092025)
+		* [Added](#added-6)
+		* [Changed](#changed-7)
+		* [Fixed](#fixed-7)
+		* [Documentation](#documentation-6)
 		* [CI / Chores](#ci--chores-3)
 		* [Internal](#internal-5)
 		* [Notes](#notes-5)
 	* [➤ 0.15.10 - 01.04.2025](#-01510---01042025)
-		* [Added](#added-6)
-	* [➤ 0.15.9 - 01.04.2025](#-0159---01042025)
 		* [Added](#added-7)
-	* [➤ 0.15.8 - 26.03.2025](#-0158---26032025)
-		* [Fixed](#fixed-7)
-	* [➤ 0.15.7 - 25.03.2025](#-0157---25032025)
-		* [Fixed](#fixed-8)
-	* [➤ 0.15.6 - 24.03.2025](#-0156---24032025)
-		* [Changed](#changed-7)
-	* [➤ 0.15.5 - 20.03.2025](#-0155---20032025)
+	* [➤ 0.15.9 - 01.04.2025](#-0159---01042025)
 		* [Added](#added-8)
-		* [Changed](#changed-8)
-	* [➤ 0.15.4 - 20.03.2025](#-0154---20032025)
-		* [Changed](#changed-9)
-	* [➤ 0.15.3 - 20.03.2025](#-0153---20032025)
-		* [Changed](#changed-10)
-	* [➤ 0.15.1 - 19.03.2025](#-0151---19032025)
+	* [➤ 0.15.8 - 26.03.2025](#-0158---26032025)
+		* [Fixed](#fixed-8)
+	* [➤ 0.15.7 - 25.03.2025](#-0157---25032025)
 		* [Fixed](#fixed-9)
-	* [➤ 0.15.0 - 19.03.2025](#-0150---19032025)
-		* [Fixed](#fixed-10)
-	* [➤ 0.14.18 - 18.03.2025](#-01418---18032025)
-		* [Fixed](#fixed-11)
-	* [➤ 0.14.17 - 18.03.2025](#-01417---18032025)
-		* [Fixed](#fixed-12)
-	* [➤ 0.14.16 - 18.03.2025](#-01416---18032025)
-		* [Fixed](#fixed-13)
-	* [➤ 0.14.15 - 17.03.2025](#-01415---17032025)
-		* [Changed](#changed-11)
-		* [Fixed](#fixed-14)
-	* [➤ 0.14.12 - 13.03.2025](#-01412---13032025)
+	* [➤ 0.15.6 - 24.03.2025](#-0156---24032025)
+		* [Changed](#changed-8)
+	* [➤ 0.15.5 - 20.03.2025](#-0155---20032025)
 		* [Added](#added-9)
-		* [Fixed](#fixed-15)
-	* [➤ 0.13.3 - 25.02.2025](#-0133---25022025)
-		* [Fixed](#fixed-16)
+		* [Changed](#changed-9)
+	* [➤ 0.15.4 - 20.03.2025](#-0154---20032025)
+		* [Changed](#changed-10)
+	* [➤ 0.15.3 - 20.03.2025](#-0153---20032025)
+		* [Changed](#changed-11)
+	* [➤ 0.15.1 - 19.03.2025](#-0151---19032025)
+		* [Fixed](#fixed-10)
+	* [➤ 0.15.0 - 19.03.2025](#-0150---19032025)
+		* [Fixed](#fixed-11)
+	* [➤ 0.14.18 - 18.03.2025](#-01418---18032025)
+		* [Fixed](#fixed-12)
+	* [➤ 0.14.17 - 18.03.2025](#-01417---18032025)
+		* [Fixed](#fixed-13)
+	* [➤ 0.14.16 - 18.03.2025](#-01416---18032025)
+		* [Fixed](#fixed-14)
+	* [➤ 0.14.15 - 17.03.2025](#-01415---17032025)
 		* [Changed](#changed-12)
+		* [Fixed](#fixed-15)
+	* [➤ 0.14.12 - 13.03.2025](#-01412---13032025)
 		* [Added](#added-10)
-	* [➤ 0.13.2 - 22.02.2024](#-0132---22022024)
+		* [Fixed](#fixed-16)
+	* [➤ 0.13.3 - 25.02.2025](#-0133---25022025)
 		* [Fixed](#fixed-17)
-	* [➤ 0.13.1 - 21.02.2024](#-0131---21022024)
-		* [Fixed](#fixed-18)
-	* [➤ 0.13.0 - 21.02.2024](#-0130---21022024)
-		* [Fixed](#fixed-19)
-		* [Added](#added-11)
 		* [Changed](#changed-13)
-	* [➤ 0.12.0 - 17.04.2023](#-0120---17042023)
-		* [Added](#added-12)
+		* [Added](#added-11)
+	* [➤ 0.13.2 - 22.02.2024](#-0132---22022024)
+		* [Fixed](#fixed-18)
+	* [➤ 0.13.1 - 21.02.2024](#-0131---21022024)
+		* [Fixed](#fixed-19)
+	* [➤ 0.13.0 - 21.02.2024](#-0130---21022024)
 		* [Fixed](#fixed-20)
+		* [Added](#added-12)
 		* [Changed](#changed-14)
-	* [➤ 0.11.4 - 21.12.2022](#-0114---21122022)
+	* [➤ 0.12.0 - 17.04.2023](#-0120---17042023)
 		* [Added](#added-13)
 		* [Fixed](#fixed-21)
 		* [Changed](#changed-15)
-	* [➤ 0.11.3 - 25.11.2022](#-0113---25112022)
-		* [Fixed](#fixed-22)
-	* [➤ 0.11.2 - 18.11.2022](#-0112---18112022)
-		* [Fixed](#fixed-23)
-	* [➤ 0.11.1 - 18.11.2022](#-0111---18112022)
-		* [Fixed](#fixed-24)
-	* [➤ 0.11.0 - 16.11.2022](#-0110---16112022)
+	* [➤ 0.11.4 - 21.12.2022](#-0114---21122022)
 		* [Added](#added-14)
-		* [Fixed](#fixed-25)
+		* [Fixed](#fixed-22)
 		* [Changed](#changed-16)
-	* [➤ 0.10.0 - 27.04.2021](#-0100---27042021)
+	* [➤ 0.11.3 - 25.11.2022](#-0113---25112022)
+		* [Fixed](#fixed-23)
+	* [➤ 0.11.2 - 18.11.2022](#-0112---18112022)
+		* [Fixed](#fixed-24)
+	* [➤ 0.11.1 - 18.11.2022](#-0111---18112022)
+		* [Fixed](#fixed-25)
+	* [➤ 0.11.0 - 16.11.2022](#-0110---16112022)
 		* [Added](#added-15)
 		* [Fixed](#fixed-26)
 		* [Changed](#changed-17)
-	* [➤ 0.9.0 - 15.12.2020](#-090---15122020)
+	* [➤ 0.10.0 - 27.04.2021](#-0100---27042021)
 		* [Added](#added-16)
 		* [Fixed](#fixed-27)
 		* [Changed](#changed-18)
-		* [Removed](#removed)
-	* [➤ 0.8.0 - 15.10.2020](#-080---15102020)
+	* [➤ 0.9.0 - 15.12.2020](#-090---15122020)
 		* [Added](#added-17)
 		* [Fixed](#fixed-28)
-	* [➤ 0.7.0 - 09.09.2020](#-070---09092020)
+		* [Changed](#changed-19)
+		* [Removed](#removed)
+	* [➤ 0.8.0 - 15.10.2020](#-080---15102020)
 		* [Added](#added-18)
 		* [Fixed](#fixed-29)
-	* [➤ 0.6.0 - N/A](#-060---na)
-	* [➤ 0.5.0 - 22.5.2020](#-050---2252020)
+	* [➤ 0.7.0 - 09.09.2020](#-070---09092020)
 		* [Added](#added-19)
 		* [Fixed](#fixed-30)
-	* [➤ 0.4.0 - 11.5.2020](#-040---1152020)
+	* [➤ 0.6.0 - N/A](#-060---na)
+	* [➤ 0.5.0 - 22.5.2020](#-050---2252020)
 		* [Added](#added-20)
 		* [Fixed](#fixed-31)
-		* [Fixed](#fixed-32)
-	* [➤ 0.3.1 - 16.04.2020](#-031---16042020)
+	* [➤ 0.4.0 - 11.5.2020](#-040---1152020)
 		* [Added](#added-21)
+		* [Fixed](#fixed-32)
 		* [Fixed](#fixed-33)
-	* [➤ 0.3.0 - 20.03.2020](#-030---20032020)
-		* [Fixed](#fixed-34)
-	* [➤ 0.2.0 - 05.03.2020](#-020---05032020)
+	* [➤ 0.3.1 - 16.04.2020](#-031---16042020)
 		* [Added](#added-22)
+		* [Fixed](#fixed-34)
+	* [➤ 0.3.0 - 20.03.2020](#-030---20032020)
+		* [Fixed](#fixed-35)
+	* [➤ 0.2.0 - 05.03.2020](#-020---05032020)
+		* [Added](#added-23)
 </details>
+
+
+[](#0210---23042026)
+
+## ➤ 0.21.0 - 23.04.2026
+
+### Highlights
+
+- 🔑 **Personal Access Tokens**: Regular users can now mint their own API tokens from Settings > API tokens, with per-token permission scopes, tenant-level kill switch, and full admin visibility (#1370, #1371)
+- 🛡️ **Critical QA Fixes**: Closed an open-redirect after OAuth login, fixed a bogus `success: false` from `submitPeriod`, restored AD user search, and made Home/Reports tolerant of malformed URL state (#1365)
+- 📊 **Reports UX Overhaul**: ViewColumnsPanel gains Reset/Save/Cancel, multi-project filter for custom queries, compact date headers in Summary, and a fresh Excel export that reads the live column state (#1372, #1373)
+- 📱 **Mobile Summary Visibility**: Fixed invisible hours in the Timesheet Summary card layout on mobile (#1364)
+- 🧱 **List Column Sizing Rewrite**: Dropped the localStorage persistence layer in favour of content-sampled initial widths with admin-set `minWidth`/`maxWidth`/`idealWidth` as the single source of truth (#1375)
+
+### Added
+
+- **Personal Access Tokens** (#1370)
+  - New "API tokens" tab in User Settings for self-service token creation (name, expiry, permission picker)
+  - Server: `ApiToken` type gains `type` and `userId`; `RequestContext` gains `tokenSource`; `handleTokenAuthentication` populates `userId` for PATs so actions are attributable
+  - New `PersonalAccessTokenResolver` enforces a permission-subset rule (users cannot grant permissions they don't hold)
+  - Tenant-level `security.personalAccessTokensEnabled` kill switch in Subscription Settings
+  - Admin API Tokens page shows a token type column and can revoke any user's PATs
+  - English and Norwegian i18n keys
+- **PAT actor fallbacks** (#1371)
+  - `userId` is used as the actor when PAT-authenticated requests lock periods or invite external users
+  - Report-link writes no longer fail on missing interactive `user.displayName`
+- **ViewColumnsPanel: Reset / Save / Cancel** (#1372)
+  - Snapshot / revert support at the top of the panel so users can experiment without committing
+- **Custom query report: Excel export + multi-project filter** (#1372)
+  - Export button added, filter card runs full width, project picker uses the `InteractionTag` multi-select pattern
+  - Server: `ReportsQuery` gains a `projectIds` array field for multi-project filtering
+- **Autosize for list column widths** (#1375)
+  - New `estimateColumnWidth` helper samples the first N rows of plain-text columns to pick a sensible initial width; columns using `onRender` / `renderAs` fall back to their configured `idealWidth` / `defaultWidth` rather than guessing
+  - New `autoSizeColumns` (default `true`) and `autoSizeSampleSize` (default `50`) props on `IListProps`
+
+### Changed
+
+- **Excel export: single source of truth for columns** (#1373)
+  - Removed the hardcoded `hiddenFromExport` column property; export now respects the `ViewColumnsPanel` visibility state, which is already persisted per list
+  - `useExcelExportCommand` reads `context.state.columns` (live user selection) instead of `context.props.columns` (static defs)
+  - Reports defaults cleaned up: `startDateTimeShort` / `endDateTimeShort`, `startEndDateTime`, and `period` hidden by default; full `startDateTime` / `endDateTime` visible by default
+- **Excel export: stale column state fix** (#1372)
+  - Export now reads column visibility from localStorage at export time instead of via `useBrowserStorage` (which only snapshots at mount)
+- **Summary report: compact layout** (#1372)
+  - Date headers show `23-29.03` instead of `23 - 29 Mar`; employee column widened to 190px
+- **DataGrid column width ceiling** (#1372)
+  - Column widths capped at 2000px to prevent runaway last-column sizing
+- **List column sizing: persistence removed** (#1375)
+  - `useColumnWidthPersist` hook deleted; the previous implementation wrote to localStorage with a key derived from column keys, which silently collided across lists that shared column-key sequences
+  - `persistColumnWidths` prop removed from `IListProps` and from `ReportList`
+  - Extracted `MAX_COLUMN_WIDTH` (2000), `DEFAULT_MIN_WIDTH` (50), and character/padding constants into `client/components/List/hooks/columnSizing.ts`
+
+### Fixed
+
+- **Open redirect after OAuth login** (#1365)
+  - `server/routes/auth.ts` validates `redirectUrl` and rejects non-relative / protocol-relative paths, matching the guard already present on the session-injection route
+- **`submitPeriod` returning `success: false` on success** (#1365)
+  - Copy-paste bug in `TimesheetResolver.ts`; the success path now returns `{ success: true }`
+- **AD user search returning empty results** (#1365)
+  - `graph_users.ts` projection was stripping all user fields; explicitly includes every `ActiveDirectoryUser` field alongside the text score
+- **Malformed URL state crashing Home / Reports** (#1365)
+  - `getUrlState`, `useHome`, and `useCustomQueryFilterCriterias` now silently ignore bad base64 / JSON instead of throwing during render
+- **Summary view hours invisible on mobile** (#1364)
+  - Fluent UI v9 applies column widths as inline styles; on the mobile card layout this collapsed the value column to 0px. `.cell` / `.treeGridCell` now use `width: 100% !important` inside the `max-width: 600px` media query, while `.selectionCell` stays `auto` so the checkbox isn't affected
+- **Auth hardening and client stale-state** (`f72ff5ef5`)
+  - `authChecker` treats an empty permissions array as unauthenticated
+  - Added missing dependencies to `useCustomers`, `useProjects`, `EventList/useColumns`, and Timesheet hotkeys so stale provider/context values no longer leak through
+  - `useApp` activity detector effect now returns its cleanup so event listeners don't leak on remount
+  - Disabled Apollo variable reporting in `setupGraphQL` and tightened related types
+- **Shared layer decoupled from server** (`f72ff5ef5`)
+  - Introduced `IHolidayObject` interface in `shared/types/`; removed server imports from `shared/`
+
+### Infrastructure
+
+- **Webpack** (`f72ff5ef5`, #1372)
+  - Production builds use `MiniCssExtractPlugin` to emit a stylesheet instead of inlining CSS
+  - `BundleAnalyzerPlugin` wired up behind `--analyze`
+  - Watch polling enabled so the Docker macOS volume mount picks up changes
+- **Docker bootstrap hardening** (`e2faefa11`)
+  - `scripts/docker.sh`: `ensure_env_file` now seeds from `.env.sample` instead of writing a minimal stub
+  - New `check_required_env` warns on missing / placeholder `SESSION_SIGNING_KEY` and `API_TOKEN_SECRET`
+  - `mongo-express` and `redis-commander` credentials read from env vars (`ME_BASICAUTH_USERNAME/PASSWORD`, `HTTP_USER/HTTP_PASSWORD`) with sensible defaults
+  - Pinned `redis-commander` image by digest instead of `:latest`
+  - `.env.sample` documents the admin-tool credential vars
+- **Version bump tooling** (this release)
+  - `.tasks/updateVersion.js` now scaffolds `.changelog/<version>.md` from a stub and prepends the `[[load:...]]` directive to `.changelog/CHANGELOG.md`, so future bumps don't need manual changelog plumbing
+- **`.gitignore` cleanup** (`947e04130`, #1375)
+  - Removed stale temporary and documentation-related entries
+  - Added `did-*/` so local git worktrees stay untracked
+
+### Documentation
+
+- **Docker docs corrected** (#1367)
+  - Fixed absolute-vs-relative script paths in `docker/DOCKER.md` (`/scripts/...` -> `./scripts/...`)
+  - Corrected the MongoDB collection name from `timeentries` to `time_entries` in `docker/data/README.md` and `docker/DOCKER.md`
+  - Replaced the non-existent `npm run docker:setup` reference with `./scripts/docker.sh start` in `docker/sample-data/README.md`
+- **Personal Access Tokens** design spec and implementation plan checked in under planning docs (#1370 follow-ups)
+- **`/did` skill and did-cli** design spec and implementation plan checked in for the upcoming Claude Code integration
+
+### Verification
+
+- `npm run lint` passes
+- `npm run build:server` passes
+- `npm test` passes (2565 tests, including new `estimateColumnWidth` unit tests)
+
 
 
 [](#0200---16032026)
