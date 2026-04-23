@@ -212,7 +212,7 @@ export function validateHolidayName(name: string): boolean {
  * @returns True if the date is a weekend
  */
 export function isWeekend(dateStr: string): boolean {
-  const date = $dayjs(dateStr)
+  const date = parseHolidayDate(dateStr)
   const dayOfWeek = date.day()
   return dayOfWeek === 0 || dayOfWeek === 6 // Sunday = 0, Saturday = 6
 }
@@ -352,8 +352,8 @@ export function getHolidayHoursInPeriod(
   }
 
   try {
-    const start = $dayjs(startDate)
-    const end = $dayjs(endDate)
+    const start = parseHolidayDate(startDate)
+    const end = parseHolidayDate(endDate)
 
     if (!start.isValid() || !end.isValid()) {
       console.error(
@@ -373,7 +373,7 @@ export function getHolidayHoursInPeriod(
 
     for (const holiday of holidays) {
       try {
-        const holidayDate = $dayjs(holiday.date)
+        const holidayDate = parseHolidayDate(holiday.date)
         if (!holidayDate.isValid()) {
           console.warn(
             `Invalid holiday date: ${holiday.date} for ${holiday.name}`
@@ -403,7 +403,7 @@ export function getHolidayHoursInPeriod(
 
           // Handle periods that span multiple years
           for (let year = startYear; year <= endYear; year++) {
-            let holidayThisYear = $dayjs(holiday.date).year(year)
+            let holidayThisYear = parseHolidayDate(holiday.date).year(year)
 
             // Handle Feb 29 in non-leap years
             if (
@@ -490,8 +490,8 @@ export function getWorkingDaysInPeriod(
   startDate: string,
   endDate: string
 ): number {
-  const start = $dayjs(startDate)
-  const end = $dayjs(endDate)
+  const start = parseHolidayDate(startDate)
+  const end = parseHolidayDate(endDate)
 
   let workingDays = 0
   let current = start
