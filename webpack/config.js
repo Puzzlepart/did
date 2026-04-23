@@ -43,7 +43,7 @@ const config = {
     aggregateTimeout: 500,
     // Ignore node_modules and the HtmlWebpackPlugin output directory —
     // without this, writing index.hbs triggers an infinite rebuild loop.
-    ignored: [/node_modules/, /server[\\/]views/, /server[\\/]public/]
+    ignored: ['**/node_modules/**', '**/server/views/**', '**/server/public/**']
   }
 }
 
