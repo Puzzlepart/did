@@ -54,12 +54,9 @@ docker/data/**/*.json
 *.log
 logs/
 
-# temp folder, for e.g. copilot implementation plans
-.tmp
-
-# doc folder for LLM generated documentation
-_doc
-_todo
+# misc 
+.tmp/
+.plans/
 
 # code reviews
 CODE_REVIEW_*
