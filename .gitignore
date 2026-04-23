@@ -65,3 +65,6 @@ _todo
 CODE_REVIEW_*
 
 .claude/
+
+# Git worktrees
+did-*/
