@@ -30,7 +30,7 @@ export function useExcelExportCommand() {
         new Date().toDateString().split(' ').join('-')
       )
       exportExcel(context.state.items, {
-        columns: context.props.columns,
+        columns: context.state.columns,
         fileName
       })
     },

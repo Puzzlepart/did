@@ -72,7 +72,7 @@ export async function exportExcel(
   }
 
   const columns = options.columns.filter(
-    (column_) => !column_?.data?.hiddenFromExport
+    (column_) => !column_?.data?.hidden
   )
 
   const sheets = [

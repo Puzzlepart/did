@@ -12,12 +12,12 @@ export const startDateTimeColumn =
     key = 'startDateTime',
     name,
     template = 'MMM DD, HH:mm',
-    hiddenFromExport = false
+    hidden = false
   }: DateTimeColumnOptions = {}): CreateColumnDefFunction =>
   (t) =>
     createColumnDef<TimeEntry>(key, name ?? t('common.startTimeLabel'), {
       minWidth: 125,
       maxWidth: 125,
-      data: { excelColFormat: 'date', hidden: true, hiddenFromExport },
+      data: { excelColFormat: 'date', hidden },
       onRender: ({ startDateTime }) => $date.formatDate(startDateTime, template)
     })
