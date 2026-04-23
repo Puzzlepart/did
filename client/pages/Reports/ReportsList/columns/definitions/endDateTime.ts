@@ -11,12 +11,12 @@ export const endDateTimeColumn =
     key = 'endDateTime',
     name,
     template = 'MMM DD, HH:mm',
-    hiddenFromExport = false
+    hidden = false
   }: DateTimeColumnOptions = {}): CreateColumnDefFunction =>
   (t) =>
     createColumnDef<TimeEntry>(key, name ?? t('common.endTimeLabel'), {
       minWidth: 125,
       maxWidth: 125,
-      data: { excelColFormat: 'date', hidden: true, hiddenFromExport },
+      data: { excelColFormat: 'date', hidden },
       onRender: ({ endDateTime }) => $date.formatDate(endDateTime, template)
     })

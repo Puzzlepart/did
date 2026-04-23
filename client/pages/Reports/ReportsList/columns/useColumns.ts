@@ -51,14 +51,14 @@ export function useColumns() {
       key: 'startDateTimeShort',
       name: t('common.startTimeLabel_MMM_DD'),
       template: 'MMM DD',
-      hiddenFromExport: true
+      hidden: true
     }),
     endDateTimeColumn(),
     endDateTimeColumn({
       key: 'endDateTimeShort',
       name: t('common.endTimeLabel_MMM_DD'),
       template: 'MMM DD',
-      hiddenFromExport: true
+      hidden: true
     }),
     resourceColumn(),
     resourceColumn({
@@ -66,8 +66,7 @@ export function useColumns() {
       label: t('common.employeeWithRoleLabel'),
       description: t('common.employeeWithRoleDescription'),
       includeRoleDetails: true,
-      hidden: true,
-      hiddenFromExport: true
+      hidden: true
     }),
     surnameColumn,
     givenNameColumn,

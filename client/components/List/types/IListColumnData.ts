@@ -45,11 +45,6 @@ export interface IListColumnData {
   excelRenderFunction?: (fieldValue: any) => string | number
 
   /**
-   * Hidden from Excel exports
-   */
-  hiddenFromExport?: boolean
-
-  /**
    * Is the column sortable?
    */
   isSortable?: boolean

@@ -13,7 +13,7 @@ export const startEndDateTimeColumn: CreateColumnDefFunction = (t) =>
       minWidth: 125,
       maxWidth: 170,
       data: {
-        hiddenFromExport: true
+        hidden: true
       }
     },
     ({ startDateTime, endDateTime }) =>

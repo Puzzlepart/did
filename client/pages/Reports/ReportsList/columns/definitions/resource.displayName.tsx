@@ -11,7 +11,6 @@ type ResourceColumnOptions = {
   description?: string
   includeRoleDetails?: boolean
   hidden?: boolean
-  hiddenFromExport?: boolean
 }
 
 /**
@@ -23,8 +22,7 @@ export const resourceColumn =
     label,
     description,
     includeRoleDetails = false,
-    hidden = false,
-    hiddenFromExport = false
+    hidden = false
   }: ResourceColumnOptions = {}): CreateColumnDefFunction =>
   (t) =>
     createColumnDef<TimeEntry>(
@@ -39,7 +37,6 @@ export const resourceColumn =
           isGroupable: true,
           isFilterable: true,
           hidden,
-          hiddenFromExport,
           filterType: ResourceFilter
         }
       },
