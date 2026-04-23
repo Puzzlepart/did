@@ -108,7 +108,10 @@ export class SubscriptionResolver {
     }
   }
 
-  @Authorized<IAuthOptions>({ scope: PermissionScope.INVITE_EXTERNAL_USERS })
+  @Authorized<IAuthOptions>({
+    scope: PermissionScope.INVITE_EXTERNAL_USERS,
+    requiresUserContext: true
+  })
   @Mutation(() => BaseResult, { description: 'Invite external user' })
   async inviteExternalUser(
     @Ctx() context: RequestContext,
