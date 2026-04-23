@@ -74,5 +74,13 @@ export const redisMiddlware = redisHostname
       del: (
         _keys: string | string[],
         callback: (error?: Error | null, reply?: any) => void
-      ) => callback?.(null, 1)
+      ) => callback?.(null, 1),
+      scan: (
+        _cursor: string,
+        _matchLabel: string,
+        _pattern: string,
+        _countLabel: string,
+        _count: string,
+        callback: (error: Error | null, reply: [string, string[]]) => void
+      ) => callback(null, ['0', []])
     } as any)

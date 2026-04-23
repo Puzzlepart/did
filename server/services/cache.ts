@@ -79,6 +79,7 @@ export type CacheOptions = {
  */
 @Service({ global: false })
 export class CacheService {
+  private _inFlight = new Map<string, Promise<any>>()
   /**
    * Constructor
    *
@@ -191,13 +192,14 @@ export class CacheService {
               scopedCacheKey
             )}.`
           )
-          resolve(null)
-        } else {
-          log(
-            `Retrieved cached value for key ${colors.magenta(scopedCacheKey)}.`
-          )
-          resolve(JSON.parse(reply) as T)
+          return resolve(null)
         }
+        if (reply == null) {
+          log(`Cache miss for key ${colors.magenta(scopedCacheKey)}.`)
+          return resolve(null)
+        }
+        log(`Cache hit for key ${colors.magenta(scopedCacheKey)}.`)
+        resolve(JSON.parse(reply) as T)
       })
     })
   }
@@ -251,23 +253,48 @@ export class CacheService {
     const pattern = `${this._getScopedCacheKey(key, CacheScope.GLOBAL, hash)}*`
     log(`Clearing cache for key ${colors.magenta(pattern)}...`)
     return new Promise((resolve) => {
-      redisMiddlware.keys(pattern, (_error, keys) => {
-        if (keys.length === 0) {
-          log(`No keys found for pattern ${colors.magenta(pattern)}.`)
-          return resolve(null)
-        } else {
-          log(
-            `Clearing ${colors.magenta(
-              keys.length.toString()
-            )} keys for pattern ${colors.magenta(pattern)}: ${colors.cyan(
-              keys.join(', ')
-            )}.`
-          )
-        }
-        redisMiddlware.del(keys, () => {
-          resolve(null)
-        })
-      })
+      const collectedKeys: string[] = []
+      const step = (cursor: string) => {
+        redisMiddlware.scan(
+          cursor,
+          'MATCH',
+          pattern,
+          'COUNT',
+          '200',
+          (error, reply) => {
+            if (error) {
+              log(
+                `SCAN failed for pattern ${colors.magenta(pattern)}: ${
+                  error.message
+                }`
+              )
+              return resolve(null)
+            }
+            const [nextCursor, keys] = (reply || ['0', []]) as [
+              string,
+              string[]
+            ]
+            if (keys?.length) {
+              collectedKeys.push(...keys)
+            }
+            if (nextCursor === '0') {
+              if (collectedKeys.length === 0) {
+                log(`No keys found for pattern ${colors.magenta(pattern)}.`)
+                return resolve(null)
+              }
+              log(
+                `Clearing ${colors.magenta(
+                  collectedKeys.length.toString()
+                )} keys for pattern ${colors.magenta(pattern)}.`
+              )
+              redisMiddlware.del(collectedKeys, () => resolve(null))
+              return
+            }
+            step(nextCursor)
+          }
+        )
+      }
+      step('0')
     })
   }
 
@@ -284,10 +311,25 @@ export class CacheService {
     { key, expiry = 60, scope, disabled = false, hash }: CacheOptions
   ) {
     if (disabled) return await asyncFunction()
-    const cachedValue: T = await this._get<T>({ key, scope, hash })
-    if (cachedValue) return cachedValue
-    const value: T = await asyncFunction()
-    await this._set({ key, scope, expiry, hash }, value)
-    return value
+    const scopedCacheKey = this._getScopedCacheKey(key, scope, hash)
+    const inFlight = this._inFlight.get(scopedCacheKey)
+    if (inFlight) {
+      return (await inFlight) as T
+    }
+    const run = (async () => {
+      const cachedValue: T = await this._get<T>({ key, scope, hash })
+      if (cachedValue !== null && cachedValue !== undefined) {
+        return cachedValue
+      }
+      const value: T = await asyncFunction()
+      await this._set({ key, scope, expiry, hash }, value)
+      return value
+    })()
+    this._inFlight.set(scopedCacheKey, run)
+    try {
+      return await run
+    } finally {
+      this._inFlight.delete(scopedCacheKey)
+    }
   }
 }
