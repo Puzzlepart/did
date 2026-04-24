@@ -418,6 +418,7 @@ export class UserResolver {
    *
    * @param feedback - Feedback model
    */
+  @Authorized<IAuthOptions>({ requiresUserContext: true })
   @Mutation(() => UserFeedbackResult, { description: 'Submit feedback' })
   public async submitFeedback(
     @Arg('feedback') feedback: UserFeedback
