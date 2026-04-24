@@ -16,12 +16,16 @@ export const checkSecurityGroupMembership = async (
   tokenParameters: any,
   mail: string
 ) => {
-  if (
-    !settings.securityGroupEnabled ||
-    !settings.securityGroupId ||
-    !mail.includes(`@${settings.domainRestriction}`)
-  )
+  if (!settings.securityGroupEnabled || !settings.securityGroupId) {
     return false
+  }
+  if (
+    settings.domainRestrictionEnabled &&
+    settings.domainRestriction &&
+    !mail.includes(`@${settings.domainRestriction}`)
+  ) {
+    return false
+  }
   const msAuthSvc = new MSOAuthService({
     user: {
       tokenParams: tokenParameters
