@@ -17,13 +17,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## ➤ Table of Contents
 
 * [➤ Changelog](#-changelog)
-	* [➤ 0.21.0 - 23.04.2026](#-0210---23042026)
+	* [➤ 0.21.0 - 24.04.2026](#-0210---24042026)
 		* [Highlights](#highlights)
 		* [Added](#added)
 		* [Changed](#changed)
 		* [Fixed](#fixed)
+		* [Performance](#performance)
 		* [Infrastructure](#infrastructure)
 		* [Documentation](#documentation)
+		* [Tests](#tests)
 		* [Verification](#verification)
 	* [➤ 0.20.0 - 16.03.2026](#-0200---16032026)
 		* [Highlights](#highlights-1)
@@ -179,9 +181,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 </details>
 
 
-[](#0210---23042026)
+[](#0210---24042026)
 
-## ➤ 0.21.0 - 23.04.2026
+## ➤ 0.21.0 - 24.04.2026
 
 ### Highlights
 
@@ -190,6 +192,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 📊 **Reports UX Overhaul**: ViewColumnsPanel gains Reset/Save/Cancel, multi-project filter for custom queries, compact date headers in Summary, and a fresh Excel export that reads the live column state (#1372, #1373)
 - 📱 **Mobile Summary Visibility**: Fixed invisible hours in the Timesheet Summary card layout on mobile (#1364)
 - 🧱 **List Column Sizing Rewrite**: Dropped the localStorage persistence layer in favour of content-sampled initial widths with admin-set `minWidth`/`maxWidth`/`idealWidth` as the single source of truth (#1375)
+- ⚡ **Cache and Session Hardening**: SCAN-based cache invalidation, request coalescing, trimmed Redis session payload, and per-request subscription metadata refresh (#1374, #1377, #1378)
 
 ### Added
 
@@ -248,6 +251,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Disabled Apollo variable reporting in `setupGraphQL` and tightened related types
 - **Shared layer decoupled from server** (`f72ff5ef5`)
   - Introduced `IHolidayObject` interface in `shared/types/`; removed server imports from `shared/`
+- **Holiday date normalization** (#1376)
+  - `getHolidayHoursInPeriod` and sibling helpers in `shared/utils/holidayUtils.ts` now route date inputs through `parseHolidayDate` / `toISODateString` instead of raw `$dayjs()`
+  - Handles ISO datetime strings, `Date` objects, and leap-year edge cases consistently
+- **Subscription metadata staleness** (#1377)
+  - `RequestContext.create` now refetches the subscription document from the main database on each request for session-authenticated callers
+  - Falls back to the session copy on lookup miss or Mongo error to avoid 500s during outages
+  - Closes the last staleness gap for tenant settings and feature flags (permissions were already refreshed per-request)
+- **Redis session payload size** (#1378)
+  - New `pickSessionFields` trims `Express.User` to `id`, `mail`, `provider`, `role.name`, `subscription`, `configuration`, and `tokenParams` before `passport.serializeUser` writes it to Redis
+  - `global.d.ts` drops unused fields (`givenName`, `jobTitle`, `mobilePhone`, `preferredLanguage`, `surname`) and tightens `tokenParams` / `role` / `subscription` types
+
+### Performance
+
+- **Cache semantics hardened and Redis TTLs tuned** (#1374)
+  - `CacheService.clear` swaps `KEYS` for a cursor-based `SCAN` loop (`COUNT 200`) so cache invalidation no longer blocks Redis on large keyspaces
+  - `usingCache` coalesces concurrent requests for the same key via an in-flight promise map, avoiding thundering herds when the cache is cold
+  - Distinguishes cache miss (`reply == null`) from parse error explicitly
+  - TTLs tuned: `getProjects` 30s -> 180s, calendar events 20s -> 60s, customer lookups now use `sha256` hashing to keep cache keys stable under query variation
+  - Added `scan` stub to the no-op Redis fallback so local dev without Redis keeps working
 
 ### Infrastructure
 
@@ -276,11 +298,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Personal Access Tokens** design spec and implementation plan checked in under planning docs (#1370 follow-ups)
 - **`/did` skill and did-cli** design spec and implementation plan checked in for the upcoming Claude Code integration
 
+### Tests
+
+- **Auth boundary and URL state regression coverage** (#1379)
+  - `authChecker.test.ts`: anonymous request rejection, empty-permissions rejection (bare and scoped), scope-match acceptance, API-token path parity
+  - `getUrlState.test.ts`: fallback on non-base64, non-JSON, unexpected shapes, and empty input
+- **Redis session serialization** (#1378)
+  - Focused test for `pickSessionFields` to lock the trimmed session shape
+- **RequestContext subscription refresh** (#1377)
+  - Covers the fresh / miss / Mongo-error paths for per-request subscription lookup
+- **Holiday date parsing** (#1376)
+  - Regression tests for ISO datetime strings, `Date` objects, and leap-year boundaries
+
 ### Verification
 
 - `npm run lint` passes
 - `npm run build:server` passes
-- `npm test` passes (2565 tests, including new `estimateColumnWidth` unit tests)
+- `npm test` passes (including new auth boundary, URL state, session serialization, RequestContext, and holiday date tests)
 
 
 

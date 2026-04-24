@@ -73,6 +73,7 @@
 | [☁️&nbsp;18 -  &nbsp;Argon](https://github.com/Puzzlepart/did/milestone/18) | 08.01.2026 | [![version](https://img.shields.io/badge/version-0.18.0-green.svg)](https://semver.org) |
 | [🧴&nbsp;19 -  &nbsp;Potassium](https://github.com/Puzzlepart/did/milestone/18) | 19.01.2026 | [![version](https://img.shields.io/badge/version-0.19.0-yellow.svg)](https://semver.org) |
 | [🥛&nbsp;20 -  &nbsp;Calcium](https://github.com/Puzzlepart/did/milestone/18) | 11.03.2026 | [![version](https://img.shields.io/badge/version-0.20.0-red.svg)](https://semver.org) |
+| [⚾&nbsp;21 -  &nbsp;Scandium](https://github.com/Puzzlepart/did/milestone/18) | 24.04.2026 | [![version](https://img.shields.io/badge/version-0.21.0-green.svg)](https://semver.org) |
 
 
 [](#backlog)
@@ -100,7 +101,7 @@ Our backlog can be found [here](https://github.com/orgs/Puzzlepart/projects/7).
 
 ## ➤ Contributing
 
-_Contributions are very velcome! Here's some guidance to get started!_ :heart:
+_Contributions are very welcome! Here's some guidance to get started!_ :heart:
 
 
 ### Getting started
@@ -108,7 +109,7 @@ _Contributions are very velcome! Here's some guidance to get started!_ :heart:
 1. Check out the `dev` branch
 2. Run `npm install`
 3. Run `npm run-script create-env` to create your own `.env` file for local testing
-4. Set neccessary parameters in your new `.env` file (see `Set up .env` below)
+4. Set necessary parameters in your new `.env` file (see `Set up .env` below)
 5. Install the [Azure App Service extension for vscode](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice)
 6. Install the [ESLint extension for vscode](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 7. Install the [i18n Ally extension for vscode](https://marketplace.visualstudio.com/items?itemName=Lokalise.i18n-ally)
@@ -122,7 +123,7 @@ The following permissions are required by Azure App Registration:
 
 #### Set up environment
 
-You've copied `.env.sample` into `.env`, anually or using `npm run-script create-env`.
+You've copied `.env.sample` into `.env`, manually or using `npm run-script create-env`.
 
 Now you need to set the required environment variables from this table:
 
@@ -146,7 +147,7 @@ Now you need to set the required environment variables from this table:
 | `APOLLO_GRAPH_VARIANT` | Graph variant for reporting to [Apollo Studio](https://studio.apollographql.com/org/puzzlepart/graphs). See [this article](https://www.apollographql.com/docs/apollo-server/monitoring/metrics/) | **Yes**  |
 | `MONGO_DB_CONNECTION_STRING` | Connection string for MongoDB                                | **Yes**  |
 | `MONGO_DB_DB_NAME` | Database name for MongoDB                                    | **Yes**  |
-| `API_TOKEN_SECRET` | Secret to generate API tokens                                | **Yes**  |
+| `API_TOKEN_SECRET` | Secret used to sign API tokens and personal access tokens (PATs) | **Yes**  |
 | `DEBUG`                         | To debug the Node backend. E.g. `app*` to see all logs from app. See [debug](https://www.npmjs.com/package/debug). | No       |
 | `LAUNCH_BROWSER`      | Set to `1` if you want to automatically open did in the browser when running `watch` task. | No       |
 
@@ -189,7 +190,7 @@ Now you need to set the required environment variables from this table:
 
 **NB: did should be developed with Node 22.14.0 (LTS).**
 
-_It's recommended to use `nvm`. We have a `.nvrc` with node version set to 18.18.0._
+_It's recommended to use `nvm`. We have a `.nvmrc` with node version set to 22.14.0._
 
 ### Authentication
 
