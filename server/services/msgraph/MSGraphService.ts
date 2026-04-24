@@ -10,6 +10,7 @@ import { environment } from '../../utils'
 import { CacheOptions, CacheScope, CacheService } from '../cache'
 import MSOAuthService, { MSAccessTokenOptions } from '../msoauth'
 import { MSGraphError, MSGraphOutlookCategory } from './types'
+const debug = require('debug')('services/msgraph')
 
 /**
  * Microsoft Graph service
@@ -390,11 +391,17 @@ export class MSGraphService {
   ): Promise<boolean> {
     try {
       const client = await this._getClient()
-      const response = await (client
-        .api(`/groups/${groupId}/members?$select=id,mail`)
-        .get() as Promise<{ value: any[] }>)
-      return response.value.some((member) => member.mail === mail)
-    } catch {
+      const response = (await client
+        .api(`/users/${encodeURIComponent(mail)}/checkMemberGroups`)
+        .post({ groupIds: [groupId] })) as { value: string[] }
+      return response.value?.includes(groupId) ?? false
+    } catch (error) {
+      debug(
+        '[isUserMemberOfSecurityGroup]',
+        'Graph check failed for',
+        mail,
+        error?.message
+      )
       return false
     }
   }
