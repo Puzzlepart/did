@@ -61,9 +61,9 @@
   "dependencies": {
     "@apollo/client": "3.10.4",
     "@apollo/server": "4.13.0",
-    "@babel/compat-data": "7.29.0",
+    "@babel/compat-data": "7.29.3",
     "@babel/core": "7.29.0",
-    "@babel/preset-env": "7.29.0",
+    "@babel/preset-env": "7.29.5",
     "@fluentui-contrib/react-data-grid-react-window": "^1.4.2",
     "@fluentui-contrib/react-tree-grid": "^0.3.2",
     "@fluentui/react-breadcrumb-preview": "1.2.5",
