@@ -59,8 +59,8 @@
     "update:version:minor": "npm run update:version -- --minor"
   },
   "dependencies": {
-    "@apollo/client": "3.10.4",
-    "@apollo/server": "4.13.0",
+    "@apollo/client": "4.1.9",
+    "@apollo/server": "5.5.1",
     "@babel/compat-data": "7.29.0",
     "@babel/core": "7.29.0",
     "@babel/preset-env": "7.29.0",
