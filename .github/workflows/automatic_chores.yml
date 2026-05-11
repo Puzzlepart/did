@@ -32,7 +32,7 @@ jobs:
           fetch-depth: 0
 
       - name: Use Node.js (${{ vars.NODE_VERSION }})
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ vars.NODE_VERSION }}
           cache: "npm"
