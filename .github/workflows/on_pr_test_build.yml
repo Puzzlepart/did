@@ -17,12 +17,12 @@ jobs:
       cancel-in-progress: true
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: ${{ github.head_ref }}
       
       - name: Use Node.js (${{ vars.NODE_VERSION }})
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: ${{ vars.NODE_VERSION }}
           cache: 'npm'
@@ -41,12 +41,12 @@ jobs:
       cancel-in-progress: true
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: ${{ github.head_ref }}
       
       - name: Use Node.js (${{ vars.NODE_VERSION }})
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: ${{ vars.NODE_VERSION }}
           cache: 'npm'
@@ -70,12 +70,12 @@ jobs:
       cancel-in-progress: true
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: ${{ github.head_ref }}
       
       - name: Use Node.js (${{ vars.NODE_VERSION }})
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: ${{ vars.NODE_VERSION }}
           cache: 'npm'

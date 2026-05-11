@@ -29,10 +29,10 @@ jobs:
       group: deploy-${{ inputs.environment }}-${{ github.ref }}
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Use Node.js (${{ vars.NODE_VERSION }})
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: ${{ vars.NODE_VERSION }}
           cache: 'npm'
@@ -50,7 +50,7 @@ jobs:
           DISPLAY_VERSION_DETAILS: ${{ inputs.display-version-details }}
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: did-package-${{ inputs.environment }}
           path: ./did-package.zip
@@ -64,7 +64,7 @@ jobs:
       url: ${{ steps.deploy-to-app-slot.outputs.webapp-url }}
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: did-package-${{ inputs.environment }}
 

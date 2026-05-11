@@ -112,7 +112,7 @@ This directory contains all GitHub Actions workflows for the **did** project.
 - Removed lint job from PR workflow (handled by automatic_chores)
 
 ### ✅ Standardization
-- All workflows now use actions@v4 (was mixed v3/v4)
+- All workflows pinned to current major: `actions/*@v5`, `azure/webapps-deploy@v3` (Node 24 compatible)
 - Consistent Node.js setup pattern across all jobs
 - Standardized on `cache: 'npm'` for faster dependency installs
 
@@ -136,9 +136,9 @@ For `dev` branch:
 
 ### Node.js Setup Pattern
 ```yaml
-- uses: actions/checkout@v4
+- uses: actions/checkout@v5
 - name: Use Node.js (${{ vars.NODE_VERSION }})
-  uses: actions/setup-node@v4
+  uses: actions/setup-node@v5
   with:
     node-version: ${{ vars.NODE_VERSION }}
     cache: 'npm'
