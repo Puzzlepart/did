@@ -14,7 +14,7 @@ import { getFluentIcons } from 'utils/getFluentIcon'
  */
 export function useFabricIcons(includeFluentIcons = false): ISuggestionItem[] {
   return useMemo(() => {
-    return [...icons, ...(includeFluentIcons && getFluentIcons())]
+    return [...icons, ...(includeFluentIcons ? getFluentIcons() : [])]
       .filter(Boolean)
       .filter((icon) => !!icon.name)
       .map(({ name }) => ({
