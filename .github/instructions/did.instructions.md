@@ -2,6 +2,8 @@
 
 These instructions guide automated code reviews for the **did** calendar-to-timesheet application.
 
+> Scope: this file is the **rejection criteria** for PR review. For project conventions, architecture, commands, and stack details, the source of truth is [`/AGENTS.md`](../../AGENTS.md) and the scoped `AGENTS.md` files. Don't duplicate non-review guidance here.
+
 ## Critical: Multi-Tenant Architecture
 
 **ALWAYS CHECK:** Each customer has their own MongoDB database

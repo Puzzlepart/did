@@ -9,13 +9,15 @@ This directory contains all GitHub Actions workflows for the **did** project.
 ### 🤖 automatic_chores.yml
 **Trigger:** Push to `dev` branch (when specific paths change)
 
-**Purpose:** Automatically fixes lint errors, formatting, and regenerates README/CHANGELOG
+**Purpose:** Regenerates README.md and CHANGELOG.md from the `.readme/` and `.changelog/` blueprints
 
 **Key Features:**
 - Creates a PR instead of pushing directly to protected branch
-- Auto-approves and auto-merges the PR
-- Runs on file changes (code, configs, or workflow itself)
+- Auto-merges the PR
+- Runs on file changes (docs sources, package metadata, or workflow itself)
 - Skips if commit message contains `[skip-ci]`
+
+> Lint/format are enforced via the `.githooks/pre-commit` hook and the `Test build` PR check, not by this workflow.
 
 ---
 
@@ -80,17 +82,17 @@ This directory contains all GitHub Actions workflows for the **did** project.
 ---
 
 ### 🐳 docker-build.yml
-**Trigger:** 
-- Push to `main` or `dev` branches
-- Version tags (`v*`)
+**Trigger:** Manual (`workflow_dispatch`)
 
-**Purpose:** Multi-platform Docker image builds
+**Purpose:** On-demand Docker image builds published to GitHub Container Registry
 
 **Features:**
-- Builds for linux/amd64 and linux/arm64
+- Builds for `linux/amd64` (single arch; see `../../docs/docker-build-optimizations.md` for the queue of further improvements, including arm64)
 - Publishes to GitHub Container Registry (ghcr.io)
 - Layer caching with GitHub Actions cache
 - Metadata tagging with git info
+
+> Note: this workflow is intentionally manual. Auto-publishing on every push to `main`/`dev` would be expensive and is not currently desired. Trigger from the Actions tab when you need a fresh image.
 
 ---
 
