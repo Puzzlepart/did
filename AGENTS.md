@@ -66,8 +66,8 @@ API_TOKEN_SECRET=your_api_secret
 ```
 
 ### Node Requirements
-- Node.js >= 22.14.0 LTS (see .nvmrc)
-- npm >= 10.0.0
+- Node.js >= 24 LTS (see .nvmrc)
+- npm >= 11.0.0
 
 ## Testing Strategy
 

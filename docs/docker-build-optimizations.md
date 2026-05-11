@@ -56,7 +56,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
           cache: 'npm'
       - run: npm ci
       - run: npm run lint
@@ -67,7 +67,7 @@ jobs:
 Remove feat/* from Docker builds entirely - only build images when merging to main/dev.
 
 ### 6. Use smaller base image (distroless)
-Replace `node:22-alpine` production image with gcr.io/distroless/nodejs22-debian12 for faster pulls.
+Replace `node:24-alpine` production image with gcr.io/distroless/nodejs24-debian12 for faster pulls.
 
 ### 7. Optimize webpack bundle
 In webpack config, ensure:

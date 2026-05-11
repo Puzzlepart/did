@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1.6
 # Multi-stage Dockerfile for did application
 # Stage 1: Base development image
-FROM node:22.14.0-alpine AS base
+FROM node:24-alpine AS base
 
 # Set working directory
 WORKDIR /app
@@ -64,7 +64,7 @@ COPY . .
 RUN npm run package:client && npm run build:server
 
 # Stage 4: Production image
-FROM node:22.14.0-alpine AS production
+FROM node:24-alpine AS production
 
 # Set working directory
 WORKDIR /app
