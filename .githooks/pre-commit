@@ -1,4 +1,8 @@
 #!/bin/sh
 set -e
 
-npm run lint:fix
+# Run lint in check-only mode. Auto-fixing here is unsafe: lint:fix mutates
+# the working tree without re-staging, so the committed snapshot would diverge
+# from what the developer just "fixed". Surface failures and let the dev fix
+# and re-stage explicitly.
+npm run lint
