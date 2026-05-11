@@ -1,0 +1,72 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: '06:00'
+      timezone: Europe/Oslo
+    open-pull-requests-limit: 10
+    target-branch: dev
+    labels:
+      - dependencies
+    commit-message:
+      prefix: 'chore'
+      include: scope
+    groups:
+      fluentui:
+        patterns:
+          - '@fluentui/*'
+          - '@fluentui-contrib/*'
+      apollo:
+        patterns:
+          - '@apollo/*'
+          - 'apollo-*'
+      babel:
+        patterns:
+          - '@babel/*'
+      typescript:
+        patterns:
+          - typescript
+          - 'ts-*'
+          - '@types/*'
+      eslint:
+        patterns:
+          - eslint
+          - 'eslint-*'
+          - '@typescript-eslint/*'
+      test:
+        patterns:
+          - ava
+          - sinon
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: '06:00'
+      timezone: Europe/Oslo
+    target-branch: dev
+    labels:
+      - dependencies
+      - github-actions
+    commit-message:
+      prefix: 'chore'
+      include: scope
+
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: '06:00'
+      timezone: Europe/Oslo
+    target-branch: dev
+    labels:
+      - dependencies
+      - docker
+    commit-message:
+      prefix: 'chore'
+      include: scope
