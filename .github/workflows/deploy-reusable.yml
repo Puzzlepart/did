@@ -29,7 +29,7 @@ jobs:
       group: deploy-${{ inputs.environment }}-${{ github.ref }}
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Use Node.js (${{ vars.NODE_VERSION }})
         uses: actions/setup-node@v4
