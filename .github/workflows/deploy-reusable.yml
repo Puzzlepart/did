@@ -70,7 +70,7 @@ jobs:
 
       - name: Deploy to Azure App Service
         id: deploy-to-app-slot
-        uses: azure/webapps-deploy@v2
+        uses: azure/webapps-deploy@v3
         with:
           app-name: 'didapp'
           slot-name: ${{ inputs.slot-name }}

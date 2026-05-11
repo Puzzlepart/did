@@ -17,6 +17,7 @@ on:
 
 jobs:
   deploy:
+    if: ${{ !contains(github.event.head_commit.message, '[skip-ci]') && !contains(github.event.head_commit.message, '[skip-deploy]') }}
     uses: ./.github/workflows/deploy-reusable.yml
     with:
       environment: staging
