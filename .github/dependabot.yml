@@ -70,3 +70,10 @@ updates:
     commit-message:
       prefix: 'chore'
       include: scope
+    ignore:
+      # Pin the Node base image to the major version chosen in .nvmrc /
+      # package.json engines. Bumping across majors must be a deliberate
+      # project-wide change (see chore/node-24), not a silent dep PR.
+      - dependency-name: 'node'
+        update-types:
+          - 'version-update:semver-major'
