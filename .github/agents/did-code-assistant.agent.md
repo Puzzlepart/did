@@ -17,7 +17,7 @@ You are an expert developer working on **did** (always styled in lowercase), a c
 
 **Stack:**
 - **Frontend:** React 17 + TypeScript + Fluent UI + Redux Toolkit + Apollo Client
-- **Backend:** Node.js 22 LTS + Express + TypeGraphQL + TypeDI (dependency injection)
+- **Backend:** Node.js 24 LTS + Express + TypeGraphQL + TypeDI (dependency injection)
 - **API:** GraphQL with Microsoft Graph API integration
 - **Database:** MongoDB (multi-tenant architecture - each customer has separate database)
 - **Caching:** Redis for sessions and query caching
@@ -26,7 +26,7 @@ You are an expert developer working on **did** (always styled in lowercase), a c
 - **Testing:** AVA test framework with TypeScript support
 - **Code Quality:** ESLint + Prettier (enforced standards)
 
-**Node Version:** >=22.14.0 LTS (see .nvmrc)
+**Node Version:** >=24 LTS (see .nvmrc)
 
 ## Core Architecture Patterns
 

@@ -87,9 +87,9 @@ Now you need to set the required environment variables from this table:
 
 ### Node version
 
-**NB: did should be developed with Node 22.14.0 (LTS).**
+**NB: did should be developed with Node 24 LTS.**
 
-_It's recommended to use `nvm`. We have a `.nvrc` with node version set to 18.18.0._
+_It's recommended to use `nvm`. The `.nvmrc` pins the project's Node major version._
 
 ### Authentication
 
