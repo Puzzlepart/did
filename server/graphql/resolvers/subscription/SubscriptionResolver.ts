@@ -141,6 +141,7 @@ export class SubscriptionResolver {
    *
    * @returns A promise that resolves to the external invitations.
    */
+  @Authorized<IAuthOptions>({ scope: PermissionScope.INVITE_EXTERNAL_USERS })
   @Query(() => [ExternalUserInvitation], {
     description: 'Get external invitations',
     nullable: true

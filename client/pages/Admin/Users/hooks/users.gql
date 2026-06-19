@@ -1,4 +1,4 @@
-query UsersAdmin {
+query UsersAdmin($includeInvitations: Boolean = false) {
   users {
     id
     displayName
@@ -38,9 +38,9 @@ query UsersAdmin {
     readOnly
     enabledForExternalUsers
   }
-  invitations: externalInvitations {
+  invitations: externalInvitations @include(if: $includeInvitations) {
     id
-    name  
+    name
     mail
     role
     invitedAt
